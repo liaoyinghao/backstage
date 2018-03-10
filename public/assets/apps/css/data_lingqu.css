@@ -1,0 +1,15 @@
+.flow_dox{background: white}
+.title_light_d{margin: 0 auto}
+.title_light_div{margin:20px auto}
+#title_light{background: #eee;}
+#news-table{border: none;}
+.title_span{width: 3px;height: 18px;display: inline-block;background: red;margin-right: 5px;position: relative;top: 4px}
+.footer_botton{text-align: right;margin: 20px 40px}
+.footer_botton a{margin-top: 20px}
+.footer_botton .footer_bottons{margin-top: 20px}
+.table-scrollable{border: none;}
+#news-table_filter{text-align: right}
+.table-scrollables{box-shadow: none;}
+.portlet.light.bordered{border: none !important;}
+
+

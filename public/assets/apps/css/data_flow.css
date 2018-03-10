@@ -1,0 +1,22 @@
+.flow_dox{background: white}
+.title_light_d{margin: 0 auto}
+.title_light_div{margin:20px auto}
+#title_light{background: #eee;}
+.title_span{width: 3px;height: 18px;display: inline-block;background: red;margin-right: 5px;position: relative;top: 4px}
+.flow_detail>div{height: 70px;line-height:24px;padding-top: 10px;border-bottom: 1px solid #eee}
+.flow_detail_d1{text-align: right;font-size: 14px;color: #999;}
+.flow_detail_d1>span{display: inline-block;padding-right: 20px;border-right: 1px dashed #999}
+.flow_detail_d2>span{display: block;color: #999;font-size: 14px;}
+.flow_detail_d2>a{text-decoration: none;color: black;font-size: 20px;margin-left: 50px}
+.footer_botton{text-align: right;margin: 20px 40px}
+.footer_botton a{margin-top: 20px}
+.flow_detail_d1{text-align: center}
+.footer_botton .footer_bottons{margin-top: 20px}
+
+
+
+
+
+
+
+

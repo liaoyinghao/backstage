@@ -1,0 +1,23 @@
+.Totaldata{height: 100px;margin-bottom: 20px}
+.Totaldata>div{
+    height: 90px;text-align: center;
+    line-height:30px;padding-top:10px;
+    background: #fff;box-shadow: 2px 2px 5px #ccc;
+    border-right: 1px solid #ccc;
+    }
+.Totaldata>div>span{display: block}
+.Totaldata>div>a{font-size: 20px;color: #000;text-decoration: none}
+.index_row_div{height: 55px}
+.Totaldatas:nth-child(1){height: 70px}
+.Totaldatas>div{height: 50px;padding: 0}
+.Totaldatas>div a{
+    font-size: 15px;line-height: 50px;
+    width: 100%;display: block;height: 100%;
+}
+.Totaldatas>div a:hover{text-decoration: underline}
+.Totaldatas>div:nth-child(1):hover{background: #ffecec}
+.Totaldatas>div:nth-child(2):hover{background: #ececff}
+.Totaldatas>div:nth-child(3):hover{background: #ecffec}
+.Totaldatass>div:nth-child(1):hover{background: #c9c4fa}
+.Totaldatass>div:nth-child(2):hover{background: #dafcfd}
+.Totaldatass>div:nth-child(3):hover{background: #fae0c4}

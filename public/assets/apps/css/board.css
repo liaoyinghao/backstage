@@ -1,0 +1,58 @@
+.shop-title{height: 200px;overflow: hidden;}
+.shop-title img{width: 100%;}
+.shop-text{color: #fff;margin-top: -130px;font-size: 30px;text-align: center;margin-bottom: 80px;}
+.text-center{text-align: center;}
+#tab1{padding: 0 12px;}
+.wec .weui-cell:before{border-top: 1px dashed #7b7b7b;}
+.wec{border-left: 1px solid rgba(149,149,149,.1);border-right: 1px solid rgba(149,149,149,.1);border-bottom: 1px solid rgba(149,149,149,.1);border-top: 2px solid red;}
+.wec img{border-radius: 50%;height: 50px;}
+.wec .weui-cell_link{color: #A7A7A7;font-size: 12px;}
+.weui-navbar__item:after{border-right: 0;}
+.weui-navbar__item.weui-bar__item--on{border-bottom: 2px solid #FFA500;background-color: transparent;}
+.wecc .weui-media-box__hd{overflow: hidden;text-align: center;}
+.wecc .weui-media-box__hd img{vertical-align: middle;}
+.weui-media-box_appmsg .weui-media-box__thumb{height: 60px;}
+.right-left{margin-left: 15px;}
+.weui-dialog__bd img{width: 100%;}
+
+/*名片样式*/
+.not_wx{margin-top: -21px}
+.box{background: #fdfdf4;height:0;overflow: hidden;}
+.dian{display:inline-block;background: #ffa500;width: 30px;height: 30px;border-radius: 50%;
+    -moz-border-radius: 50%;-webkit-border-radius: 50%;font-size: 16px;
+    line-height:27px;text-align: center;color: #fff;}
+.brief{color:#999;font-size: 15px;margin-left:38px}
+.brief_name{font-size: 20px;margin-bottom:5px;}
+.brief_box{position: relative;}
+.brief-p2{text-align: right;color: #ffa500;margin-top: 5px;position: absolute;bottom: -28px;right: -25px;width: 120px;height:25px;text-align: center;line-height: 25px;}
+.box_div1 .box_div1_s2{text-align: right;position: absolute;top:10px;right: 10px}
+.box_div1 .box_div1_s2 a{border-bottom: 1px solid #999;display: inline-block;color: #666;font-size: 14px}
+.box_div1 .box_div1_s2 span{margin-right:15px;font-size: 20px;margin-top:3px;}
+.box_div2{height:232px;overflow: hidden;position: relative;}
+.box_div3{padding:15px;position: relative;}
+.box_div3 .box_div3_p3{position: absolute;display: block;padding: 2px 10px;background:#ffa500;color: #fff;border-radius: 2px;-moz-border-radius:2px;-webkit-border-radius:2px;right:10px;bottom: 0px;font-size: 15px}
+#brief-p3{width: 120px;overflow: hidden;height: 90px;position: absolute;top:6px;right: 0;padding:0;text-align: center;}
+#cl-phone{border-bottom: none!important;padding:5px 0 20px 5px;}
+#brief-p3>a{display: block;border-bottom: 1px solid #999;margin-bottom:5px;padding-bottom: 3px}
+#brief-p3>span{font-size: 17px;color: #000}
+
+.box_div2_d4{width: 200px;height: 50px;display: block;margin:15px 0 0 30px;;}
+
+.box_div2_d1{width: 200px;height: 113px;font-size: 14px;border-radius: 10px;-moz-border-radius:10px;-webkit-border-radius:10px;padding:8px 20px 20px 20px;margin:10px 0 0 10px;overflow: hidden;}
+.box_div2_d1 span{border-bottom:1px solid #999;margin-left:30px;}
+.box_div2_d3{box-shadow: 1px 1px 3px #999;position: absolute;top:100px;right:5px;max-height: 110px;max-width:110px;}
+
+.box_div2_d3>img{max-width:110px;max-height: 110px}
+
+/*卡券样式*/
+.wec{border:none!important;background:none}
+.add{background: #f8f8f8;border-radius: 10px 10px 0 0;height:50px}
+.weui-panel__bd .add .weui-media-box__hd{padding: 0}
+#wec_back{width:40px; background: url('/assets/global/img/qw.png');height:110px;position: absolute;top: 0;right: 0}
+.weui-panel__bd .weui-media-box__bd{height: 70px;background: #fff;padding: 10px 0 0 10px;}
+.wec .weui-panel__ft{background: #fff;height:30px;border-radius: 0 0 10px 10px;line-height:8px;width: 96%}
+
+
+.b_gexing{font-size: 15px;font-weight:400;color: #888}
+.box_div2_d4>a{padding:2px 2px 2px 20px;display: block;color: #000;}
+#icon_i{float: right;margin-right: 40px;}

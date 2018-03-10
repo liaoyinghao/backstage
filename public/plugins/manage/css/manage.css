@@ -1,0 +1,8 @@
+.dropdown-menu{min-width: 100px;}
+.dropdown-menu>li>a{color: #000;font-weight: normal;}
+.dropdown-menu>li>a:hover{color: #000;font-weight: normal;background-color: #c3c3c3}
+
+
+.tb-cz{width: 90px;}
+.tb-num{width: 50px;}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{vertical-align: -webkit-baseline-middle;}

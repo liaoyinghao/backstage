@@ -1,0 +1,33 @@
+body, html{height: 100%;}
+.weui-btn_primary{background-color:#FFA500}
+.weui-btn_primary:not(.weui-btn_disabled):active{background-color: #E29200}
+.not_wx{max-width: 640px;margin: 0 auto;box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.22)!important}
+
+/*body{background-color: #f2f2f2;font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif}*/
+body{background-color: #f2f2f2;}
+.weui-footer{margin: 45px 0 5px 0;}
+.s-slaver-tips{color: #999999;font-size: 14px;}
+.weui-x-remove{font-size: 36px;color: #000;}
+.em-w60{margin: 0 auto;padding: 15px 0;width: 60%;}
+
+.text-center{text-align: center;}
+.text-right{text-align: right;}
+.text-left{text-align: left;}
+.main-top-div{margin-top: 10px}
+
+.weui-tabbar__icon i{font-size: 22px;}
+.weui-bar__item--on i{color: #FFA500}
+.weui-tabbar__item.weui-bar__item--on .weui-tabbar__label{color: #FFA500}
+.weui-cell__ft-span{font-size: 17px!important}
+.weui-progress__inner-bar{background-color:#FFA500}
+
+.weui-switch-cp__input:checked~.weui-switch-cp__box, .weui-switch:checked{border-color:#FFA500;background-color:#FFA500;}
+.not_wx .weui-actionsheet{left: initial!important;max-width: 640px;}
+.not_wx .weui-popup__container, .weui-popup__overlay{max-width: 640px;margin: 0 auto;}
+
+.not_wx .weui-picker-container, .weui-picker-overlay{left: inherit;right: inherit;}
+.not_wx .weui-picker-modal{max-width: 640px;}
+
+.weui-cells_checkbox .weui-check:checked+.weui-icon-checked:before{color: #FFA500}
+
+.wenhao-click{margin-bottom: 2px;color: #ffa500;cursor: pointer;font-weight: bold;}

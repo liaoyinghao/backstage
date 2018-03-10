@@ -1,0 +1,15 @@
+/node_modules
+/public/storage
+/public/hot
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+/public/uploads
+Homestead.json
+Homestead.yaml
+.env
+.DS_Store
+.log
+composer.lock
+.vscode

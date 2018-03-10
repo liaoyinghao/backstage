@@ -1,0 +1,68 @@
+.shop-title{height: 200px;overflow: hidden;}
+.shop-title img{width: 100%;}
+.shop-text{color: #fff;margin-top: -80px;font-size: 30px;text-align: center;margin-bottom: 80px;}
+.text-center{text-align: center;}
+#tab1{padding: 0 12px;}
+.lt-k{width: 20px;height: 20px;background-color: #f8f8f8;position: absolute;left: -10px;border-radius: 20px;transform: scaleX(0.5) scaleY(0.5);border: 1px solid rgba(149,149,149,.1);top: auto;bottom: -11px;z-index: 3}
+.rt-k{width: 20px;height: 20px;background-color: #f8f8f8;position: absolute;right: -10px;border-radius: 20px;transform: scaleX(0.5) scaleY(0.5);border: 1px solid rgba(149,149,149,.1);top: auto;bottom: -11px;z-index: 3}
+.wec .weui-cell:before{border-top: 1px dashed #7b7b7b;}
+.wec{border-left: 1px solid rgba(149,149,149,.1);border-right: 1px solid rgba(149,149,149,.1);border-bottom: 1px solid rgba(149,149,149,.1);border-top: 2px solid red;}
+.wec img{border-radius: 50%;height: 60px;}
+.wec .weui-cell_link{color: #A7A7A7;font-size: 12px;}
+.weui-navbar__item:after{border-right: 0;}
+.weui-navbar__item.weui-bar__item--on{border-bottom: 2px solid #FFA500;background-color: transparent;}
+
+#tab3 i{margin-right: 10px;color: #7a7a7a}
+.wecc .weui-media-box__hd{border-radius: 50%;overflow: hidden;}
+.wecc .weui-media-box__hd img{vertical-align: middle;}
+.colhdj{color: #FFA500!important}
+.weui-tab{height: auto;margin-bottom: 60px;}
+.weui-gallery__opr{display: none;}
+.right-left{margin-left: 15px;}
+
+#tab1{background: #f1f1f1}
+/*店铺头*/
+.fxf{width: 100%;height: 165px;background: #f9f9f9;position: relative;}
+
+.fxf_hd{width: 80px;height: 80px;margin: 30px 10px 0 20px;}
+.fxf_hd img{max-width: 80px;max-height: 80px}
+.fxf_bd_dian{position: absolute;top: 20px;left: 0px;display:inline-block;background: #ffa500;width: 30px;height: 30px;border-radius: 50%;-moz-border-radius: 50%;-webkit-border-radius: 50%;font-size: 16px;line-height:27px;text-align: center;color: #fff;}
+.fxf_hd,.fxf_bd{float: left;}
+.fxf_bd{position: relative;}
+.fxf_bd .brief-p1{font-size: 12px;position: absolute;display: block;width: 130px;top: 115px;left: -90px;color: #999;}
+.brief-p2{position: absolute;right: 10px;bottom: 2px;padding: 2px 10px 2px 10px;;color: #ffa500}
+.fxf_sd{position: absolute;overflow: hidden;top: 50px;right: 10px;font-size: 17px;width: 220px;height: 80px;overflow: hidden;text-align: center;}
+.box{width: 100%;height: 0;position: relative;background: #fdfdf4;font-size: 15px;color: #666;overflow: hidden;/*opacity: 0*/}
+.box>p:nth-child(1){padding-top:15px}
+.box>p.p_odd{margin:0 0 4px 15px;font-size: 15px;}
+.box>p.p_even{text-indent:50px;margin-left: 50px;font-size: 13px;}
+.p_even{font-size: 13px;}
+.box .spans{background: #ffa500;border-radius: 1px;-moz-border-radius: 1px-webkit-border-radius: 1px;
+    padding: 3px 10px 3px 10px;color: #fff;font-size: 15px;float: right;margin: 20px 10px 10px 0;}
+.box hr{width: 50%;margin-left: 60px;opacity: 0.2;margin-bottom:10px;}
+.box i{margin-top: -7px;}
+.box a{color: #666}
+.box a p{padding-left: 100px}
+#p_evens{font-size: 13px}
+.exponential{position: absolute;right: 20px;top: 15px;border-bottom: 1px solid #ccc;font-size: 12px;}
+
+/*卡券*/
+
+.wec{border:none!important;background:none}
+.add{background: #f8f8f8;border-radius: 10px 10px 0 0;height:50px}
+.weui-panel__bd .add .weui-media-box__hd{padding: 0}
+#wec_back{width:40px; background: url('/assets/global/img/qw.png');height:110px;position: absolute;top: 0;right: 0}
+.weui-panel__bd .weui-media-box__bd{height: 70px;background: #fff;padding: 10px 0 0 10px;}
+.wec .weui-panel__ft{background: #fff;height:30px;border-radius: 0 0 10px 10px;line-height:8px;}
+
+
+.b_gexing{font-size: 15px;font-weight:400;color: #888}
+.box_div2_d4>a{padding:2px 2px 2px 20px;display: block;color: #000;}
+#icon_i{float: right;margin-right: 40px;}
+
+.wx-get{padding:0}
+
+.weui-panel__bd{background: #fff}
+
+
+.weui-loadmore_line,.weui-loadmore-loading{display: none;}

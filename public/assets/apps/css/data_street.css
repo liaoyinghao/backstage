@@ -1,0 +1,33 @@
+/*.portlet.light.bordered{border: none !important;}*/
+#news-table_filter{text-align: right}
+.news-table-one{display: none;}
+.table-scrollable{border: none}
+
+.shoplist_top{background: #f5f5f5;padding: 12px;margin-bottom: 20px;position: relative}
+.shoplist_top .shoplist_top_d1{width: 40px;height: 40px;background: white;padding: 0}
+.shoplist_top .shoplist_top_d1 img{width: 100%}
+.shoplist_top .shoplist_top_d2{margin-left: 20px;font-size: 12px;color: #999;padding-left: 0}
+.shoplist_top .shoplist_top_d2 span{display: block}
+.shoplist_top .shoplist_top_d2 span b{color: black}
+.shoplist_top .shoplist_top_d3{position: absolute;right: 10px;top: 20px;}
+.shoplist_top .shoplist_top_d3>a{
+    text-decoration: none;background: white;
+    padding: 1px 3px;display: inline-block;
+    margin-right: 3px;border: 1px solid #0b94ea;
+    border-radius: 2px;color: #0b94ea;font-size: 12px;
+}
+
+#news-table{border: none}
+#news-table thead>tr{background: #f9f9f9;border: none}
+#news-table thead th{height: 40px;line-height:40px}
+#news-table tbody tr{height:55px;border-bottom: 1px solid #eee}
+#news-table tbody tr:hover{background: #f9f9f9;}
+#news-table tbody tr td{padding-top: 15px}
+#news-table tbody tr td a{font-size: 12px;}
+
+.submit{width: 300px;height: 35px;background: #217ebd;border: none;border-radius: 3px;color: #fff;}
+.top_card_radio{width: 90%;min-height: 50px;margin-left: 9%}
+#top_card{margin-left: 12px}
+
+
+
