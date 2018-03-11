@@ -13,4 +13,8 @@ class UserController extends Controller
         return view('manage.user.main');
     }
 
+    public function userdetailed(){
+        return view('manage.user.userdetailed');
+    }
+
 }

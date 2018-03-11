@@ -31,14 +31,14 @@
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
-                            <th width="50px">ID</th>
-                            <th>商街</th>
-                            <th>类型</th>
-                            <th class="tb-num">店铺</th>
-                            <th class="tb-num">达人</th>
-                            <th>地址</th>
-                            <th class="tb-num">设备</th>
-                            <th>操作</th>
+                            <th width="50px">***</th>
+                            <th>***</th>
+                            <th>***</th>
+                            <th>***</th>
+                            <th>***</th>
+                            <th>***</th>
+                            <th>***</th>
+                            <th>***</th>
                         </tr>
                         </thead>
                         <tbody>
