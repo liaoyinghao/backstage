@@ -23,7 +23,7 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        <a href="{{route('manage_street_add')}}" class="btn blue btn-outline"><i class="fa fa-plus"></i> 添加</a>
+                        <a class="btn blue btn-outline"><i class="fa fa-plus"></i> 添加</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -33,7 +33,6 @@
                         <tr>
                             <th width="50px">ID</th>
                             <th>商街</th>
-                            <!-- <th>剑客</th> -->
                             <th>类型</th>
                             <th class="tb-num">店铺</th>
                             <th class="tb-num">达人</th>
