@@ -39,7 +39,7 @@
                             <img class="img-circle" src="{{request()->cookie('manage_avatar')}}" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
-                            <li><a href="{{route('manage_login_post',['flag'=>'logout'])}}"><i class="icon-key"></i> 退出 </a></li>
+                            <li><a href="{{route('manage_loginpost',['flag'=>'logout'])}}"><i class="icon-key"></i> 退出 </a></li>
                         </ul>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->

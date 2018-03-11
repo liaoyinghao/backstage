@@ -6,7 +6,7 @@ Route::get('/',function(){
 });
 
 Route::get('login' , 'AdminController@login')->name('login');
-Route::post('login' , 'AdminController@loginPost')->name('login_post');
+Route::any('loginpost' , 'AdminController@loginPost')->name('loginpost');
 
 
 Route::group(['prefix'=>'street' , 'as'=>'street_'] , function(){

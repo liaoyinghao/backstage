@@ -50,6 +50,8 @@
         .hqyzm{background: #FFA500;line-height: 35px;border-radius: 2px;text-align: center;display: inline-block;color: #fff;width: 115px;cursor: pointer;}
         #yzm_name{display: inline-block;width: 235px}
         #denglus{width: 120px;}
+        .form>.row{margin-top: 50px;}
+        .form>.row input{border: none;border-bottom: 1px solid #999;}
     </style>
 
     <body class="login">
@@ -58,7 +60,7 @@
                 <div class="col-md-6 login-container bs-reset">
                     <div class="login-content text-center">
                         <h1> 登 录 </h1>
-                        <form class="login-form">
+                        <div class="form">
                             {{ csrf_field() }}
                             <div class="alert alert-danger display-hide">
                                 <button class="close" data-close="alert"></button>
@@ -66,9 +68,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" name="name" autocomplete="off" placeholder="用户名" name="username" required/> </div>
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" placeholder="用户名" id="username"/> </div>
                                 <div class="col-xs-6">
-                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" name="pwd" autocomplete="off" placeholder="密码" name="password" required/> </div>
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" placeholder="密码" id="password"/> </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-2"></div>
@@ -76,7 +78,7 @@
                                     <span class="btn blue" id="denglus">登录</span>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 bs-reset">
@@ -111,38 +113,34 @@
             $(function(){
                 //账号登录ajax
                 $("#denglus").on('click',function(){
-                    var name = $("#z_name").val();
-                    var pwd = $("#z_pwd").val();
+                    var username = $("#username").val();
+                    var password = $("#password").val();
 
-                    if(name == ''){
-                        $(".alert").css("display","block");
+                    if(username == ''){
                         $(".alert_span").html("账号不能为空！");
+                        $(".alert").css("display","block");
                         return false;
                     }
-                    if(pwd == ''){
-                        $(".alert").css("display","block");
+                    if(password == ''){
                         $(".alert_span").html("密码不能为空！");
+                        $(".alert").css("display","block");
                         return false;
                     }
                     $("#denglus").html("登录中...");
 
                     $.ajax({
-                        url:"{{route('exec_loginposts')}}",
+                        url:"{{route('manage_loginpost')}}",
                         type:"post",
-                        data:{"name":name,"pwd":pwd},
+                        data:{"username":username,"password":password},
                         dataType:"json",
                         success:function(d){
                             if(d==1){
                                 $("#denglus").html("登录成功");
-                                location.href="{{route('exec_survey_index')}}";
-                            }else if(d==2){
-                                $("#denglus").html("登录");
-                                $(".alert").css("display","block");
-                                $(".alert_span").html("对不起，该品牌商不存在，请联系管理员！");
+                                location.href="{{route('manage_street_main')}}";
                             }else{
                                 $("#denglus").html("登录");
                                 $(".alert").css("display","block");
-                                $(".alert_span").html("密码错误，请重新登录！");
+                                $(".alert_span").html("密码或账号错误，请重新输入！");
                             }
                         }
                     })
