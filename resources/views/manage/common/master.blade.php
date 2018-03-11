@@ -6,14 +6,14 @@
 <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
-        <title>互动街-运营后台</title>
+        <title>后台管理系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="互动街" name="description" />
-        <meta content="O2OPark" name="author" />
+        <meta content="后台管理系统" name="description" />
+        <meta content="后台管理系统" name="author" />
         @include('manage.common.globalcss')
         @yield('usercss')
-        <link rel="shortcut icon" href="/favicon.ico" /> </head>
+        <link rel="shortcut icon" href="/plugins/manage/img/logo_icon.png" /> </head>
         <link rel="stylesheet" href="//at.alicdn.com/t/font_456120_cmjsd3cmvxpyzaor.css">
         <link rel="stylesheet" href="//at.alicdn.com/t/font_456120_oqu5n95fdxlp7gb9.css">
         

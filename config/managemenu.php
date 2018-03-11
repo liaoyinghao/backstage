@@ -11,4 +11,14 @@ return [
             ],
         ]
     ],
+    'user'=>[
+        'name'=>'管理',
+        'icon'=>'icon-direction',
+        'son'=>[
+            'main'=>[
+                'name'=>'账户管理',
+                'url'=>'main'
+            ],
+        ]
+    ],
 ];

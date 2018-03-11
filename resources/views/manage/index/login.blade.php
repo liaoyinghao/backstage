@@ -7,11 +7,11 @@
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>互动街</title>
+        <title>后台管理系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="互动街" name="description" />
-        <meta content="互动街" name="author" />
+        <meta content="后台管理系统" name="description" />
+        <meta content="后台管理系统" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
         <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -32,21 +32,33 @@
         <!-- END PAGE LEVEL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
+        <link rel="shortcut icon" href="/plugins/manage/img/logo_icon.png" /> </head>
     <!-- END HEAD -->
 
-    <body class=" login">
-        <!-- BEGIN : LOGIN PAGE 5-2 -->
+    <style type="text/css">
+        .zhuce,.denglu,.denglu_yzm{width: 100%;height: 100%;background:rgba(0,0,0,0.5);border: 1px solid #999;position: absolute;top: 0;left: 0;text-align: center;overflow: hidden;display: none}
+        .guanbi_icon,.guanbi_icon2,.guanbi_icon3{position: absolute;right: 1px;top: 1px;cursor: pointer;z-index: 100}
+        #zhuce_img{margin-top: -400px}
+        .saoyisao{font-size: 30px;color: #fff;}
+        .user_k,.yzm_k{color: #666 !important;margin-top: -6px !important;cursor: pointer;}
+        .user_k{margin-right: 40px}
+        .usek{width: 500px;height: 300px;background: #fff;margin: 150px auto;text-align: center;margin-top: -400px}
+        .rows>div{margin: 0 90px}
+        .alert{position: absolute;width: 500px;top: 180px}
+        .login{overflow: hidden;}
+        #yzm_pwd{width: 100px;display: inline-block;margin-right: 20px;}
+        .hqyzm{background: #FFA500;line-height: 35px;border-radius: 2px;text-align: center;display: inline-block;color: #fff;width: 115px;cursor: pointer;}
+        #yzm_name{display: inline-block;width: 235px}
+        #denglus{width: 120px;}
+    </style>
+
+    <body class="login">
         <div class="user-login-5">
             <div class="row bs-reset">
                 <div class="col-md-6 login-container bs-reset">
-                    <!-- <img class="login-logo login-6" src="/assets/pages/img/2.png" /> -->
                     <div class="login-content text-center">
-                        <h3>请用微信扫码登录</h3>
-                        <img src="http://pan.baidu.com/share/qrcode?w=300&h=300&url={{str_replace('&' , '%26' , route('h5_leading_wxenter' , ['code'=> $code , 'time'=>$time ]))}}">
-                        <!-- <h1>互动街</h1> -->
-                        <!-- <h1> &nbsp;</h1>
-                        <form action="{{route('manage_login_post')}}" class="login-form" method="post">
+                        <h1> 登 录 </h1>
+                        <form class="login-form">
                             {{ csrf_field() }}
                             <div class="alert alert-danger display-hide">
                                 <button class="close" data-close="alert"></button>
@@ -59,57 +71,12 @@
                                     <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" name="pwd" autocomplete="off" placeholder="密码" name="password" required/> </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
-                                        <input type="checkbox" name="remember" value="1" /> 记住
-                                        <span></span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-8 text-right">
-                                    <button class="btn blue" type="submit" style="width:100px;">登录</button>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-10 text-right">
+                                    <span class="btn blue" id="denglus">登录</span>
                                 </div>
                             </div>
-                        </form> -->
-                        <!-- BEGIN FORGOT PASSWORD FORM -->
-                        <!-- <form class="forget-form" action="javascript:;" method="post">
-                            <h3>Forgot Password ?</h3>
-                            <p> Enter your e-mail address below to reset your password. </p>
-                            <div class="form-group">
-                                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
-                            <div class="form-actions">
-                                <button type="button" id="back-btn" class="btn blue btn-outline">Back</button>
-                                <button type="submit" class="btn blue uppercase pull-right">Submit</button>
-                            </div>
-                        </form> -->
-                        <!-- END FORGOT PASSWORD FORM -->
-                    </div>
-                    <div class="login-footer">
-                        <div class="row bs-reset">
-                            <div class="col-xs-5 bs-reset">
-                                <ul class="login-social">
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="icon-social-dribbble"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-7 bs-reset">
-                                <div class="login-copyright text-right">
-                                    <p>Copyright &copy; 互动街 2017</p>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-6 bs-reset">
@@ -117,11 +84,7 @@
                 </div>
             </div>
         </div>
-        <!-- END : LOGIN PAGE 5-2 -->
-        <!--[if lt IE 9]>
-<script src="/assets/global/plugins/respond.min.js"></script>
-<script src="/assets/global/plugins/excanvas.min.js"></script>
-<![endif]-->
+
         <!-- BEGIN CORE PLUGINS -->
         <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
         <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -140,26 +103,50 @@
         <script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="/assets/pages/scripts/login-5.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/login-52.min.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <!-- END THEME LAYOUT SCRIPTS -->
         <script type="text/javascript">
             $(function(){
-                function getCode() {
-                    $.post("{{route('manage_login_post')}}",{"code":"{{$code}}","time":"{{$time}}","flag":"enter"},function(d){
-                        if(d==1){
-                            location.href="{{route('manage_street_main')}}";
+                //账号登录ajax
+                $("#denglus").on('click',function(){
+                    var name = $("#z_name").val();
+                    var pwd = $("#z_pwd").val();
+
+                    if(name == ''){
+                        $(".alert").css("display","block");
+                        $(".alert_span").html("账号不能为空！");
+                        return false;
+                    }
+                    if(pwd == ''){
+                        $(".alert").css("display","block");
+                        $(".alert_span").html("密码不能为空！");
+                        return false;
+                    }
+                    $("#denglus").html("登录中...");
+
+                    $.ajax({
+                        url:"{{route('exec_loginposts')}}",
+                        type:"post",
+                        data:{"name":name,"pwd":pwd},
+                        dataType:"json",
+                        success:function(d){
+                            if(d==1){
+                                $("#denglus").html("登录成功");
+                                location.href="{{route('exec_survey_index')}}";
+                            }else if(d==2){
+                                $("#denglus").html("登录");
+                                $(".alert").css("display","block");
+                                $(".alert_span").html("对不起，该品牌商不存在，请联系管理员！");
+                            }else{
+                                $("#denglus").html("登录");
+                                $(".alert").css("display","block");
+                                $(".alert_span").html("密码错误，请重新登录！");
+                            }
                         }
-                    });
-                }
-
-                $(function(){
-                    window.setInterval(function(){
-                        getCode();
-                    }, 3000);
-                });
-
+                    })
+                })
             });
         </script>
     </body>
