@@ -64,7 +64,7 @@
                             {{ csrf_field() }}
                             <div class="alert alert-danger display-hide">
                                 <button class="close" data-close="alert"></button>
-                                <span>请输入用户名密码</span>
+                                <span class="alert_span">请输入用户名密码</span>
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
@@ -139,8 +139,8 @@
                                 location.href="{{route('manage_street_main')}}";
                             }else{
                                 $("#denglus").html("登录");
-                                $(".alert").css("display","block");
                                 $(".alert_span").html("密码或账号错误，请重新输入！");
+                                $(".alert").css("display","block");
                             }
                         }
                     })

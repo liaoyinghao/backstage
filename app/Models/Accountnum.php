@@ -3,10 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-public $timestamps = false;
+use App\Models\Userlist;
 class Accountnum extends Model
 {
+	public $timestamps = false;//取消updated_at字段
 
+	public static function useris($username,$password){
+		$data = self::where("username",$username)->where("password",md5($password))->where("status",1)->first();
+		if($data){
+			$quanxian = Userlist::userlist($data['id']);
+			$data['is_account'] = $quanxian['is_account'];
+			return $data;
+		}else{
+			return false;
+		}
+	}
 
 }
