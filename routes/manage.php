@@ -18,5 +18,5 @@ Route::group(['prefix'=>'street' , 'as'=>'street_'] , function(){
 Route::group(['prefix'=>'user' , 'as'=>'user_'] , function(){
     Route::get('main' , 'UserController@main')->name('main');
     Route::get('userdetailed' , 'UserController@userdetailed')->name('userdetailed');
+    Route::any('userzhuce' , 'UserController@userzhuce')->name('userzhuce');
 });
-

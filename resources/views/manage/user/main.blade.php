@@ -33,16 +33,15 @@
                         <tr>
                             <th width="50px">ID</th>
                             <th>账号</th>
-                            <th>密码</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
+                            <th>谁创建</th>
+                            <th>职位</th>
+                            <th>昵称</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>

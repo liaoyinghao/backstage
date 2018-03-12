@@ -30,7 +30,7 @@
                 border: none;
                 border-radius: 5px;}
     </style>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -43,10 +43,30 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <form method="post" action="">
+                    <form method="post" action="{{route('manage_user_userzhuce')}}">
 
                     <p class="form_p">
                         用户名：<input type="text" name="name" value="" placeholder="输入用户名">
+                    </p>
+                    <p class="form_p">
+                        密  码：<input type="password" name="password" value="" placeholder="请输入密码">
+                    </p>
+                    <p class="form_p">
+                      所属职位：<select name= 'job'>
+                        <option  value='总经理'  name ="generalmanager">总经理</option>
+                        <option  value='销售经理'    name ="salesmanager">销售经理</option>
+                        <option  value='技术部长'  name="minister">技术部长</option>
+                        <option  value='生产部长' name="production">生产部长</option>
+                        <option  value='采购主管' name="purchase">采购主管</option>
+                        <option  value='品质主管' name="quality">品质主管</option>
+                        <option  value='车间主任' name="workshop">车间主任</option>
+                        <option  value='财务主管' name="finance">财务主管</option>
+                        <option  value='人事行政主管' name="personnel ">人事行政主管</option>
+                        <option  value='职员'  name="staff">职员</option>
+                      </select>
+                    </p>
+                    <p class="form_p">
+                        帐号昵称：<input type="text" name="nickanme" value="" placeholder="输入昵称">
                     </p>
 
                     <p><input type="submit" value="确认注册" class="submit"></p>
