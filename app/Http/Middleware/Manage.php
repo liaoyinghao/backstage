@@ -19,6 +19,9 @@ class Manage
            return redirect()->route('manage_login');
        }
 
+       $GLOBALS['m']['user']=$request->cookie('backstage_user');
+       $GLOBALS['m']['quanxian']=$request->cookie('backstage_user_quanxian');
+
         return $next($request);
     }
 }

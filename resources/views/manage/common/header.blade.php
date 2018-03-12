@@ -35,7 +35,7 @@
                     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                     <li class="dropdown dropdown-user ">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <span class="username username-hide-on-mobile">{{request()->cookie('backstage_user_nickname')}}</span>
+                            <span class="username username-hide-on-mobile">欢迎{{request()->cookie('backstage_user_nickname')}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li><a href="{{route('manage_loginpost',['flag'=>'logout'])}}"><i class="icon-key"></i> 退出 </a></li>

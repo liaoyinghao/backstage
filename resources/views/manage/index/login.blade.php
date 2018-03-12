@@ -110,9 +110,21 @@
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <!-- END THEME LAYOUT SCRIPTS -->
         <script type="text/javascript">
+
             $(function(){
+
+                $(document).keyup(function(event){
+                      if(event.keyCode ==13){
+                        submoit();
+                      }
+                });
+
                 //账号登录ajax
                 $("#denglus").on('click',function(){
+                    submoit();
+                })
+
+                function submoit(){
                     var username = $("#username").val();
                     var password = $("#password").val();
 
@@ -144,7 +156,7 @@
                             }
                         }
                     })
-                })
+                }
             });
         </script>
     </body>
