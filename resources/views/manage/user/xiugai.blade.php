@@ -36,23 +36,23 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase"> 注册新用户</span>
+                        <span class="caption-subject bold uppercase"> 修改用户</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <form method="post" action="{{route('manage_user_userzhuce')}}">
+                    <form method="post" action="{{route('manage_user_userxiugai')}}">
 
                     <p class="form_p">
-                        用户名：<input type="text" name="name" value="" placeholder="输入用户名">
+                        用户名：<input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名">
                     </p>
                     <p class="form_p">
-                        密  码：<input type="password" name="password" value="" placeholder="请输入密码">
+                        密  码：<input type="password" name="password" value="{{$user['password']}}" placeholder="请输入新密码">
                     </p>
                     <p class="form_p">
-                      所属职位：<select name= 'job'>
+                      所属职位：<select name= 'job' value="{{$user['position']}}">
                         <option  value='总经理'  name ="generalmanager">总经理</option>
                         <option  value='销售主管'    name ="salesmanager">销售主管</option>
                         <option  value='销售'  name="minister">销售</option>
@@ -62,10 +62,10 @@
                       </select>
                     </p>
                     <p class="form_p">
-                        帐号昵称：<input type="text" name="nickanme" value="" placeholder="输入昵称">
+                        帐号昵称：<input type="text" name="nickanme" value="{{$user['nickname']}}" placeholder="输入昵称">
                     </p>
-
-                    <p><input type="submit" value="确认添加" class="submit"></p>
+                    <input type='hidden'  name= 'id' value='{{$id}}'>
+                    <p><input type="submit" value="确认修改" class="submit"></p>
                     </form>
                 </div>
             </div>
