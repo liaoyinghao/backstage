@@ -30,7 +30,9 @@ Route::group(['prefix'=>'user' , 'as'=>'user_'] , function(){
 
 //客户管理
 Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
-    Route::get('main' , 'CustomerController@main')->name('main');
+    Route::any('main' , 'CustomerController@main')->name('main');
+    Route::get('khadd' , 'CustomerController@khadd')->name('khadd');
+    Route::get('khdetails' , 'CustomerController@khdetails')->name('khdetails');
 });
 
 

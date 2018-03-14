@@ -12,4 +12,12 @@ class CustomerController extends Controller
         return view('manage.customer.main');
     }
 
+    public function khadd(){
+        return view('manage.calendar.main');
+    }
+
+    public function khdetails(){
+        return view('manage.calendar.main');
+    }
+
 }
