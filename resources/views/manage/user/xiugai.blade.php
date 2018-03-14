@@ -29,6 +29,8 @@
                 color: #fff;
                 border: none;
                 border-radius: 5px;}
+        .job{width: 300px;height: 35px;border-radius: 5px;}
+        .userk{text-align: right;width: 100px;display: inline-block;}
     </style>
 
     <div class="row">
@@ -46,13 +48,13 @@
                     <form method="post" action="{{route('manage_user_userxiugai')}}">
 
                     <p class="form_p">
-                        用户名：<input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名">
+                        <span class="userk">用户名：</span><input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名">
                     </p>
                     <p class="form_p">
-                        密  码：<input type="password" name="password" value="{{$user['password']}}" placeholder="请输入新密码">
+                        <span class="userk">密  码：</span><input type="password" name="password" value="{{$user['password']}}" placeholder="请输入新密码">
                     </p>
                     <p class="form_p">
-                      所属职位：<select name= 'job' value="{{$user['position']}}">
+                      <span class="userk">所属职位：</span><select name= 'job' value="{{$user['position']}}" class="job">
                         <option  value='总经理'  name ="generalmanager">总经理</option>
                         <option  value='销售主管'    name ="salesmanager">销售主管</option>
                         <option  value='销售'  name="minister">销售</option>
@@ -62,7 +64,7 @@
                       </select>
                     </p>
                     <p class="form_p">
-                        帐号昵称：<input type="text" name="nickanme" value="{{$user['nickname']}}" placeholder="输入昵称">
+                        <span class="userk">帐号昵称：</span><input type="text" name="nickanme" value="{{$user['nickname']}}" placeholder="输入昵称">
                     </p>
                     <input type='hidden'  name= 'id' value='{{$id}}'>
                     <p><input type="submit" value="确认修改" class="submit"></p>

@@ -13,11 +13,22 @@ class CustomerController extends Controller
     }
 
     public function khadd(){
-        return view('manage.calendar.main');
+        return view('manage.customer.khadd');
+    }
+
+    public function khaddpost(){
+    	$start=request()->input('start');
+    	//fromuser谁的客户 = 添加的人
+    	//进度默认为空，进度时间默认为当前时间和addtime一样
+        dd($start);
     }
 
     public function khdetails(){
-        return view('manage.calendar.main');
+    	$id=request()->input('id');
+
+    	$data['start']=1;
+
+        return view('manage.customer.khadd',$data);
     }
 
 }
