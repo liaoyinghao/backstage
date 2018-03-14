@@ -20,6 +20,7 @@ class UserController extends Controller
         }
       }
       $data['lists']=Accountnum::get();
+      $data['user']=Accountnum::pluck('nickname','id')->toArray();
       return view('manage.user.main',$data);
     }
 
