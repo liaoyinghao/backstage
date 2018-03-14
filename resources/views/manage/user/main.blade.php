@@ -84,9 +84,11 @@
                                   <li>
                                   <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}">@if($v->status ==1 ) 修改@endif</a>
                                   <li>
+                                    @if($v->id != 1)
                                   <li>
-                                  <a class="delete" data-id="{{$v->id}}">@if($v->status ==1 ) 删除@endif</a>
+                                  <a class="delete" data-id="{{$v->id}}"> @if($v->status ==1 ) 删除@endif </a>
                                   <li>
+                                    @endif
                                   </ul>
                                   </div>
                                 </td>

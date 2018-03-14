@@ -24,8 +24,8 @@
                     </div>
                     <div class="actions">
                         <a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>
-                        <a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"> 查看组员客户信息</a>
-                        <a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"> 查看全部客户</a>
+                        @if($flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"> 查看组员客户信息</a>@endif
+                        @if($flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"> 查看全部客户</a>@endif
                         <a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"><i class="fa fa-plus"></i> 客户录入</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
@@ -46,19 +46,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <td>1</td>
-                            <td>廖应浩</td>
-                            <td>15172454646</td>
-                            <td>5800000.00</td>
-                            <td>5星</td>
-                            <td>潘天南</td>
-                            <td>正常</td>
-                            <td>2018-03-14</td>
+                          @if(isset($lists))
+                          @foreach($lists as $v)
+                          <tr>
+                            <td>{{$v->id}}</td>
+                            <td>{{$v->name}}</td>
+                            <td>{{$v->info}}</td>
+                            <td>{{$v->offer}}</td>
+                            <td>{{$v->grade}}星</td>
+                            <td>{{$user[$v->fromuser]}}</td>
+                            <td>@if($v->status ==1 ) 正常 @endif @if($v->status ==0 ) 放弃 @endif</td>
+                            <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn blue btn-xs"><a style="color:#fff;text-decoration:none" href="{{route('manage_customer_khdetails')}}">编辑资料</a></button>
                                 </div>
                             </td>
+                          </tr>
+                          @endforeach
+                          @endif
                         </tbody>
                     </table>
                 </div>

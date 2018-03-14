@@ -46,7 +46,7 @@ class UserController extends Controller
         $t['password'] =$pas;
         $t['addtime'] =time();
         $t['position']=$job;
-        $t['fromuser'] = $fromuser['nickanme'];
+        $t['fromuser'] = $fromuser['id'];
         $t['nickname'] =$nickname;
         Accountnum::insert($t);
       }
