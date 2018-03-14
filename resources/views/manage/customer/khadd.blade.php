@@ -54,41 +54,41 @@
                     <form method="post" action="{{route('manage_customer_khaddpost')}}">
 
                     <p class="form_p">
-                        <span class="userk">姓名：</span><input type="text" name="start[name]" value="" placeholder="客户姓名" required="required">
+                        <span class="userk">客户姓名：</span><input type="text" name="start[name]" value="{{$start['name'] or ''}}" placeholder="客户姓名" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">联系方式：</span><input type="text" name="start[info]" value="" placeholder="电话或邮箱等其他" required="required">
+                        <span class="userk">联系方式：</span><input type="text" name="start[info]" value="{{$start['info'] or ''}}" placeholder="电话或邮箱等其他" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">需求：</span>
-                        <textarea name="start[demand]" placeholder="输入客户需求" class="textarea"></textarea>
+                        <span class="userk">客户需求：</span>
+                        <textarea name="start[demand]" placeholder="输入客户需求" class="textarea">{{$start['demand'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
-                        <span class="userk">报价(单位:元)：</span><input type="text" name="start[offer]" value="" placeholder="输入金额" required="required">
+                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">备注：</span><input type="text" name="start[remarks]" value="">
+                        <span class="userk">备注：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}">
                     </p>
                     <p class="form_p">
                       <span class="userk">客户评级(单位:星)：</span><select name='start[grade]' class="job">
-                        <option  value='1' selected="selected">1</option>
-                        <option  value='2'>2</option>
-                        <option  value='3'>3</option>
-                        <option  value='4'>4</option>
-                        <option  value='5'>5</option>
+                        <option  value='1' @if(isset($start)) @if($start['remarks']==1) selected="selected" @endif @else selected="selected"  @endif >1</option>
+                        <option  value='2' @if(isset($start) && $start['remarks']==2) selected="selected"  @endif >2</option>
+                        <option  value='3' @if(isset($start) && $start['remarks']==3) selected="selected"  @endif >3</option>
+                        <option  value='4' @if(isset($start) && $start['remarks']==4) selected="selected"  @endif >4</option>
+                        <option  value='5' @if(isset($start) && $start['remarks']==5) selected="selected"  @endif >5</option>
                       </select>
                     </p>
                     <p class="form_p">
                       <span class="userk">客户状态：</span><select name='start[status]' class="job">
-                        <option  value='1' selected="selected">正常</option>
-                        <option  value='0'>放弃</option>
+                        <option  value='1' @if(isset($start)) @if($start['status']==1) selected="selected" @endif @else selected="selected"  @endif >正常</option>
+                        <option  value='0' @if(isset($start) && $start['status']==0) selected="selected"  @endif >放弃</option>
                       </select>
                     </p>
 
                     @if(isset($start))
                         <p class="form_p">
                             <span class="userk">客户跟进信息：</span>
-                            <textarea name="start[progress]" placeholder="添加客户跟进信息" class="textarea"></textarea>
+                            <textarea name="start[progress]" placeholder="添加客户跟进信息" class="textarea">{{$start['progress'] or ''}}</textarea>
                         </p>
                     @endif
                     

@@ -99,9 +99,20 @@ class CustomerController extends Controller
 
     public function khaddpost(){
     	$start=request()->input('start');
-    	//fromuser谁的客户 = 添加的人
-    	//进度默认为空，进度时间默认为当前时间和addtime一样
-        dd($start);
+    	if(empty($start) || empty($start['name'])){
+    		return redirect()->route('manage_customer_khaddpost');
+    	}
+
+    	$user = Accountnum::userinfo($GLOBALS['m']['user']);
+    	$start['addtime'] = time();
+    	$start['progresstime'] = time();
+    	$start['fromuser'] = $user['id'];
+    	$m = Customer::insert($start);
+    	if($m){
+    		return redirect()->route('manage_customer_main');
+    	}else{
+    		dd('添加失败');
+    	}
     }
 
     public function khdetails(){
