@@ -32,6 +32,7 @@ Route::group(['prefix'=>'user' , 'as'=>'user_'] , function(){
 Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
     Route::any('main' , 'CustomerController@main')->name('main');
     Route::get('khadd' , 'CustomerController@khadd')->name('khadd');
+    Route::post('khaddpost' , 'CustomerController@khaddpost')->name('khaddpost');
     Route::get('khdetails' , 'CustomerController@khdetails')->name('khdetails');
 });
 
