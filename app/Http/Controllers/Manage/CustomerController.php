@@ -59,6 +59,23 @@ class CustomerController extends Controller
 
     public function khaddpost(){
     	$start=request()->input('start');
+    	$form_type=request()->input('form_type');
+
+    	$user = Accountnum::userinfo($GLOBALS['m']['user']);
+    	
+    	if(!empty($form_type)){	//修改信息
+    		if(!empty($start['progress'])){
+    			$start['progresstime'] = time();
+    		}
+    		$start['fromuser'] = $user['id'];
+    		$m = Customer::where("id",$start['id'])->update($start);
+    		if($m){
+    			return redirect()->route('manage_customer_main');
+    		}else{
+    			dd('修改失败');
+    		}
+    	}
+
     	if(empty($start) || empty($start['name'])){
     		return redirect()->route('manage_customer_khaddpost');
     	}
@@ -77,9 +94,11 @@ class CustomerController extends Controller
 
     public function khdetails(){
     	$id=request()->input('id');
-
-    	$data['start']=1;
-
+    	$id=1;
+    	$data['start']=Customer::customerinfo($id);
+    	if(!$data['start']){
+    		dd('客户不存在！');
+    	}
         return view('manage.customer.khadd',$data);
     }
 
