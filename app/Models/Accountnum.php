@@ -19,4 +19,8 @@ class Accountnum extends Model
 		}
 	}
 
+	public static function userinfo($user){
+		return self::where("username",$user)->first();
+	}
+
 }
