@@ -51,7 +51,7 @@
                         <span class="userk">用户名：</span><input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名">
                     </p>
                     <p class="form_p">
-                        <span class="userk">密  码：</span><input type="password" name="password" value="{{$user['password']}}" placeholder="请输入新密码">
+                        <span class="userk">密  码：</span><input type="password" name="password" value="" placeholder="请输入新密码">
                     </p>
                     <p class="form_p">
                       <span class="userk">所属职位：</span><select name= 'job' value="{{$user['position']}}" class="job">

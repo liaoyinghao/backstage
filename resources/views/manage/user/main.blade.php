@@ -70,7 +70,11 @@
                           <tr>
                             <td class="bid">{{$v->id}}</td>
                             <td>{{$v->username}}</td>
-                            <td>{{$v->fromuser}}</td>
+                            @if(!empty($v->fromuser)))
+                            <td>{{$user[$v->fromuser]}}</td>
+                            @else
+                            <td></td>
+                            @endif
                             <td>{{$v->position}}</td>
                             <td>{{$v->nickname}}</td>
                             <td>{{date("Y-m-d H:i:s",$v->addtime)}}</td>

@@ -11,7 +11,7 @@ class Accountnum extends Model
 	public static function useris($username,$password){
 		$data = self::where("username",$username)->where("password",md5($password))->where("status",1)->first();
 		if($data){
-			$quanxian = Userlist::userlist($data['id']);
+			$quanxian = Userlist::userlist($data['position']);
 			$data['is_account'] = $quanxian['is_account'];
 			return $data;
 		}else{
