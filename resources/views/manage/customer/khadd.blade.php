@@ -78,11 +78,11 @@
                     </p>
                     <p class="form_p">
                       <span class="userk">客户评级(单位:星)：</span><select name='start[grade]' class="job">
-                        <option  value='1' @if(isset($start)) @if($start['grade']==1) selected="selected" @endif @else selected="selected"  @endif >1</option>
-                        <option  value='2' @if(isset($start) && $start['grade']==2) selected="selected"  @endif >2</option>
-                        <option  value='3' @if(isset($start) && $start['grade']==3) selected="selected"  @endif >3</option>
-                        <option  value='4' @if(isset($start) && $start['grade']==4) selected="selected"  @endif >4</option>
-                        <option  value='5' @if(isset($start) && $start['grade']==5) selected="selected"  @endif >5</option>
+                        <option  value='D' @if(isset($start)) @if($start['grade']=='D') selected="selected" @endif @else selected="selected"  @endif >D</option>
+                        <option  value='C' @if(isset($start) && $start['grade']=='C') selected="selected"  @endif >C</option>
+                        <option  value='B' @if(isset($start) && $start['grade']=='B') selected="selected"  @endif >B</option>
+                        <option  value='A' @if(isset($start) && $start['grade']=='A') selected="selected"  @endif >A</option>
+                        <option  value='S' @if(isset($start) && $start['grade']=='S') selected="selected"  @endif >S</option>
                       </select>
                     </p>
                     <p class="form_p">
@@ -100,7 +100,15 @@
                     @endif
                     
 
-                    <p><input type="submit" value="确认添加" class="submit"></p>
+                    
+                    @if(isset($start))
+                        <p><input type="submit" value="确认修改" class="submit"></p>
+                    @else
+                        <p><input type="submit" value="确认添加" class="submit"></p>
+                    @endif
+                        
+
+
                     </form>
                 </div>
             </div>

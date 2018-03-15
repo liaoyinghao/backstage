@@ -17,7 +17,16 @@ class CustomerController extends Controller
       if($user['position'] == '总经理'){
         $data['flag']=1;
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
-        $data['lists']=Customer::where('fromuser',$user['id'])->get();
+        $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
+        $lists=Customer::where('status',0)->get();
+        $kong=[];
+        foreach ($data['lists'] as $key => $value) {
+          array_push($kong,$value);
+        }
+        foreach ($lists as $key => $value) {
+          array_push($kong,$value);
+        }
+        $data['lists'] = $kong;
       }
 
       //销售主管
@@ -25,7 +34,7 @@ class CustomerController extends Controller
         $data['flag']=2;
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $data['lists']=Customer::where('fromuser',$user['id'])->get();//放弃
-        $lists=Customer::where('status',2)->get();
+        $lists=Customer::where('status',0)->get();
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
           array_push($kong,$value);
@@ -41,7 +50,7 @@ class CustomerController extends Controller
         $data['flag']=3;
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $data['lists']=Customer::where('fromuser',$user['id'])->get();//放弃
-        $lists=Customer::where('status',2)->get();
+        $lists=Customer::where('status',0)->get();
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
           array_push($kong,$value);
@@ -93,10 +102,12 @@ class CustomerController extends Controller
       return view('manage.customer.main',$data);
     }
 
+    //添加用户
     public function khadd(){
         return view('manage.customer.khadd');
     }
 
+    //添加用户post
     public function khaddpost(){
     	$start=request()->input('start');
     	$form_type=request()->input('form_type');
@@ -132,14 +143,30 @@ class CustomerController extends Controller
     	}
     }
 
+    //修改客户资料
     public function khdetails(){
     	$id=request()->input('id');
-    	$id=1;
     	$data['start']=Customer::customerinfo($id);
     	if(!$data['start']){
     		dd('客户不存在！');
     	}
         return view('manage.customer.khadd',$data);
+    }
+
+    //修改客户等级
+    public function khgrades(){
+      $id=request()->input('id');
+      $grades=request()->input('grades');
+      $sta = Customer::where('id',$id)->select("grade")->first();
+      if($sta['grade'] == $grades){
+        return 1;
+      }
+      $start=Customer::where('id',$id)->update(['grade'=>$grades]);
+      if($start){
+        return 1;
+      }else{
+        return 0;
+      }
     }
 
 }

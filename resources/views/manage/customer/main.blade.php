@@ -8,6 +8,25 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".td_select").change(function(){
+                var grades = $(this).val();
+                var id  = $(this).siblings(".tid").val();
+                $.ajax({
+                    url:"{{route('manage_customer_khgrades')}}",
+                    type:"post",
+                    data:{"grades":grades,"id":id},
+                    dataType:"json",
+                    success:function(d){
+                        if(d==1){
+                            alert("客户等级修改成功！");
+                        }else{
+                            alert("修改失败！");
+                        }
+                    }
+                })
+            })
+
         });
 
 
@@ -15,6 +34,10 @@
 @endsection
 
 @section('content')
+<style type="text/css">
+    .td_select{width: 100%;}
+    .td_s_sp{font-size: 12px;}
+</style>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -39,7 +62,7 @@
                             <th>联系方式</th>
                             <th>报价</th>
                             <th>客户评级</th>
-                            <th>谁的客户</th>
+                            <th>跟进人员</th>
                             <th>客户状态</th>
                             <th>添加时间</th>
                             <th>操作</th>
@@ -53,13 +76,22 @@
                             <td>{{$v->name}}</td>
                             <td>{{$v->info}}</td>
                             <td>{{$v->offer}}</td>
-                            <td>{{$v->grade}}星</td>
+                            <td>
+                                <select class="td_select">
+                                    <option value="A" @if($v->grade == "A") selected="selected" @endif >A</option>
+                                    <option value="B" @if($v->grade == "B") selected="selected" @endif >B</option>
+                                    <option value="C" @if($v->grade == "C") selected="selected" @endif >C</option>
+                                    <option value="D" @if($v->grade == "D") selected="selected" @endif >D</option>
+                                    <option value="S" @if($v->grade == "S") selected="selected" @endif >S</option>
+                                </select>
+                                <input type="hidden" class="tid" value="{{$v->id}}">
+                            </td>
                             <td>{{$user[$v->fromuser]}}</td>
                             <td>@if($v->status ==1 ) 正常 @endif @if($v->status ==0 ) 放弃 @endif</td>
                             <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn blue btn-xs"><a style="color:#fff;text-decoration:none" href="{{route('manage_customer_khdetails')}}">编辑资料</a></button>
+                                    <button type="button" class="btn blue btn-xs"><a style="color:#fff;text-decoration:none" href="{{route('manage_customer_khdetails',['id'=>$v->id])}}">编辑资料</a></button>
                                 </div>
                             </td>
                           </tr>
