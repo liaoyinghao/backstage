@@ -62,6 +62,13 @@ class UserController extends Controller
       Accountnum::where('id',$id)->update(['status'=>0]);
       return 1;
     }
+    //恢复
+    public function hui()
+    {
+      $id=request()->input('id');
+      Accountnum::where('id',$id)->update(['status'=>1]);
+      return 1;
+    }
 
     //修改
     public function xiugai()

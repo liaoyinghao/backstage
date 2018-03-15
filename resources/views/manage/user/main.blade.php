@@ -11,7 +11,7 @@
 
 
             $(".delete").on('click', function(){
-                event.returnValue = confirm("删除是不可恢复的，你确认要删除吗？");
+                event.returnValue = confirm("你确认要删除吗？");
                 if(event.returnValue){
                     var id = $(this).attr("data-id");
                     $.ajax({
@@ -25,6 +25,27 @@
                                 location.href=location.href
                             }else{
                                 alert('删除失败！');
+                            }
+                        }
+                    })
+                }
+            })
+
+            $(".hui").on('click', function(){
+                event.returnValue = confirm("你确认要恢复吗？");
+                if(event.returnValue){
+                    var id = $(this).attr("data-id");
+                    $.ajax({
+                        url:"{{route('manage_user_hui')}}",
+                        type:"post",
+                        data:{'id':id},
+                        dataType:'json',
+                        success:function(d){
+                            if(d==1){
+                                alert('恢复成功！');
+                                location.href=location.href
+                            }else{
+                                alert('恢复失败！');
                             }
                         }
                     })
@@ -84,16 +105,27 @@
                                 <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown">
                                   <i class="fa fa-angle-down"></i>
                                 </button>
+                                @if(isset($flag))
                                 <ul class="dropdown-menu pull-right" role="menu">
+                                  @if($v->status ==1 )
                                   <li>
-                                  <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}">@if($v->status ==1 ) 修改@endif</a>
+                                  <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}"> 修改</a>
                                   <li>
+                                    @endif
+                                    @if($v->status ==1 )
                                     @if($v->id != 1)
                                   <li>
-                                  <a class="delete" data-id="{{$v->id}}"> @if($v->status ==1 ) 删除@endif </a>
+                                  <a class="delete" data-id="{{$v->id}}">  删除</a>
+                                  <li>
+                                    @endif
+                                    @endif
+                                    @if($v->status ==0 )
+                                  <li>
+                                  <a class="hui" data-id="{{$v->id}}">恢复</a>
                                   <li>
                                     @endif
                                   </ul>
+                                  @endif
                                   </div>
                                 </td>
                           </tr>

@@ -23,6 +23,7 @@ Route::group(['prefix'=>'user' , 'as'=>'user_'] , function(){
     Route::get('userdetailed' , 'UserController@userdetailed')->name('userdetailed');
     Route::any('userzhuce' , 'UserController@userzhuce')->name('userzhuce');
     Route::any('del' , 'UserController@del')->name('del');
+    Route::any('hui' , 'UserController@hui')->name('hui');
     Route::any('xiugai' , 'UserController@xiugai')->name('xiugai');
     Route::any('userxiugai' , 'UserController@userxiugai')->name('userxiugai');
 });
