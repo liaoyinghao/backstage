@@ -91,7 +91,13 @@
                             <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn blue btn-xs"><a style="color:#fff;text-decoration:none" href="{{route('manage_customer_khdetails',['id'=>$v->id])}}">编辑资料</a></button>
+                                    <button type="button" class="btn blue btn-xs"><a style="color:#fff;text-decoration:none" href="{{route('manage_customer_khdetails',['id'=>$v->id])}}">编辑</a></button>
+                                    <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street">修改跟进信息</a></li>
+                                    </ul>
                                 </div>
                             </td>
                           </tr>

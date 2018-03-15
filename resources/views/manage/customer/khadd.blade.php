@@ -71,7 +71,7 @@
                         <textarea name="start[demand]" placeholder="输入客户需求" class="textarea">{{$start['demand'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
-                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" step="0.01" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">备注：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}">
@@ -91,15 +91,6 @@
                         <option  value='0' @if(isset($start)) @if($start['status']==0) selected="selected" @endif @endif >放弃</option>
                       </select>
                     </p>
-
-                    @if(isset($start))
-                        <p class="form_p">
-                            <span class="userk">客户跟进信息：</span>
-                            <textarea name="start[progress]" placeholder="添加客户跟进信息" class="textarea">{{$start['progress'] or ''}}</textarea>
-                        </p>
-                    @endif
-                    
-
                     
                     @if(isset($start))
                         <p><input type="submit" value="确认修改" class="submit"></p>

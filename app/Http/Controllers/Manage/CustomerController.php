@@ -115,9 +115,6 @@ class CustomerController extends Controller
     	$user = Accountnum::userinfo($GLOBALS['m']['user']);
     	
     	if(!empty($form_type)){	//修改信息
-    		if(!empty($start['progress'])){
-    			$start['progresstime'] = time();
-    		}
     		$start['fromuser'] = $user['id'];
     		$m = Customer::where("id",$start['id'])->update($start);
     		if($m){
@@ -167,6 +164,14 @@ class CustomerController extends Controller
       }else{
         return 0;
       }
+    }
+
+    //修改跟进信息
+    public function followup(){
+      $id=request()->input('id');
+      $data['info'] = Customer::where('id',$id)->first();
+      // dd($data['info']);
+      return view('manage.customer.followup',$data);
     }
 
 }
