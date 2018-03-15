@@ -10,12 +10,14 @@
             });
 
             $("#tianjia").on("click",function(){
+                var hang = $("#hang").val();
+                    hang = parseInt(hang) + 1;
                 var div = ' <div class="form_d">'+
                                 '<div class="form_d_1">'+
-                                    '<span class="userk">选择时间：</span><input type="date" name="time">'+
+                                    '<span class="userk">选择时间：</span><input type="date" name="stoer[time'+hang+']">'+
                                 '</div>'+
                                 '<div class="form_d_2">'+
-                                    '<textarea name=""></textarea>'+
+                                    '<textarea name="stoer[main'+hang+']""></textarea>'+
                                 '</div>'+
                             '</div>';
                 $("#formkh").append(div);
@@ -64,22 +66,35 @@
                 </div>
                 <div class="portlet-body">
 
-                    <form method="post" action="{{route('manage_customer_khaddpost')}}">
+                    <form method="post" action="{{route('manage_customer_followuppost')}}">
                     <input type="hidden" name="id" value="{{$info['id'] or ''}}">
-
+                    <input type="hidden" id="hang" value="{{$count or '1'}}">
                     <div id="formkh">
 
-                        <div class="form_d">
-                            <div class="form_d_1">
-                                <span class="userk">选择时间：</span><input type="date" name="stoer[time1]">
+                        @if(isset($progress) && !empty($progress))
+                            @foreach($progress as $key=>$val)
+                                <div class="form_d">
+                                    <div class="form_d_1">
+                                        <span class="userk">选择时间：</span><input type="date" name="stoer[{{$val['timename'] or ''}}]" value="{{$val['time'] or ''}}">
+                                    </div>
+                                    <div class="form_d_2">
+                                        <textarea name="stoer[{{$val['mainname'] or ''}}]">{{$val['main'] or ''}}</textarea>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="form_d">
+                                <div class="form_d_1">
+                                    <span class="userk">选择时间：</span><input type="date" name="stoer[time1]">
+                                </div>
+                                <div class="form_d_2">
+                                    <textarea name="stoer[main1]"></textarea>
+                                </div>
                             </div>
-                            <div class="form_d_2">
-                                <textarea  name=""></textarea>
-                            </div>
-                        </div>  
-
+                        @endif       
+                        
+                        
                     </div>  
-                                      
 
                     
                     

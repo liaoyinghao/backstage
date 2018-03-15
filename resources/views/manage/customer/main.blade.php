@@ -27,6 +27,15 @@
                 })
             })
 
+            //筛选（还没做完）
+            $("#shaixuan").change(function(){
+                var shaixuan = $(this).val();
+                if(shaixuan == 0){
+                    return false;
+                }
+                // window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
+            })
+
         });
 
 
@@ -37,6 +46,8 @@
 <style type="text/css">
     .td_select{width: 100%;}
     .td_s_sp{font-size: 12px;}
+    #news-table_length{display: none}
+    #shaixuan{position: absolute;top: 78px;left: 35px;width: 140px;height: 30px;border-radius: 5px;}
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -53,6 +64,14 @@
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
+                <select id="shaixuan">
+                    <option value="0">请选择筛选条件</option>
+                    <option value="D">D</option>
+                    <option value="C">C</option>
+                    <option value="B">B</option>
+                    <option value="A">A</option>
+                    <option value="S">S</option>
+                </select>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
@@ -78,10 +97,10 @@
                             <td>{{$v->offer}}</td>
                             <td>
                                 <select class="td_select">
-                                    <option value="A" @if($v->grade == "A") selected="selected" @endif >A</option>
-                                    <option value="B" @if($v->grade == "B") selected="selected" @endif >B</option>
-                                    <option value="C" @if($v->grade == "C") selected="selected" @endif >C</option>
                                     <option value="D" @if($v->grade == "D") selected="selected" @endif >D</option>
+                                    <option value="C" @if($v->grade == "C") selected="selected" @endif >C</option>
+                                    <option value="B" @if($v->grade == "B") selected="selected" @endif >B</option>
+                                    <option value="A" @if($v->grade == "A") selected="selected" @endif >A</option>
                                     <option value="S" @if($v->grade == "S") selected="selected" @endif >S</option>
                                 </select>
                                 <input type="hidden" class="tid" value="{{$v->id}}">

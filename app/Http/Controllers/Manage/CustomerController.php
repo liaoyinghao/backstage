@@ -170,8 +170,63 @@ class CustomerController extends Controller
     public function followup(){
       $id=request()->input('id');
       $data['info'] = Customer::where('id',$id)->first();
-      // dd($data['info']);
+      if(!empty($data['info']['progress'])){
+          $tprogresst = @unserialize($data['info']['progress']);
+          $count = count($tprogresst);
+          if($count > 1){
+              $data['count'] = $count / 2;
+              $data['progress'] = [];
+              $key = [];
+              $val = [];
+              $i = 1;
+              $j = 1;
+              $h = 1;
+              $t = 1;
+              foreach ($tprogresst as $k => $v) {
+                if ($i%2==0){  
+                    $val[$h] = $v;
+                    $h++;
+                }else{  
+                    $key[$j] = $v;
+                    $j++;
+                }  
+                $i++;
+              }
+
+              foreach ($key as $v1 => $v2) {
+                 $data['progress'][$v1]['time'] = $v2;
+                 $data['progress'][$v1]['main'] = $val[$v1];
+                 $data['progress'][$v1]['timename'] = 'time'.$t;
+                 $data['progress'][$v1]['mainname'] = 'main'.$t;
+                 $t++;
+              }
+
+              // dd($data['progress']);
+          }
+      }
+      // dd($data);
       return view('manage.customer.followup',$data);
     }
+
+    //修改跟进信息post
+    public function followuppost(){
+      $id=request()->input('id');
+      $stoer = request()->input('stoer');
+      foreach ($stoer as $key => $value) {
+        if(empty($value)){
+            $stoer[$key] = 0;
+        }
+      }
+      $progress = serialize($stoer);
+      $isok = Customer::where("id",$id)->update(["progress"=>$progress]);
+      if($isok){
+          $time = time();
+          $isok = Customer::where("id",$id)->update(["progresstime"=>$time]);
+          return redirect()->route('manage_customer_main');
+      }else{
+         dd('修改失败');
+      }
+    }
+
 
 }
