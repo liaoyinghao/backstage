@@ -51,7 +51,14 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <form method="post" action="{{route('manage_customer_khaddpost')}}">
+                    
+                    @if(isset($start))
+                        <form method="post" action="{{route('manage_customer_khaddpost')}}">
+                        <input type="hidden" name="form_type" value="form_type">
+                        <input type="hidden" name="start[id]" value="{{$start['id'] or ''}}">
+                    @else
+                        <form method="post" action="{{route('manage_customer_khaddpost')}}">
+                    @endif
 
                     <p class="form_p">
                         <span class="userk">客户姓名：</span><input type="text" name="start[name]" value="{{$start['name'] or ''}}" placeholder="客户姓名" required="required">
@@ -64,36 +71,35 @@
                         <textarea name="start[demand]" placeholder="输入客户需求" class="textarea">{{$start['demand'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
-                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" step="0.01" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">备注：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}">
                     </p>
                     <p class="form_p">
                       <span class="userk">客户评级(单位:星)：</span><select name='start[grade]' class="job">
-                        <option  value='1' @if(isset($start)) @if($start['remarks']==1) selected="selected" @endif @else selected="selected"  @endif >1</option>
-                        <option  value='2' @if(isset($start) && $start['remarks']==2) selected="selected"  @endif >2</option>
-                        <option  value='3' @if(isset($start) && $start['remarks']==3) selected="selected"  @endif >3</option>
-                        <option  value='4' @if(isset($start) && $start['remarks']==4) selected="selected"  @endif >4</option>
-                        <option  value='5' @if(isset($start) && $start['remarks']==5) selected="selected"  @endif >5</option>
+                        <option  value='D' @if(isset($start)) @if($start['grade']=='D') selected="selected" @endif @else selected="selected"  @endif >D</option>
+                        <option  value='C' @if(isset($start) && $start['grade']=='C') selected="selected"  @endif >C</option>
+                        <option  value='B' @if(isset($start) && $start['grade']=='B') selected="selected"  @endif >B</option>
+                        <option  value='A' @if(isset($start) && $start['grade']=='A') selected="selected"  @endif >A</option>
+                        <option  value='S' @if(isset($start) && $start['grade']=='S') selected="selected"  @endif >S</option>
                       </select>
                     </p>
                     <p class="form_p">
                       <span class="userk">客户状态：</span><select name='start[status]' class="job">
                         <option  value='1' @if(isset($start)) @if($start['status']==1) selected="selected" @endif @else selected="selected"  @endif >正常</option>
-                        <option  value='0' @if(isset($start) && $start['status']==0) selected="selected"  @endif >放弃</option>
+                        <option  value='0' @if(isset($start)) @if($start['status']==0) selected="selected" @endif @endif >放弃</option>
                       </select>
                     </p>
-
-                    @if(isset($start))
-                        <p class="form_p">
-                            <span class="userk">客户跟进信息：</span>
-                            <textarea name="start[progress]" placeholder="添加客户跟进信息" class="textarea">{{$start['progress'] or ''}}</textarea>
-                        </p>
-                    @endif
                     
+                    @if(isset($start))
+                        <p><input type="submit" value="确认修改" class="submit"></p>
+                    @else
+                        <p><input type="submit" value="确认添加" class="submit"></p>
+                    @endif
+                        
 
-                    <p><input type="submit" value="确认添加" class="submit"></p>
+
                     </form>
                 </div>
             </div>

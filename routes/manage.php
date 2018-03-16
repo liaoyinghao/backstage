@@ -35,6 +35,9 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
     Route::get('khadd' , 'CustomerController@khadd')->name('khadd');
     Route::post('khaddpost' , 'CustomerController@khaddpost')->name('khaddpost');
     Route::get('khdetails' , 'CustomerController@khdetails')->name('khdetails');
+    Route::any('khgrades' , 'CustomerController@khgrades')->name('khgrades');
+    Route::any('followup' , 'CustomerController@followup')->name('followup');
+    Route::any('followuppost' , 'CustomerController@followuppost')->name('followuppost');
 });
 
 

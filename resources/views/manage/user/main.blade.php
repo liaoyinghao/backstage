@@ -91,7 +91,7 @@
                           <tr>
                             <td class="bid">{{$v->id}}</td>
                             <td>{{$v->username}}</td>
-                            @if(!empty($v->fromuser)))
+                            @if(!empty($v->fromuser))
                             <td>{{$user[$v->fromuser]}}</td>
                             @else
                             <td></td>
