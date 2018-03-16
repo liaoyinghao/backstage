@@ -143,7 +143,7 @@ class CustomerController extends Controller
     		if($m){
     			return redirect()->route('manage_customer_main');
     		}else{
-    			dd('修改失败');
+          return view('manage.common.error',['msg'=>'修改失败!']);
     		}
     	}
 
@@ -159,7 +159,7 @@ class CustomerController extends Controller
     	if($m){
     		return redirect()->route('manage_customer_main');
     	}else{
-    		dd('添加失败');
+    		return view('manage.common.error',['msg'=>'修改失败!']);
     	}
     }
 
@@ -167,8 +167,8 @@ class CustomerController extends Controller
     public function khdetails(){
     	$id=request()->input('id');
     	$data['start']=Customer::customerinfo($id);
-    	if(!$data['start']){
-    		dd('客户不存在！');
+    	if(!$data['start']){ 
+        return view('manage.common.error',['msg'=>'客户不存在！']);
     	}
         return view('manage.customer.khadd',$data);
     }
@@ -247,7 +247,7 @@ class CustomerController extends Controller
           $isok = Customer::where("id",$id)->update(["progresstime"=>$time]);
           return redirect()->route('manage_customer_main');
       }else{
-         dd('修改失败');
+         return view('manage.common.error',['msg'=>'修改失败!']);
       }
     }
 
