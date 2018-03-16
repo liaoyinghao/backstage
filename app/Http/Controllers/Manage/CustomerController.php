@@ -95,8 +95,9 @@ class CustomerController extends Controller
         $data['flag']=2;
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $fromuser=Accountnum::where('fromuser',$user['id'])->pluck('id')->toArray();//找到队员
-        $data['lists']=Customer::whereIn('fromuser',$fromuser)->get();//队员客户
-        $lists=Customer::where('fromuser',$user['id'])->get();//自己客户
+        $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status',1)->get();//队员客户
+        $lists=Customer::where('fromuser',$user['id'])->where('status',1)->get();//自己客户
+        // dd($user,$fromuser,$data['lists']);
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
           array_push($kong,$value);
