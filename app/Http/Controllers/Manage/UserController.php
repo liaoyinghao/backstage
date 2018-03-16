@@ -39,7 +39,7 @@ class UserController extends Controller
       $nickname=$request['nickanme'];
       $account=Accountnum::where('username',$user)->first();
       if($account){
-        return view('h5.common.error',['msg'=>'用户名已经存在！']);
+        return view('manage.common.error',['msg'=>'用户名已经存在！']);
       }else{
         $topuser=$GLOBALS['m']['user'];
         $fromuser=Accountnum::where('username',$topuser)->first();
