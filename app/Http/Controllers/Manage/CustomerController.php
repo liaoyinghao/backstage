@@ -12,53 +12,75 @@ class CustomerController extends Controller
     public function main(){
       $topuser=$GLOBALS['m']['user'];
       $type= request()->input('type');
+      $shai= request()->input('shaixuan');
       $user=Accountnum::where('username',$topuser)->first();
       //总经理
       if($user['position'] == '总经理'){
-        $data['flag']=1;
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
-        $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
-        $lists=Customer::where('status',0)->get();
-        $kong=[];
-        foreach ($data['lists'] as $key => $value) {
-          array_push($kong,$value);
-        }
-        foreach ($lists as $key => $value) {
-          array_push($kong,$value);
-        }
-        $data['lists'] = $kong;
+
+          $data['flag']=1;
+          $data['user']=Accountnum::pluck('nickname','id')->toArray();
+          if($type == 'shaixuan'){
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();
+            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+          }else{
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
+            $lists=Customer::where('status',0)->get();
+          }
+          $kong=[];
+          foreach ($data['lists'] as $key => $value) {
+            array_push($kong,$value);
+          }
+          foreach ($lists as $key => $value) {
+            array_push($kong,$value);
+          }
+          $data['lists'] = $kong;
+
       }
 
       //销售主管
       if($user['position'] == '销售主管'){
-        $data['flag']=2;
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
-        $data['lists']=Customer::where('fromuser',$user['id'])->get();//放弃
-        $lists=Customer::where('status',0)->get();
-        $kong=[];
-        foreach ($data['lists'] as $key => $value) {
-          array_push($kong,$value);
-        }
-        foreach ($lists as $key => $value) {
-          array_push($kong,$value);
-        }
-        $data['lists'] = $kong;
+          $data['flag']=2;
+          $data['user']=Accountnum::pluck('nickname','id')->toArray();
+          if($type == 'shaixuan'){
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
+            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+          }else{
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();//放弃
+            $lists=Customer::where('status',0)->get();
+          }
+          $kong=[];
+          foreach ($data['lists'] as $key => $value) {
+            array_push($kong,$value);
+          }
+          foreach ($lists as $key => $value) {
+            array_push($kong,$value);
+          }
+          $data['lists'] = $kong;
+
+
       }
 
       //销售
       if($user['position'] == '销售'){
-        $data['flag']=3;
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
-        $data['lists']=Customer::where('fromuser',$user['id'])->get();//放弃
-        $lists=Customer::where('status',0)->get();
-        $kong=[];
-        foreach ($data['lists'] as $key => $value) {
-          array_push($kong,$value);
-        }
-        foreach ($lists as $key => $value) {
-          array_push($kong,$value);
-        }
-        $data['lists'] = $kong;
+
+          $data['flag']=3;
+          $data['user']=Accountnum::pluck('nickname','id')->toArray();
+          if($type == 'shaixuan'){
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
+            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+          }else{
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();//放弃
+            $lists=Customer::where('status',0)->get();
+          }
+          $kong=[];
+          foreach ($data['lists'] as $key => $value) {
+            array_push($kong,$value);
+          }
+          foreach ($lists as $key => $value) {
+            array_push($kong,$value);
+          }
+          $data['lists'] = $kong;
+
       }
 
       //总经理查全部
@@ -113,7 +135,7 @@ class CustomerController extends Controller
     	$form_type=request()->input('form_type');
 
     	$user = Accountnum::userinfo($GLOBALS['m']['user']);
-    	
+
     	if(!empty($form_type)){	//修改信息
     		$start['fromuser'] = $user['id'];
     		$m = Customer::where("id",$start['id'])->update($start);
@@ -183,13 +205,13 @@ class CustomerController extends Controller
               $h = 1;
               $t = 1;
               foreach ($tprogresst as $k => $v) {
-                if ($i%2==0){  
+                if ($i%2==0){
                     $val[$h] = $v;
                     $h++;
-                }else{  
+                }else{
                     $key[$j] = $v;
                     $j++;
-                }  
+                }
                 $i++;
               }
 

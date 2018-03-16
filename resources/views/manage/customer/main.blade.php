@@ -33,7 +33,7 @@
                 if(shaixuan == 0){
                     return false;
                 }
-                // window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
+                window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
             })
 
         });
