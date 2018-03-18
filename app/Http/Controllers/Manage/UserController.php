@@ -13,15 +13,11 @@ class UserController extends Controller
     public function main(){
       $topuser=$GLOBALS['m']['user'];
       $user=Accountnum::where('username',$topuser)->first();
-      $job=Userlist::where('jobtitle',$user['position'])->first();
-      if($job){
-        if($job['is_account'] ==1 ){
-          $data['flag'] = 1;
-        }
+      if($user['position'] == '总经理'){
+        $data['lists']=Accountnum::get();
       }
-      $data['lists']=Accountnum::get();
-      $data['user']=Accountnum::pluck('nickname','id')->toArray();
-      return view('manage.user.main',$data);
+        $data['user']=Accountnum::pluck('nickname','id')->toArray();
+        return view('manage.user.main',$data);
     }
 
     public function userdetailed(){
@@ -42,12 +38,11 @@ class UserController extends Controller
         return view('manage.common.error',['msg'=>'用户名已经存在！']);
       }else{
         $topuser=$GLOBALS['m']['user'];
-        $fromuser=Accountnum::where('username',$topuser)->first();
         $t['username'] =$user;
         $t['password'] =$pas;
         $t['addtime'] =time();
         $t['position']=$job;
-        $t['fromuser'] = $fromuser['id'];
+        $t['fromuser'] = '';
         $t['nickname'] =$nickname;
         Accountnum::insert($t);
       }
@@ -100,5 +95,33 @@ class UserController extends Controller
       return redirect()->route('manage_user_main');
     }
 
+    //分配组员
+    public function distribution(){
+        $id=request()->input('id');
+        $type=request()->input('type');
+        $data['user']=Accountnum::where('id',$id)->first();
+        if($data['user']['position'] == '销售主管'){
+            $data['xsinfo'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
+        }else{
+            $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
+        }
+        // if($user['position'] == '销售主管'){
+        //     $data['xsinfo'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
+        // }else if($user['position'] == '销售'){
+        //     $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
+        // }else{
+        //     $data['xs'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
+        //     $data['xszg'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
+        // }
+        // dd($data);
+        return view('manage.user.distribution',$data);
+    }
 
+        //分配组员
+    public function distributionpost(){
+        $zhuguan=request()->input('zhuguan');
+        $xiaoshou=request()->input('xiaoshou');
+        Accountnum::where("id",$xiaoshou)->update(['fromuser'=>$zhuguan]);
+        return redirect()->route('manage_user_main');
+    }
 }

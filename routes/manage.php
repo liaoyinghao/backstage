@@ -26,6 +26,8 @@ Route::group(['prefix'=>'user' , 'as'=>'user_'] , function(){
     Route::any('hui' , 'UserController@hui')->name('hui');
     Route::any('xiugai' , 'UserController@xiugai')->name('xiugai');
     Route::any('userxiugai' , 'UserController@userxiugai')->name('userxiugai');
+    Route::any('distribution' , 'UserController@distribution')->name('distribution');
+    Route::any('distributionpost' , 'UserController@distributionpost')->name('distributionpost');
 });
 
 

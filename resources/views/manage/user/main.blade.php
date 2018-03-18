@@ -51,6 +51,10 @@
                     })
                 }
             })
+
+            $(".positionfp").on("click",function(){
+                alert("您无需分配组员！");
+            })
         });
 
 
@@ -58,6 +62,11 @@
 @endsection
 
 @section('content')
+@if(isset($lists))
+<style type="text/css">
+    li{list-style-type: none;}
+    .pfp{color:#fff;text-decoration:none}
+</style>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -66,9 +75,7 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        @if(isset($flag))
                         <a href="{{route('manage_user_userdetailed')}}" class="btn blue btn-outline"><i class="fa fa-plus"></i> 添加</a>
-                        @endif
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -78,7 +85,7 @@
                         <tr>
                             <th width="50px">ID</th>
                             <th>账号</th>
-                            <th>谁创建</th>
+                            <th>属于谁</th>
                             <th>职位</th>
                             <th>昵称</th>
                             <th>创建时间</th>
@@ -102,30 +109,37 @@
                             <th>@if($v->status ==1 ) 正常@endif @if($v->status ==0 )离职@endif</th>
                             <td>
                               <div class="btn-group">
-                                <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown">
-                                  <i class="fa fa-angle-down"></i>
-                                </button>
-                                @if(isset($flag))
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                  @if($v->status ==1 )
+                              @if($v->status ==1 )
+                                  @if($v->position == '销售' || $v->position == '销售主管')
+                                      <button type="button" class="btn blue btn-xs">
+                                            <a href="{{route('manage_user_distribution',['id'=>$v->id])}}" class="pfp">分配</a>
+                                      </button>
+                                    <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                  <ul class="dropdown-menu pull-right" role="menu">
                                   <li>
-                                  <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}"> 修改</a>
+                                    <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}">修改</a>
                                   <li>
-                                    @endif
-                                    @if($v->status ==1 )
-                                    @if($v->id != 1)
-                                  <li>
-                                  <a class="delete" data-id="{{$v->id}}">  删除</a>
-                                  <li>
-                                    @endif
-                                    @endif
-                                    @if($v->status ==0 )
-                                  <li>
-                                  <a class="hui" data-id="{{$v->id}}">恢复</a>
-                                  <li>
-                                    @endif
-                                  </ul>
+                                  @else
+                                        <button type="button" class="btn blue btn-xs">
+                                            <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}" class="pfp">修改</a>
+                                        </button>
+                                        <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
                                   @endif
+                              @endif
+                              @if($v->status ==1 )
+                                @if($v->id != 1)
+                                  <li><a class="delete" data-id="{{$v->id}}">删除</a><li>
+                                @endif
+                              @endif
+                              @if($v->status ==0 )
+                                  <li>
+                                  <button type="button" class="btn blue btn-xs">
+                                    <a class="hui pfp" data-id="{{$v->id}}">恢复</a>
+                                  </button>
+                                  <li>
+                              @endif
+                                  </ul>
                                   </div>
                                 </td>
                           </tr>
@@ -136,5 +150,7 @@
             </div>
         </div>
     </div>
-
+@else
+    <div>您没有对此操作的权限</div>
+@endif
 @endsection
