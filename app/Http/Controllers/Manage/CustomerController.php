@@ -14,11 +14,12 @@ class CustomerController extends Controller
       $type= request()->input('type');
       $shai= request()->input('shaixuan');
       $user=Accountnum::where('username',$topuser)->first();
+      $data['user']=Accountnum::pluck('nickname','id')->toArray();
+      
       //总经理
       if($user['position'] == '总经理'){
 
           $data['flag']=1;
-          $data['user']=Accountnum::pluck('nickname','id')->toArray();
           if($type == 'shaixuan'){
             $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
@@ -46,7 +47,6 @@ class CustomerController extends Controller
       //销售主管
       if($user['position'] == '销售主管'){
           $data['flag']=2;
-          $data['user']=Accountnum::pluck('nickname','id')->toArray();
           if($type == 'shaixuan'){
             $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
@@ -76,7 +76,6 @@ class CustomerController extends Controller
       if($user['position'] == '销售'){
 
           $data['flag']=3;
-          $data['user']=Accountnum::pluck('nickname','id')->toArray();
           if($type == 'shaixuan'){
             $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
@@ -104,7 +103,6 @@ class CustomerController extends Controller
       //总经理查全部
       if($type == 'quan'){
         $data['flag']=1;
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $data['lists']=Customer::get();
         foreach ($data['lists'] as $key => $value) {
           if(!empty($value)){
@@ -118,7 +116,6 @@ class CustomerController extends Controller
       //销售主管加队员
       if($type == 'zu'){
         $data['flag']=2;
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $fromuser=Accountnum::where('fromuser',$user['id'])->pluck('id')->toArray();//找到队员
         $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status',1)->get();//队员客户
         $lists=Customer::where('fromuser',$user['id'])->where('status',1)->get();//自己客户
@@ -141,7 +138,6 @@ class CustomerController extends Controller
 
       //7天跟进
       if($type == 'qi'){
-        $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $data['lists']=Customer::get();
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
@@ -152,6 +148,15 @@ class CustomerController extends Controller
           }
         }
         $data['lists'] = $kong;
+      }
+
+      $data['lists']=Customer::get();
+      foreach ($data['lists'] as $key => $value) {
+        if(!empty($value)){
+          if(time() - $value['progresstime'] > 604800){
+              $data['lists'][$key]['khstatus'] = 1;
+          }
+        }
       }
 
       return view('manage.customer.main',$data);

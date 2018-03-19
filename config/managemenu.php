@@ -16,7 +16,7 @@ return [
         'icon'=>'icon-direction',
         'son'=>[
             'main'=>[
-                'name'=>'客户录入',
+                'name'=>'客户管理',
                 'url'=>'main'
             ],
         ]

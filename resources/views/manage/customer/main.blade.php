@@ -70,10 +70,10 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        @if($flag)<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>@endif
-                        @if($flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看组员客户</a>@endif
-                        @if($flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'quan'])}}"> 查看全部客户</a>@endif
-                        <a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"><i class="fa fa-plus"></i> 客户录入</a>
+                        @if(isset($flag))<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>@endif
+                        @if(isset($flag) && $flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看组员客户</a>@endif
+                        @if(isset($flag) && $flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'quan'])}}"> 查看全部客户</a>@endif
+                        @if(isset($flag))<a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"><i class="fa fa-plus"></i> 客户录入</a>@endif
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -124,9 +124,11 @@
                             <td><span class="td_span">{{$v->remarks or ''}}</span></td>
                             <td>
                                 <div class="btn-group">
+                                    @if(isset($flag))
                                     <button type="button" class="btn blue btn-xs">
                                         <a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a>
                                     </button>
+                                    @endif
                                     <button type="button" class="btn blue btn-xs btnxs">
                                         <a class="tap-street acolor ahrefs">转入项目</a>
                                         <input type="hidden" value="{{$v->id}}" class="aid">
