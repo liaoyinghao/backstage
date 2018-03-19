@@ -71,6 +71,16 @@ return [
             ],
         ]
     ],
+    'leave'=>[
+        'name'=>'打卡',
+        'icon'=>'icon-users',
+        'son'=>[
+            'main'=>[
+                'name'=>'请假',
+                'url'=>'main'
+            ],
+        ]
+    ],
     'notice'=>[
         'name'=>'通知',
         'icon'=>'icon-bubble',

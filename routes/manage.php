@@ -69,6 +69,12 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 });
 
 
+//请假
+Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
+    Route::get('main' , 'LeaveController@main')->name('main');
+});
+
+
 //通知
 Route::group(['prefix'=>'notice' , 'as'=>'notice_'] , function(){
     Route::get('main' , 'NoticeController@main')->name('main');

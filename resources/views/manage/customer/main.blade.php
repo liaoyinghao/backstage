@@ -36,6 +36,14 @@
                 window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
             })
 
+            $(".ahrefs").on("click",function(){
+                event.returnValue = confirm("你确认要将此客户的状态转为项目吗？");
+                if(event.returnValue){
+                    var id = $(this).siblings(".aid").val();
+                    alert('id='+id);
+                }
+            })
+
         });
 
 
@@ -51,6 +59,7 @@
     .acolor{color:#fff;text-decoration:none}
     .td_span{width: 100%;height: 20px;display: block;overflow: hidden;}
     .outline{outline: 1px solid red;}
+    .btnxs{margin-left: 5px !important;}
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -87,7 +96,7 @@
                             <th>跟进人员</th>
                             <th>客户状态</th>
                             <th width="150px">备注</th>
-                            <th width="150px">操作</th>
+                            <th width="170px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -115,6 +124,10 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn blue btn-xs">
                                         <a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a>
+                                    </button>
+                                    <button type="button" class="btn blue btn-xs btnxs">
+                                        <a class="tap-street acolor ahrefs">转入项目</a>
+                                        <input type="hidden" value="{{$v->id}}" class="aid">
                                     </button>
                                 </div>
                             </td>
