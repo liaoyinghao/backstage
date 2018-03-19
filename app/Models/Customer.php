@@ -11,4 +11,10 @@ class Customer extends Model
 	public static function customerinfo($id){
 		return self::where("id",$id)->first();
 	}
+
+
+	public static function userkh($id){
+		return self::where("status",1)->where("fromuser",$id)->get();
+	}
+
 }

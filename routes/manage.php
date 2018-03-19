@@ -36,10 +36,12 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
     Route::any('main' , 'CustomerController@main')->name('main');
     Route::get('khadd' , 'CustomerController@khadd')->name('khadd');
     Route::post('khaddpost' , 'CustomerController@khaddpost')->name('khaddpost');
-    Route::get('khdetails' , 'CustomerController@khdetails')->name('khdetails');
+    // Route::get('khdetails' , 'CustomerController@khdetails')->name('khdetails');
     Route::any('khgrades' , 'CustomerController@khgrades')->name('khgrades');
     Route::any('followup' , 'CustomerController@followup')->name('followup');
     Route::any('followuppost' , 'CustomerController@followuppost')->name('followuppost');
+    Route::get('chzuyuan' , 'CustomerController@chzuyuan')->name('chzuyuan');
+    Route::get('zuyuankh' , 'CustomerController@zuyuankh')->name('zuyuankh');
 });
 
 

@@ -27,15 +27,6 @@
                 })
             })
 
-            //筛选
-            $("#shaixuan").change(function(){
-                var shaixuan = $(this).val();
-                if(shaixuan == 0){
-                    return false;
-                }
-                window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
-            })
-
         });
 
 
@@ -50,31 +41,20 @@
     #shaixuan{position: absolute;top: 78px;left: 35px;width: 140px;height: 30px;border-radius: 5px;}
     .acolor{color:#fff;text-decoration:none}
     .td_span{width: 100%;height: 20px;display: block;overflow: hidden;}
-    .outline{outline: 1px solid red;}
 </style>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
+                        <span class="caption-subject bold uppercase"> 组员{{$name or ''}}的所有客户</span>
                     </div>
                     <div class="actions">
-                        @if($flag)<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>@endif
-                        @if($flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看组员客户</a>@endif
-                        @if($flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'quan'])}}"> 查看全部客户</a>@endif
-                        <a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"><i class="fa fa-plus"></i> 客户录入</a>
+                        <a class="btn blue btn-outline" href="{{route('manage_customer_main')}}">返回全部客户列表</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
-                <select id="shaixuan">
-                    <option value="0">请选择筛选条件</option>
-                    <option value="D">D</option>
-                    <option value="C">C</option>
-                    <option value="B">B</option>
-                    <option value="A">A</option>
-                    <option value="S">S</option>
-                </select>
+
                 <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
@@ -95,7 +75,7 @@
                           @foreach($lists as $v)
                           <tr>
                             <td>{{$v->id}}</td>
-                            <td @if(!empty($v->khstatus)) class="outline" @endif >{{$v->name}}</td>
+                            <td>{{$v->name}}</td>
                             <td>{{$v->info}}</td>
                             <td>{{$v->offer}}</td>
                             <td>
@@ -114,7 +94,7 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn blue btn-xs">
-                                        <a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a>
+                                        <a href="{{route('manage_customer_followup',['id'=>$v->id,'zid'=>$zid])}}" class="tap-street acolor">修改跟进信息</a>
                                     </button>
                                 </div>
                             </td>

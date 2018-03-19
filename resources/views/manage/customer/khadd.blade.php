@@ -40,65 +40,48 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        @if(isset($start))
-                            <span class="caption-subject bold uppercase">修改客户资料</span>
-                        @else
                             <span class="caption-subject bold uppercase">录入客户</span>
-                        @endif
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
                 <div class="portlet-body">
-                    
-                    @if(isset($start))
-                        <form method="post" action="{{route('manage_customer_khaddpost')}}">
-                        <input type="hidden" name="form_type" value="form_type">
-                        <input type="hidden" name="start[id]" value="{{$start['id'] or ''}}">
-                    @else
-                        <form method="post" action="{{route('manage_customer_khaddpost')}}">
-                    @endif
 
+                    <form method="post" action="{{route('manage_customer_khaddpost')}}">
                     <p class="form_p">
-                        <span class="userk">客户姓名：</span><input type="text" name="start[name]" value="{{$start['name'] or ''}}" placeholder="客户姓名" required="required">
+                        <span class="userk">客户姓名：</span><input type="text" name="start[name]" value" placeholder="客户姓名" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">联系方式：</span><input type="text" name="start[info]" value="{{$start['info'] or ''}}" placeholder="电话或邮箱等其他" required="required">
+                        <span class="userk">联系方式：</span><input type="text" name="start[info]" value="" placeholder="电话或邮箱等其他" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">客户需求：</span>
-                        <textarea name="start[demand]" placeholder="输入客户需求" class="textarea">{{$start['demand'] or ''}}</textarea>
+                        <textarea name="start[demand]" placeholder="输入客户需求" class="textarea"></textarea>
                     </p>
                     <p class="form_p">
-                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" step="0.01" value="{{$start['offer'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" step="0.01" value="" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">备注：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}">
+                        <span class="userk">备注：</span><input type="text" name="start[remarks]" value="">
                     </p>
                     <p class="form_p">
                       <span class="userk">客户评级(单位:星)：</span><select name='start[grade]' class="job">
-                        <option  value='D' @if(isset($start)) @if($start['grade']=='D') selected="selected" @endif @else selected="selected"  @endif >D</option>
-                        <option  value='C' @if(isset($start) && $start['grade']=='C') selected="selected"  @endif >C</option>
-                        <option  value='B' @if(isset($start) && $start['grade']=='B') selected="selected"  @endif >B</option>
-                        <option  value='A' @if(isset($start) && $start['grade']=='A') selected="selected"  @endif >A</option>
-                        <option  value='S' @if(isset($start) && $start['grade']=='S') selected="selected"  @endif >S</option>
+                        <option  value='D' selected="selected">D</option>
+                        <option  value='C'>C</option>
+                        <option  value='B'>B</option>
+                        <option  value='A'>A</option>
+                        <option  value='S'>S</option>
                       </select>
                     </p>
                     <p class="form_p">
                       <span class="userk">客户状态：</span><select name='start[status]' class="job">
-                        <option  value='1' @if(isset($start)) @if($start['status']==1) selected="selected" @endif @else selected="selected"  @endif >正常</option>
-                        <option  value='0' @if(isset($start)) @if($start['status']==0) selected="selected" @endif @endif >放弃</option>
+                        <option value='1' selected="selected">正常</option>
+                        <option value='0'>放弃</option>
                       </select>
                     </p>
                     
-                    @if(isset($start))
-                        <p><input type="submit" value="确认修改" class="submit"></p>
-                    @else
-                        <p><input type="submit" value="确认添加" class="submit"></p>
-                    @endif
-                        
-
+                    <p><input type="submit" value="确认添加" class="submit"></p>
 
                     </form>
                 </div>

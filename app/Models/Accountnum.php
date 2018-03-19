@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Userlist;
+use App\Models\Customer;
 class Accountnum extends Model
 {
 	public $timestamps = false;//取消updated_at字段
@@ -21,6 +22,16 @@ class Accountnum extends Model
 
 	public static function userinfo($user){
 		return self::where("username",$user)->first();
+	}
+
+	public static function userfromuser($fromuser){
+		$info = self::where("fromuser",$fromuser)->where("status",1)->get();
+		foreach ($info as $key => $value) {
+			if(!empty($value)){
+				$info[$key]['khcount'] = Customer::where("status",1)->where("fromuser",$value['id'])->count();
+			}
+		}
+		return $info;
 	}
 
 }

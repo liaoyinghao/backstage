@@ -28,9 +28,15 @@ class CustomerController extends Controller
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
             array_push($kong,$value);
           }
           foreach ($lists as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
             array_push($kong,$value);
           }
           $data['lists'] = $kong;
@@ -50,10 +56,16 @@ class CustomerController extends Controller
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
-            array_push($kong,$value);
+              if(time() - $value['progresstime'] > 604800){
+                  $value['khstatus'] = 1;
+              }
+              array_push($kong,$value);
           }
           foreach ($lists as $key => $value) {
-            array_push($kong,$value);
+              if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
+              array_push($kong,$value);
           }
           $data['lists'] = $kong;
 
@@ -74,9 +86,15 @@ class CustomerController extends Controller
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
             array_push($kong,$value);
           }
           foreach ($lists as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
             array_push($kong,$value);
           }
           $data['lists'] = $kong;
@@ -88,6 +106,13 @@ class CustomerController extends Controller
         $data['flag']=1;
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
         $data['lists']=Customer::get();
+        foreach ($data['lists'] as $key => $value) {
+          if(!empty($value)){
+            if(time() - $value['progresstime'] > 604800){
+                $data['lists'][$key]['khstatus'] = 1;
+            }
+          }
+        }
       }
 
       //销售主管加队员
@@ -100,9 +125,15 @@ class CustomerController extends Controller
         // dd($user,$fromuser,$data['lists']);
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
+          if(time() - $value['progresstime'] > 604800){
+              $value['khstatus'] = 1;
+          }
           array_push($kong,$value);
         }
         foreach ($lists as $key => $value) {
+          if(time() - $value['progresstime'] > 604800){
+              $value['khstatus'] = 1;
+          }
           array_push($kong,$value);
         }
         $data['lists'] = $kong;//自己+队员
@@ -116,6 +147,7 @@ class CustomerController extends Controller
         foreach ($data['lists'] as $key => $value) {
           $time= time();
           if($time - $value['progresstime'] > 604800){
+            $value['khstatus'] = 1;
             array_push($kong,$value);
           }
         }
@@ -133,19 +165,7 @@ class CustomerController extends Controller
     //添加用户post
     public function khaddpost(){
     	$start=request()->input('start');
-    	$form_type=request()->input('form_type');
-
     	$user = Accountnum::userinfo($GLOBALS['m']['user']);
-
-    	if(!empty($form_type)){	//修改信息
-    		$start['fromuser'] = $user['id'];
-    		$m = Customer::where("id",$start['id'])->update($start);
-    		if($m){
-    			return redirect()->route('manage_customer_main');
-    		}else{
-          return view('manage.common.error',['msg'=>'修改失败!']);
-    		}
-    	}
 
     	if(empty($start) || empty($start['name'])){
     		return redirect()->route('manage_customer_khaddpost');
@@ -161,16 +181,6 @@ class CustomerController extends Controller
     	}else{
     		return view('manage.common.error',['msg'=>'修改失败!']);
     	}
-    }
-
-    //修改客户资料
-    public function khdetails(){
-    	$id=request()->input('id');
-    	$data['start']=Customer::customerinfo($id);
-    	if(!$data['start']){ 
-        return view('manage.common.error',['msg'=>'客户不存在！']);
-    	}
-        return view('manage.customer.khadd',$data);
     }
 
     //修改客户等级
@@ -192,9 +202,10 @@ class CustomerController extends Controller
     //修改跟进信息
     public function followup(){
       $id=request()->input('id');
-      $data['info'] = Customer::where('id',$id)->first();
-      if(!empty($data['info']['progress'])){
-          $tprogresst = @unserialize($data['info']['progress']);
+      $data['zid']=request()->input('zid');
+      $data['start']=Customer::customerinfo($id);
+      if(!empty($data['start']['progress'])){
+          $tprogresst = @unserialize($data['start']['progress']);
           $count = count($tprogresst);
           if($count > 1){
               $data['count'] = $count / 2;
@@ -223,18 +234,31 @@ class CustomerController extends Controller
                  $data['progress'][$v1]['mainname'] = 'main'.$t;
                  $t++;
               }
-
-              // dd($data['progress']);
           }
       }
-      // dd($data);
       return view('manage.customer.followup',$data);
     }
 
-    //修改跟进信息post
+    //资料修改跟进信息post
     public function followuppost(){
-      $id=request()->input('id');
-      $stoer = request()->input('stoer');
+      $id=request()->input('id');           //id
+      $zid=request()->input('zid');           //组员
+      $stoer = request()->input('stoer');   //跟进信息
+      $start=request()->input('start');     //基础资料
+
+      $customers = Customer::customerinfo($id);
+      if($customers['status'] == 0){
+          $user=Accountnum::userinfo($GLOBALS['m']['user']);
+          $start['fromuser'] = $user['id'];
+      }
+      Customer::where("id",$id)->update($start);
+      if(count($stoer) == 2 && empty($stoer['time1']) && empty($stoer['main1'])){
+          if(empty($zid)){
+              return redirect()->route('manage_customer_main');
+          }else{
+              return redirect()->route('manage_customer_zuyuankh',['id'=>$zid]);
+          }
+      }
       foreach ($stoer as $key => $value) {
         if(empty($value)){
             $stoer[$key] = 0;
@@ -244,12 +268,31 @@ class CustomerController extends Controller
       $isok = Customer::where("id",$id)->update(["progress"=>$progress]);
       if($isok){
           $time = time();
-          $isok = Customer::where("id",$id)->update(["progresstime"=>$time]);
+          Customer::where("id",$id)->update(["progresstime"=>$time]);
+      }
+      if(empty($zid)){
           return redirect()->route('manage_customer_main');
       }else{
-         return view('manage.common.error',['msg'=>'修改失败!']);
+          return redirect()->route('manage_customer_zuyuankh',['id'=>$zid]);
       }
     }
 
+    //主管查看自己的全部组员列表
+    public function chzuyuan(){
+        $user = Accountnum::userinfo($GLOBALS['m']['user']);
+        if($user['position'] == '销售主管'){
+            $data['zuyuan'] = Accountnum::userfromuser($user['id']);
+            return view('manage.customer.chzuyuan',$data);
+        }
+    }
 
+    //组员的客户
+    public function zuyuankh(){
+        $id=request()->input('id');
+        $data['lists'] = Customer::userkh($id);
+        $data['user']=Accountnum::pluck('nickname','id')->toArray();
+        $data['name'] = $data['user'][$id];
+        $data['zid'] = $id;
+        return view('manage.customer.zuyuankh',$data);
+    }
 }
