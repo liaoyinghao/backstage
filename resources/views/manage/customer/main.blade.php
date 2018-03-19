@@ -60,6 +60,7 @@
     .td_span{width: 100%;height: 20px;display: block;overflow: hidden;}
     .outline{outline: 1px solid red;}
     .btnxs{margin-left: 5px !important;}
+    .tishired{position: absolute;top: 95px;left: 35px;color: red;font-size: 12px;}
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -84,6 +85,7 @@
                     <option value="A">A</option>
                     <option value="S">S</option>
                 </select>
+                <P class='tishired'>*标有红框的客户是为七天内未跟进客户</P>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
