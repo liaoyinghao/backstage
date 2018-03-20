@@ -23,14 +23,14 @@ class CustomerController extends Controller
           $data['flag']=1;
           if($type == 'shaixuan'){
             if(empty($quan)){
-              $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();
+              $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();
             }else{
               $data['quan']=1;
-              $data['lists']=Customer::where('grade',$shai)->where('status',1)->get();
+              $data['lists']=Customer::where('grade',$shai)->where('status','!=',0)->get();
             }
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();
             $lists=Customer::where('status',0)->get();
           }
           $kong=[];
@@ -54,10 +54,10 @@ class CustomerController extends Controller
       if($user['position'] == '销售主管'){
           $data['flag']=2;
           if($type == 'shaixuan'){
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
             $lists=Customer::where('status',0)->get();
           }
           $kong=[];
@@ -83,10 +83,10 @@ class CustomerController extends Controller
 
           $data['flag']=3;
           if($type == 'shaixuan'){
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
             $lists=Customer::where('status',0)->get();
           }
           $kong=[];
@@ -124,8 +124,8 @@ class CustomerController extends Controller
       if($type == 'zu'){
         $data['flag']=2;
         $fromuser=Accountnum::where('fromuser',$user['id'])->pluck('id')->toArray();//找到队员
-        $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status',1)->get();//队员客户
-        $lists=Customer::where('fromuser',$user['id'])->where('status',1)->get();//自己客户
+        $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status','!=',0)->get();//队员客户
+        $lists=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//自己客户
         // dd($user,$fromuser,$data['lists']);
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
@@ -178,23 +178,23 @@ class CustomerController extends Controller
 
     //添加用户post
     public function khaddpost(){
-    	$start=request()->input('start');
-    	$user = Accountnum::userinfo($GLOBALS['m']['user']);
+      $start=request()->input('start');
+      $user = Accountnum::userinfo($GLOBALS['m']['user']);
 
-    	if(empty($start) || empty($start['name'])){
-    		return redirect()->route('manage_customer_khaddpost');
-    	}
+      if(empty($start) || empty($start['name'])){
+        return redirect()->route('manage_customer_khaddpost');
+      }
 
-    	$user = Accountnum::userinfo($GLOBALS['m']['user']);
-    	$start['addtime'] = time();
-    	$start['progresstime'] = time();
-    	$start['fromuser'] = $user['id'];
-    	$m = Customer::insert($start);
-    	if($m){
-    		return redirect()->route('manage_customer_main');
-    	}else{
-    		return view('manage.common.error',['msg'=>'修改失败!']);
-    	}
+      $user = Accountnum::userinfo($GLOBALS['m']['user']);
+      $start['addtime'] = time();
+      $start['progresstime'] = time();
+      $start['fromuser'] = $user['id'];
+      $m = Customer::insert($start);
+      if($m){
+        return redirect()->route('manage_customer_main');
+      }else{
+        return view('manage.common.error',['msg'=>'修改失败!']);
+      }
     }
 
     //修改客户等级

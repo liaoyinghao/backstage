@@ -125,9 +125,15 @@
                                 <input type="hidden" class="tid" value="{{$v->id}}">
                             </td>
                             <td>{{$user[$v->fromuser]}}</td>
-                            <td>@if($v->status ==1 ) 正常 @endif @if($v->status ==0 ) 放弃 @endif</td>
+                            <td>
+                                @if($v->status ==1)      正常 
+                                @elseif($v->status ==2)  已转入项目
+                                @else                    放弃 
+                                @endif
+                            </td>
                             <td><span class="td_span">{{$v->remarks or ''}}</span></td>
                             <td>
+                                @if($v->status != 2)
                                 <div class="btn-group">
                                     @if(isset($flag))
                                     <button type="button" class="btn blue btn-xs">
@@ -139,6 +145,7 @@
                                         <input type="hidden" value="{{$v->id}}" class="aid">
                                     </button>
                                 </div>
+                                @endif
                             </td>
                           </tr>
                           @endforeach
