@@ -56,4 +56,31 @@ class ProjectController extends Controller
     	return redirect()->route('manage_project_main');
     }
 
+    //项目改变状态
+    public function updatastatus(){
+    	$id = request()->input('id');
+    	$type = request()->input('type');//1.丢弃，2找回，3选择其他状态
+    	$status = request()->input('status');
+    	if($type == 1){
+    		$isok = Project::where("id",$id)->update(['status'=>0]);
+    		if($isok){
+    			return 1;
+    		}else{
+    			return 0;
+    		}
+    	}
+    	if($type == 2){
+    		$isok = Project::where("id",$id)->update(['status'=>1]);
+    		if($isok){
+    			return 1;
+    		}else{
+    			return 0;
+    		}
+    	}
+    	if($type == 3){
+    		$isok = Project::where("id",$id)->update(['status'=>$status]);
+    		return redirect()->route('manage_project_main');
+    	}
+    }
+
 }

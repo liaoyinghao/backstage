@@ -14,10 +14,10 @@
                     hang = parseInt(hang) + 1;
                 var div = ' <div class="form_d">'+
                                 '<div class="form_d_1">'+
-                                    '<span class="userk">选择时间：</span><input type="date" name="stoer[time'+hang+']">'+
+                                    '<span class="userk">选择时间：</span><input type="date" name="stoer[time'+hang+']" required="required">'+
                                 '</div>'+
                                 '<div class="form_d_2">'+
-                                    '<textarea name="stoer[main'+hang+']""></textarea>'+
+                                    '<textarea name="stoer[main'+hang+']"" required="required"></textarea>'+
                                 '</div>'+
                             '</div>';
                 $("#formkh").append(div);
@@ -119,20 +119,20 @@
                             @foreach($progress as $key=>$val)
                                 <div class="form_d">
                                     <div class="form_d_1">
-                                        <span class="userk">选择时间：</span><input type="date" name="stoer[{{$val['timename'] or ''}}]" value="{{$val['time'] or ''}}">
+                                        <span class="userk">选择时间：</span><input type="date" name="stoer[{{$val['timename'] or ''}}]" value="{{$val['time'] or ''}}" required="required">
                                     </div>
                                     <div class="form_d_2">
-                                        <textarea name="stoer[{{$val['mainname'] or ''}}]">{{$val['main'] or ''}}</textarea>
+                                        <textarea name="stoer[{{$val['mainname'] or ''}}]" required="required">{{$val['main'] or ''}}</textarea>
                                     </div>
                                 </div>
                             @endforeach
                         @else
                             <div class="form_d">
                                 <div class="form_d_1">
-                                    <span class="userk">选择时间：</span><input type="date" name="stoer[time1]">
+                                    <span class="userk">选择时间：</span><input type="date" name="stoer[time1]" value=""  required="required">
                                 </div>
                                 <div class="form_d_2">
-                                    <textarea name="stoer[main1]"></textarea>
+                                    <textarea name="stoer[main1]" required="required"></textarea>
                                 </div>
                             </div>
                         @endif       
