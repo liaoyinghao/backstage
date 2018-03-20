@@ -33,7 +33,12 @@
                 if(shaixuan == 0){
                     return false;
                 }
-                window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
+
+                @if(isset($quan) && $quan ==1)
+                    window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan&quan=1";
+                @else
+                    window.location.href="{{route('manage_customer_main')}}?shaixuan="+shaixuan+"&type=shaixuan";
+                @endif
             })
 
             $(".ahrefs").on("click",function(){

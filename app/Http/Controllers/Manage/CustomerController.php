@@ -12,6 +12,7 @@ class CustomerController extends Controller
     public function main(){
       $topuser=$GLOBALS['m']['user'];
       $type= request()->input('type');
+      $quan= request()->input('quan');
       $shai= request()->input('shaixuan');
       $user=Accountnum::where('username',$topuser)->first();
       $data['user']=Accountnum::pluck('nickname','id')->toArray();
@@ -21,7 +22,12 @@ class CustomerController extends Controller
 
           $data['flag']=1;
           if($type == 'shaixuan'){
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();
+            if(empty($quan)){
+              $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status',1)->get();
+            }else{
+              $data['quan']=1;
+              $data['lists']=Customer::where('grade',$shai)->where('status',1)->get();
+            }
             $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
             $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
@@ -103,6 +109,7 @@ class CustomerController extends Controller
       //总经理查全部
       if($type == 'quan'){
         $data['flag']=1;
+        $data['quan']=1;
         $data['lists']=Customer::get();
         foreach ($data['lists'] as $key => $value) {
           if(!empty($value)){
@@ -150,13 +157,15 @@ class CustomerController extends Controller
         $data['lists'] = $kong;
       }
 
-      $data['lists']=Customer::get();
-      foreach ($data['lists'] as $key => $value) {
-        if(!empty($value)){
-          if(time() - $value['progresstime'] > 604800){
-              $data['lists'][$key]['khstatus'] = 1;
+      if(!isset($data['lists'])){
+          $data['lists']=Customer::get();
+            foreach ($data['lists'] as $key => $value) {
+              if(!empty($value)){
+                if(time() - $value['progresstime'] > 604800){
+                    $data['lists'][$key]['khstatus'] = 1;
+                }
+              }
           }
-        }
       }
 
       return view('manage.customer.main',$data);
