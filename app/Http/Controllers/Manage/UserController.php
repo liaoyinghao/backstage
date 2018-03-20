@@ -105,15 +105,6 @@ class UserController extends Controller
         }else{
             $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
         }
-        // if($user['position'] == '销售主管'){
-        //     $data['xsinfo'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
-        // }else if($user['position'] == '销售'){
-        //     $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
-        // }else{
-        //     $data['xs'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
-        //     $data['xszg'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
-        // }
-        // dd($data);
         return view('manage.user.distribution',$data);
     }
 
@@ -121,7 +112,20 @@ class UserController extends Controller
     public function distributionpost(){
         $zhuguan=request()->input('zhuguan');
         $xiaoshou=request()->input('xiaoshou');
-        Accountnum::where("id",$xiaoshou)->update(['fromuser'=>$zhuguan]);
-        return redirect()->route('manage_user_main');
+        $zhiwei=request()->input('zhiwei');
+        if($zhiwei=='销售'){
+            Accountnum::where("id",$xiaoshou)->update(['fromuser'=>$zhuguan]);
+        }else{
+            $arr = explode(',',$xiaoshou);
+            if(count($arr) == 1){
+                Accountnum::where("id",$arr[0])->update(['fromuser'=>$zhuguan]);
+            }else{
+              foreach ($arr as $key => $val) {
+                  Accountnum::where("id",$val)->update(['fromuser'=>$zhuguan]);
+              }
+            }
+        }
+        
+        return 1;
     }
 }
