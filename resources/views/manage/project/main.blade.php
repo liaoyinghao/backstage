@@ -31,18 +31,35 @@
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
-                            <th width="50px">***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
+                            <th width="50px">ID</th>
+                            <th>项目名称</th>
+                            <th>客户名称</th>
+                            <th>联系方式</th>
+                            <th>合同金额</th>
+                            <th>已付定金</th>
+                            <th>底价</th>
+                            <th>签单时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                          @if(isset($lists))
+                          @foreach($lists as $v)
+                          <tr>
+                            <td>{{$v->id}}</td>
+                            <td>{{$v->proname}}</td>
+                            <td>{{$v->customername}}</td>
+                            <td>{{$v->contact}}</td>
+                            <td>{{$v->contractamount}}</td>
+                            <td>{{$v->paiddeposit}}</td>
+                            <td>{{$v->floorprice}}</td>
+                            <td>{{date('Y-m-d H:i:s',$v->signingtime)}}</td>
+                            <td>{{$v->status}}</td>
+                            <td>编辑</td>
+                          </tr>
+                          @endforeach
+                          @endif
                         </tbody>
                     </table>
                 </div>
