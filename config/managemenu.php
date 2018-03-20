@@ -36,7 +36,7 @@ return [
         'icon'=>'icon-direction',
         'son'=>[
             'main'=>[
-                'name'=>'项目录入',
+                'name'=>'项目管理',
                 'url'=>'main'
             ],
         ]

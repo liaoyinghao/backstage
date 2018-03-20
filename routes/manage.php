@@ -54,6 +54,8 @@ Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
 //项目管理
 Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::get('main' , 'ProjectController@main')->name('main');
+    Route::get('addproject' , 'ProjectController@addproject')->name('addproject');
+    Route::any('addprojectpost' , 'ProjectController@addprojectpost')->name('addprojectpost');
 });
 
 

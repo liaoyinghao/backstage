@@ -54,9 +54,17 @@
                             <td>{{$v->contractamount}}</td>
                             <td>{{$v->paiddeposit}}</td>
                             <td>{{$v->floorprice}}</td>
-                            <td>{{date('Y-m-d H:i:s',$v->signingtime)}}</td>
-                            <td>{{$v->status}}</td>
-                            <td>编辑</td>
+                            <td>{{$v->signingtime}}</td>
+                            <td>
+                            @if($v->status == 1) 
+                                处理中
+                            @elseif($v->status == 2)
+                                结束
+                            @else 
+                                放弃
+                            @endif
+                            </td>
+                            <td><a href="{{route('manage_project_addproject',['id'=>$v->id])}}">编辑项目</a></td>
                           </tr>
                           @endforeach
                           @endif

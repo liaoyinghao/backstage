@@ -44,8 +44,8 @@
             $(".ahrefs").on("click",function(){
                 event.returnValue = confirm("你确认要将此客户的状态转为项目吗？");
                 if(event.returnValue){
-                    var id = $(this).siblings(".aid").val();
-                    alert('id='+id);
+                    var aid = $(this).siblings(".aid").val();
+                    window.location.href="{{route('manage_project_addproject')}}?aid="+aid;
                 }
             })
 
