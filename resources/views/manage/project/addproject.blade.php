@@ -80,12 +80,7 @@
                         <span class="userk">备注：</span>
                         <textarea name="start[remarks]" placeholder="备注" class="textarea">{{$start['remarks'] or ''}}</textarea>
                     </p>
-                    <p class="form_p">
-                      <span class="userk">客户状态：</span><select name='start[status]' class="job">
-                        <option  value='1' @if(isset($start)) @if($start['status']==1) selected="selected" @endif @else selected="selected"  @endif >正常</option>
-                        <option  value='0' @if(isset($start)) @if($start['status']==0) selected="selected" @endif @endif >放弃</option>
-                      </select>
-                    </p>
+                    
 
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
                     </form>

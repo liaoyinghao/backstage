@@ -56,6 +56,21 @@
                 $("#change-id").val(id);
             });
 
+            $(".yggzt").on("click",function(){
+                alert('您没有权限更改此状态！');
+                return false;
+            });
+
+            $(".yggzter").on("click",function(){
+                alert('您没有权限更改此状态！');
+                return false;
+            });
+
+            $(".yggztyi").on("click",function(){
+                alert('项目还未经过财务确定，不能更改！');
+                return false;
+            });
+
         });
 
 
@@ -67,6 +82,7 @@
 <style type="text/css">
     li{list-style-type: none;}
     .pfp{color:#fff;text-decoration:none}
+    .huibg{background: #999 !important;border-color: #999 !important;}
 </style>
 
 <div class="modal fade bs-example-modal-sm" id="tap-change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -81,16 +97,17 @@
                 </div>
                 <div class="modal-body">
                     <select class="form-control" name="status" id="change-street">
-                        @if($user['position'] == '财务' || $user['position'] == '总经理')
-                            <option value="1">确认中</option>
-                            <option value="2">进行中</option>
-                        @endif
-                        @if($user['position'] == '客服' || $user['position'] == '客服主管' || $user['position'] == '总经理')
-                            <option value="3">完成</option>
-                        @endif
-                        @if($user['position'] == '总经理')
-                            <option value="4">申请退</option>
-                        @endif
+                            @if(isset($lists['type']) && $lists['type'] == 4)       <!-- 总经理 -->
+                                <option value="1">确认中</option>
+                                <option value="2">进行中</option>
+                                <option value="3">完成</option>
+                                <option value="4">申请退</option>
+                            @elseif(isset($lists['type']) && $lists['type'] == 3)   <!-- 财务 -->
+                                <option value="2">进行中</option>
+                            @elseif(isset($lists['type']) && $lists['type'] == 2)   <!-- 客服 -->
+                                <option value="3">完成</option>
+                            @else
+                            @endif
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -126,12 +143,13 @@
                             <th>底价</th>
                             <th>签单时间</th>
                             <th>状态</th>
-                            <th>操作</th>
+                            <th width="120px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
                           @if(isset($lists))
                           @foreach($lists as $v)
+                            @if(isset($v->id))
                           <tr>
                             <td>{{$v->id}}</td>
                             <td>{{$v->proname}}</td>
@@ -143,35 +161,53 @@
                             <td>{{$v->signingtime}}</td>
                             <td>
                                 @if($v->status == 1) 
-                                    确认中
+                                    <button class="btn blue btn-xs">确认中</button>
                                 @elseif($v->status == 2)
-                                    进行中
+                                    <button class="btn btn-success btn-xs">进行中</button>
                                 @elseif($v->status == 3)
-                                    完成
+                                    <button class="btn btn-danger btn-xs">完成</button>
                                 @elseif($v->status == 4)
-                                    申请退
+                                    <button class="btn btn-warning btn-xs">申请退</button>
                                 @else 
-                                    放弃
+                                    <button class="btn success btn-xs">放弃</button>
                                 @endif
                             </td>
                             <td>
                               <div class="btn-group">
-                                  <button type="button" class="btn blue btn-xs">
+                                  
+                                  <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
                                   </button>
-                                  <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                  
+                                  @if($lists['type'] != 1) <!-- 销售不能更改状态 -->
+                                  <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                   <ul class="dropdown-menu pull-right" role="menu">
-                                      <li><a class="genghuanzt pfp" data-toggle="modal" data-target="#tap-change" data-id="{{$v->id}}">更换状态</a></li>
-                                       @if($v->status == 0) 
-                                            <li><a class="huifuxm pfp" data-id="{{$v->id}}">恢复此项目</a><li>
-                                        @else 
-                                            <li><a class="fangqixm pfp" data-id="{{$v->id}}">放弃此项目</a><li>
+                                      <li>
+                                        @if($lists['type'] == 2 && $v->status > 2)   <!-- 客服 -->
+                                            <a class="genghuanzt pfp yggzt">更换状态</a>
+                                        @elseif($lists['type'] == 2 && $v->status == 1)  <!-- 客服 -->
+                                            <a class="genghuanzt pfp yggztyi">更换状态</a>
+                                        @elseif($lists['type'] == 3 && $v->status > 1)
+                                            <a class="genghuanzt pfp yggzter">更换状态</a>  <!-- 财务 -->
+                                        @else
+                                            <a class="genghuanzt pfp" data-toggle="modal" data-target="#tap-change" data-id="{{$v->id}}">更换状态</a>
+                                        @endif
+                                      </li>
+
+                                        @if($lists['type'] == 4) <!-- 总经理能够放弃和恢复此项目 -->
+                                            @if($v->status == 0) 
+                                                <li><a class="huifuxm pfp" data-id="{{$v->id}}">恢复此项目</a><li>
+                                            @else 
+                                                <li><a class="fangqixm pfp" data-id="{{$v->id}}">放弃此项目</a><li>
+                                            @endif
                                         @endif
                                       
-                                  </ul>
+                                   </ul>
+                                   @endif
                                </div>
                             </td>
                           </tr>
+                            @endif
                           @endforeach
                           @endif
                         </tbody>

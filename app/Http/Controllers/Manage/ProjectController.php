@@ -14,8 +14,7 @@ class ProjectController extends Controller
     public function main(){
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);
-        // $data['lists'] =Project::projectlist($data['user']);
-        $data['lists'] =Project::get();
+        $data['lists'] =Project::projectlist($data['user']);
         return view('manage.project.main',$data);
     }
 
