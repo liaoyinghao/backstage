@@ -9,6 +9,7 @@
                 ]
             });
 
+            @if(isset($flag))
             $(".td_select").change(function(){
                 var grades = $(this).val();
                 var id  = $(this).siblings(".tid").val();
@@ -26,6 +27,7 @@
                     }
                 })
             })
+            @endif
 
             //筛选
             $("#shaixuan").change(function(){
@@ -139,11 +141,11 @@
                                     <button type="button" class="btn blue btn-xs">
                                         <a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a>
                                     </button>
-                                    @endif
                                     <button type="button" class="btn blue btn-xs btnxs">
                                         <a class="tap-street acolor ahrefs">转入项目</a>
                                         <input type="hidden" value="{{$v->id}}" class="aid">
                                     </button>
+                                    @endif
                                 </div>
                                 @endif
                             </td>

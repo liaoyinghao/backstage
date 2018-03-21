@@ -81,10 +81,16 @@
                 </div>
                 <div class="modal-body">
                     <select class="form-control" name="status" id="change-street">
-                        <option value="1">确认中</option>
-                        <option value="2">进行中</option>
-                        <option value="3">完成</option>
-                        <option value="4">申请退</option>
+                        @if($user['position'] == '财务' || $user['position'] == '总经理')
+                            <option value="1">确认中</option>
+                            <option value="2">进行中</option>
+                        @endif
+                        @if($user['position'] == '客服' || $user['position'] == '客服主管' || $user['position'] == '总经理')
+                            <option value="3">完成</option>
+                        @endif
+                        @if($user['position'] == '总经理')
+                            <option value="4">申请退</option>
+                        @endif
                     </select>
                 </div>
                 <div class="modal-footer">

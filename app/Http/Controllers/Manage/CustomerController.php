@@ -158,13 +158,19 @@ class CustomerController extends Controller
       }
 
       if(!isset($data['lists'])){
-          $data['lists']=Customer::get();
-            foreach ($data['lists'] as $key => $value) {
-              if(!empty($value)){
-                if(time() - $value['progresstime'] > 604800){
-                    $data['lists'][$key]['khstatus'] = 1;
-                }
+
+        if($type == 'shaixuan'){
+            $data['lists']=Customer::where('grade',$shai)->get();
+          }else{
+            $data['lists']=Customer::get();
+          }
+
+          foreach ($data['lists'] as $key => $value) {
+            if(!empty($value)){
+              if(time() - $value['progresstime'] > 604800){
+                  $data['lists'][$key]['khstatus'] = 1;
               }
+            }
           }
       }
 

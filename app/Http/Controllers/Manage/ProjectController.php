@@ -6,15 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Customer;
+use App\Models\Accountnum;
 
 class ProjectController extends Controller
 {
 
     public function main(){
+        $user=$GLOBALS['m']['user'];
+        $data['user'] = Accountnum::userinfo($user);
+        // $data['lists'] =Project::projectlist($data['user']);
         $data['lists'] =Project::get();
         return view('manage.project.main',$data);
     }
 
+    //从客户变成项目
     public function addproject(){
     	$aid = request()->input('aid');
     	$id = request()->input('id');
@@ -39,6 +44,7 @@ class ProjectController extends Controller
         return view('manage.project.addproject',$data);
     }
 
+    //项目增加和修改
     public function addprojectpost(){
     	$id = request()->input('id');
     	$aid = request()->input('aid');
@@ -78,6 +84,7 @@ class ProjectController extends Controller
     		}
     	}
     	if($type == 3){
+            if(empty($status)){ return redirect()->route('manage_project_main'); }
     		$isok = Project::where("id",$id)->update(['status'=>$status]);
     		return redirect()->route('manage_project_main');
     	}

@@ -31,18 +31,27 @@
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
-                            <th width="50px">***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
+                            <th width="50px">ID</th>
+                            <th>姓名</th>
+                            <th>职位</th>
+                            <th>当月利润</th>
+                            <th>当月销售额</th>
+                            <th>总利润</th>
+                            <th>总销售额</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                            <tr>
+                                <td width="50px">ID</td>
+                                <td>廖应浩</td>
+                                <td>销售总监</td>
+                                <td>2000.00</td>
+                                <td>10000.00</td>
+                                <td>5000.00</td>
+                                <td>50000.00</td>
+                                <td>查看详情</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
