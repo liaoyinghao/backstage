@@ -15,6 +15,9 @@
 @endsection
 
 @section('content')
+<style type="text/css">
+    .acolor{color:#fff;text-decoration:none}
+</style>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -43,14 +46,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td width="50px">ID</td>
+                                <td width="50px">1</td>
                                 <td>廖应浩</td>
                                 <td>销售总监</td>
                                 <td>2000.00</td>
                                 <td>10000.00</td>
                                 <td>5000.00</td>
                                 <td>50000.00</td>
-                                <td>查看详情</td>
+                                <td>
+                                    <button type="button" class="btn blue btn-xs">
+                                        <a href="{{route('manage_finance_fdetails',['id'=>1])}}" class="tap-street acolor">查看详情</a>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

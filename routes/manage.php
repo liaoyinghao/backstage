@@ -69,6 +69,7 @@ Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
 //财务管理
 Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
     Route::get('main' , 'FinanceController@main')->name('main');
+    Route::get('fdetails' , 'FinanceController@fdetails')->name('fdetails');
 });
 
 

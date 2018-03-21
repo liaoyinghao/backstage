@@ -13,4 +13,8 @@ class FinanceController extends Controller
         return view('manage.finance.main');
     }
 
+    public function fdetails(){
+        return view('manage.finance.fdetails');
+    }
+
 }
