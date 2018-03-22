@@ -63,6 +63,7 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
 //日历
 Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
     Route::get('main' , 'CalendarController@main')->name('main');
+    Route::get('eventdetails' , 'CalendarController@eventdetails')->name('eventdetails');
 });
 
 

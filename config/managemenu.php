@@ -21,16 +21,6 @@ return [
             ],
         ]
     ],
-    'daily'=>[
-        'name'=>'日报',
-        'icon'=>'icon-bag',
-        'son'=>[
-            'main'=>[
-                'name'=>'日报下载',
-                'url'=>'main'
-            ],
-        ]
-    ],
     'project'=>[
         'name'=>'项目管理',
         'icon'=>'icon-direction',
@@ -41,12 +31,22 @@ return [
             ],
         ]
     ],
+    'daily'=>[
+        'name'=>'日报',
+        'icon'=>'icon-bag',
+        'son'=>[
+            'main'=>[
+                'name'=>'日报下载(未做)',
+                'url'=>'main'
+            ],
+        ]
+    ],
     'calendar'=>[
         'name'=>'日历',
         'icon'=>'icon-drawer',
         'son'=>[
             'main'=>[
-                'name'=>'备忘录',
+                'name'=>'备忘录(未做)',
                 'url'=>'main'
             ],
         ]
@@ -56,7 +56,7 @@ return [
         'icon'=>'icon iconfont icon-zhanghu',
         'son'=>[
             'main'=>[
-                'name'=>'销售利润',
+                'name'=>'销售利润(未做)',
                 'url'=>'main'
             ],
         ]
@@ -76,7 +76,7 @@ return [
         'icon'=>'icon-users',
         'son'=>[
             'main'=>[
-                'name'=>'请假',
+                'name'=>'请假(未做)',
                 'url'=>'main'
             ],
         ]
@@ -86,7 +86,7 @@ return [
         'icon'=>'icon-bubble',
         'son'=>[
             'main'=>[
-                'name'=>'通知',
+                'name'=>'通知(未做)',
                 'url'=>'main'
             ],
         ]

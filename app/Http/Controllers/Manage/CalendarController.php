@@ -13,4 +13,9 @@ class CalendarController extends Controller
         return view('manage.calendar.main');
     }
 
+    //添加修改事件
+    public function eventdetails(){
+        return view('manage.calendar.eventdetails');
+    }
+
 }
