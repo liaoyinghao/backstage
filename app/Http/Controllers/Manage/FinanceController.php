@@ -12,7 +12,17 @@ class FinanceController extends Controller
 {
 
     public function main(){
-        $accountnum=Accountnum::get();
+        
+        $accountnum = Accountnum::where("username",$GLOBALS['m']['user'])->get();
+        if($accountnum[0]['position'] == '总经理' || $accountnum[0]['position'] == '财务' || $accountnum[0]['position'] == '客服' || $accountnum[0]['position'] == '客服主管'){
+
+            $accountnum=Accountnum::get();
+
+        }
+        if ($accountnum[0]['position'] == '销售主管') {
+            $accountnum = Accountnum::whereRaw('(fromuser = ? or id = ?)',[$accountnum[0]['id'],$accountnum[0]['id']])->get();
+        }
+
         $arr = [];
         $i = 1;
         foreach ($accountnum as $key => $value) {
