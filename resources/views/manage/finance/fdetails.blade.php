@@ -37,22 +37,22 @@
                     <div class="main_top">
                         <div>
                             <p>月利润</p>
-                            <p>1998元</p>
+                            <p>{{$xslrdy or 0.00}}元</p>
                         </div>
                         <div>
                             <p>总利润</p>
-                            <p>1998元</p>
+                            <p>{{$xslr or 0.00}}元</p>
                         </div>
                         <div>
                             <p>月销售额</p>
-                            <p>1998元</p>
+                            <p>{{$xszdy or 0.00}}元</p>
                         </div>
                         <div>
                             <p>总销售额</p>
-                            <p>1998元</p>
+                            <p>{{$xsz or 0.00}}元</p>
                         </div>
                     </div>
-                    
+
                     <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
@@ -66,14 +66,18 @@
                         </tr>
                         </thead>
                         <tbody>
+                          @if(isset($lists))
+                          @foreach($lists as $v)
                             <tr>
-                                <td width="50px">1</td>
-                                <td>土耳其项目</td>
-                                <td>廖应浩</td>
-                                <td>10000.00</td>
-                                <td>50000.00</td>
-                                <td>2018-12-15</td>
+                                <td width="50px">{{$v->id}}</td>
+                                <td>{{$v->proname}}</td>
+                                <td>{{$kid[$v->kid]}}</td>
+                                <td>{{$v->contractamount - $v->floorprice}}</td>
+                                <td>{{$v->contractamount}}</td>
+                                <td>{{date('Y-m-d',$v->addtime)}}</td>
                             </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

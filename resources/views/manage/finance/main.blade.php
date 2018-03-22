@@ -45,20 +45,24 @@
                         </tr>
                         </thead>
                         <tbody>
+                          @if(isset($lists))
+                          @foreach($lists as $v)
                             <tr>
-                                <td width="50px">1</td>
-                                <td>某某某</td>
-                                <td>某某某</td>
-                                <td>2000.00</td>
-                                <td>10000.00</td>
-                                <td>5000.00</td>
-                                <td>50000.00</td>
+                                <td width="50px">{{$v['id']}}</td>
+                                <td>{{$v['nickname']}}</td>
+                                <td>{{$v['position']}}</td>
+                                <td>{{$v['xslrdy']}}</td>
+                                <td>{{$v['xszdy']}}</td>
+                                <td>{{$v['xslr']}}</td>
+                                <td>{{$v['xsz']}}</td>
                                 <td>
                                     <button type="button" class="btn blue btn-xs">
-                                        <a href="{{route('manage_finance_fdetails',['id'=>1])}}" class="tap-street acolor">查看详情</a>
+                                        <a href="{{route('manage_finance_fdetails',['kid'=>$v['kid'],'nickname'=>$v['nickname'],'xslrdy'=>$v['xslrdy'],'xszdy'=>$v['xszdy'],'xslr'=>$v['xslr'],'xsz'=>$v['xsz']])}}" class="tap-street acolor">查看详情</a>
                                     </button>
                                 </td>
                             </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
