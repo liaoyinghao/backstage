@@ -56,7 +56,7 @@ return [
         'icon'=>'icon iconfont icon-zhanghu',
         'son'=>[
             'main'=>[
-                'name'=>'销售利润(未做)',
+                'name'=>'销售利润',
                 'url'=>'main'
             ],
         ]
