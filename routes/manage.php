@@ -47,7 +47,7 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
 
 //日报
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
-    Route::get('main' , 'CustomerController@main')->name('main');
+    Route::get('main' , 'DailyController@main')->name('main');
 });
 
 
@@ -64,6 +64,7 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
 Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
     Route::get('main' , 'CalendarController@main')->name('main');
     Route::get('eventdetails' , 'CalendarController@eventdetails')->name('eventdetails');
+    Route::get('eventlist' , 'CalendarController@eventlist')->name('eventlist');
 });
 
 
@@ -77,6 +78,7 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 //请假
 Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
+    Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
 });
 
 

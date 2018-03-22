@@ -18,4 +18,10 @@ class CalendarController extends Controller
         return view('manage.calendar.eventdetails');
     }
 
+    //查看全部事件
+    public function eventlist(){
+        return view('manage.calendar.eventlist');
+    }
+
+
 }

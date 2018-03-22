@@ -10,7 +10,11 @@ class LeaveController extends Controller
 {
 
     public function main(){
-        return view('manage.notice.main');
+        return view('manage.leave.main');
+    }
+
+    public function ldetails(){
+        return view('manage.leave.ldetails');
     }
 
 }
