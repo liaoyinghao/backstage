@@ -80,6 +80,18 @@
                         <span class="userk">备注：</span>
                         <textarea name="start[remarks]" placeholder="备注" class="textarea">{{$start['remarks'] or ''}}</textarea>
                     </p>
+
+
+                    <p class="form_p">
+                      <span class="userk">选择需要确认该项目的财务人员：</span>
+                      <select name='start[cwid]' class="job" required="required">
+                        @if(isset($list))
+                            @foreach($list as $val)
+                              <option value="{{$val['id']}}" @if($start['cwid']==$val['cwid']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
+                            @endforeach
+                        @endif
+                      </select>
+                    </p>
                     
 
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>

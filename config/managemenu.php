@@ -29,6 +29,10 @@ return [
                 'name'=>'项目管理',
                 'url'=>'main'
             ],
+            'list'=>[
+                'name'=>'全部项目',
+                'url'=>'list'
+            ],
         ]
     ],
     'daily'=>[
