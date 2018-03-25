@@ -85,6 +85,7 @@ Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
     Route::get('mainlist' , 'LeaveController@mainlist')->name('mainlist');
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
+    Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
 });
 
 

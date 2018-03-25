@@ -24,6 +24,10 @@ class Accountnum extends Model
 		return self::where("username",$user)->first();
 	}
 
+	public static function userid($id){
+		return self::where("id",$id)->select("id","username",'position')->first();
+	}
+
 	public static function userfromuser($fromuser){
 		$info = self::where("fromuser",$fromuser)->where("status",1)->get();
 		foreach ($info as $key => $value) {

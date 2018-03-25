@@ -36,7 +36,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <!-- <span class="caption-subject bold uppercase">备忘录事件</span> -->
+                        <span class="caption-subject bold uppercase">申请请假/外勤</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -44,35 +44,27 @@
                 </div>
                 <div class="portlet-body">
 
-                    <form method="post" action="#">
-                    <input type="hidden" name="id" value="{{$start['id'] or ''}}">
+                    <form method="post" action="{{route('manage_leave_addldetails')}}">
 
                     <p class="form_p">
-                        <span class="userk">姓名：</span><input type="text" name="start[name]" value="{{$start['name'] or ''}}" placeholder="姓名" required="required">
+                        <span class="userk">姓名：</span><input type="text" value="{{$info['nickname'] or ''}}" disabled='disabled'>
                     </p>
                     <p class="form_p">
-                        <span class="userk">职位：</span>
-                          <select name= 'job' class="job">
-                            <option  value='总经理'  name ="generalmanager">总经理</option>
-                            <option  value='销售主管'    name ="salesmanager">销售主管</option>
-                            <option  value='销售'  name="minister">销售</option>
-                            <option  value='客服主管' name="production">客服主管</option>
-                            <option  value='客服' name="quality">客服</option>
-                            <option  value='财务' name="workshop">财务</option>
+                        <span class="userk">类型：</span>
+                          <select name='start[type]' class="job" required="required">
+                            <option value='1'>请假</option>
+                            <option value='2'>外勤</option>
                           </select>
                     </p>
                     <p class="form_p">
-                        <span class="userk">类型：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}" placeholder="类型">
-                    </p>
-                    <p class="form_p">
-                        <span class="userk">时间：</span>
-                        <input type="date" name="start[jstime]" value="{{$start['jstime'] or ''}}" required="required"> 
+                        <span class="userk">请假时间：</span>
+                        <input type="date" name="start[kstime]" value="" required="required"> 
                         至
-                        <input type="date" name="start[jstime]" value="{{$start['jstime'] or ''}}" required="required">
+                        <input type="date" name="start[jstime]" value="" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">原因：</span>
-                        <textarea name="start[content]" placeholder="原因" class="textarea" required="required">{{$start['content'] or ''}}</textarea>
+                        <span class="userk">请假原因：</span>
+                        <textarea name="start[progress]" placeholder="请假原因" class="textarea" required="required"></textarea>
                     </p>
 
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
