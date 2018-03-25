@@ -53,6 +53,10 @@ return [
                 'name'=>'备忘录',
                 'url'=>'main'
             ],
+            'eventlist'=>[
+                'name'=>'全部备忘录',
+                'url'=>'eventlist'
+            ],
         ]
     ],
     'finance'=>[
