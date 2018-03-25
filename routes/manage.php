@@ -67,6 +67,8 @@ Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
     Route::get('main' , 'CalendarController@main')->name('main');
     Route::get('eventdetails' , 'CalendarController@eventdetails')->name('eventdetails');
     Route::get('eventlist' , 'CalendarController@eventlist')->name('eventlist');
+    Route::post('addcalendar' , 'CalendarController@addcalendar')->name('addcalendar');
+    Route::post('updatestatus' , 'CalendarController@updatestatus')->name('updatestatus');
 });
 
 
@@ -87,4 +89,5 @@ Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
 //通知
 Route::group(['prefix'=>'notice' , 'as'=>'notice_'] , function(){
     Route::get('main' , 'NoticeController@main')->name('main');
+    Route::get('addnotice' , 'NoticeController@addnotice')->name('addnotice');
 });

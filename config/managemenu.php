@@ -50,7 +50,7 @@ return [
         'icon'=>'icon-drawer',
         'son'=>[
             'main'=>[
-                'name'=>'备忘录(未做)',
+                'name'=>'备忘录',
                 'url'=>'main'
             ],
         ]

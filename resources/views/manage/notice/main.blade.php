@@ -23,7 +23,8 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        <a class="btn blue btn-outline"><i class="fa fa-plus"></i> 添加</a>
+                        <a class="btn blue btn-outline" href="#"> 查看全部通知(总经理)</a>
+                        <a class="btn blue btn-outline" href="{{route('manage_notice_addnotice')}}"><i class="fa fa-plus"></i> 添加通知</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -31,14 +32,12 @@
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
-                            <th width="50px">***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
-                            <th>***</th>
+                            <th width="50px">id</th>
+                            <th>发送者</th>
+                            <th>接受者</th>
+                            <th>状态</th>
+                            <th>是否已读</th>
+                            <th>标题</th>
                         </tr>
                         </thead>
                         <tbody>
