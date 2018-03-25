@@ -40,7 +40,7 @@ return [
         'icon'=>'icon-bag',
         'son'=>[
             'main'=>[
-                'name'=>'日报下载(未做)',
+                'name'=>'全部日报(未做)',
                 'url'=>'main'
             ],
         ]

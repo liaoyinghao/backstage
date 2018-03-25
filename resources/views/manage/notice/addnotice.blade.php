@@ -102,6 +102,7 @@
                         <textarea id="progress" placeholder="通知内容" class="textarea"></textarea>
                     </p>
                     
+<!-- ************** 如果是“查看详情，就没有这个提交按钮，只让他看”  ***************** -->
                     @if(!isset($store) || !empty($store))
                     <p class="submit_p"><input type="submit" value="确认发送通知" class="submit"></p>
                     @endif
