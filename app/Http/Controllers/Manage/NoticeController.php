@@ -13,9 +13,13 @@ class NoticeController extends Controller
         return view('manage.notice.main');
     }
 
+    public function mainlist(){
+        return view('manage.notice.mainlist');
+    }
+
     public function addnotice(){
-    	// $info = Accountnum::userinfo($GLOBALS['m']['user']);
-    	$data['user'] = Accountnum::where('username','!=',$GLOBALS['m']['user'])->where("status",1)->select("id","nickname")->get();
+    	//如果是查看，就赋$store值
+    	$data['store'] = '';
         return view('manage.notice.addnotice',$data);
     }
 

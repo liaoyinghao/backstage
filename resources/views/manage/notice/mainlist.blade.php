@@ -29,7 +29,6 @@ li{list-style-type: none;}
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        <a class="btn blue btn-outline" href="{{route('manage_notice_addnotice')}}"><i class="fa fa-plus"></i> 添加通知(只有总经理才能添加，去掉这行字)</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -49,6 +48,17 @@ li{list-style-type: none;}
                         </thead>
                         <tbody>   
 
+                            <tr>
+                                <td>1</td>
+                                <td>总经理名字</td>
+                                <td>明天开会</td>
+                                <td><span class="neirong">开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知</span></td>
+                                <!-- 通知状态按照时间定：未开始，进行中，已过期 -->
+                                <td><button class="btn warning btn-xs">已过期</button></td>
+                                <td>2018-3-21</td>
+                                <td>2018-3-23</td>
+                                <td><a href="{{route('manage_notice_addnotice',['id'=>1])}}">查看详情</a></td>
+                            </tr>
                             <tr>
                                 <td>1</td>
                                 <td>总经理名字</td>

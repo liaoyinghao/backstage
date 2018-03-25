@@ -8,34 +8,34 @@
                     [ 0, "desc" ]
                 ]
             });
-            $(".submit").on("click",function(){
-                var obj = $("input[name=jsid]");
-                jsid = [];
-                for(k in obj){
-                    if(obj[k].checked)
-                        jsid.push(obj[k].value);
-                }
-                if(jsid=='' || jsid==undefined){
-                    alert("您还为选择接收者人员！");
-                    return false;
-                }
-                jsid = jsid.toString();
+            // $(".submit").on("click",function(){
+            //     var obj = $("input[name=jsid]");
+            //     jsid = [];
+            //     for(k in obj){
+            //         if(obj[k].checked)
+            //             jsid.push(obj[k].value);
+            //     }
+            //     if(jsid=='' || jsid==undefined){
+            //         alert("您还为选择接收者人员！");
+            //         return false;
+            //     }
+            //     jsid = jsid.toString();
 
-                var title = $("#title").val();
-                if(title=='' || title==undefined){
-                    alert("请填写通知标题！");
-                    return false;
-                }
-                var progress = $("#progress").val();
-                if(progress=='' || progress==undefined){
-                    alert("请填写通知内容！");
-                    return false;
-                }
+            //     var title = $("#title").val();
+            //     if(title=='' || title==undefined){
+            //         alert("请填写通知标题！");
+            //         return false;
+            //     }
+            //     var progress = $("#progress").val();
+            //     if(progress=='' || progress==undefined){
+            //         alert("请填写通知内容！");
+            //         return false;
+            //     }
 
-                alert(jsid);
-                alert(title);
-                alert(progress);
-            })
+            //     alert(jsid);
+            //     alert(title);
+            //     alert(progress);
+            // })
         });
 
 
@@ -79,34 +79,33 @@
                     </div>
                 </div>
                 <div class="portlet-body">
+                    <form method="post" action="">
 
-                    <input type="hidden" name="id" value="{{$start['id'] or ''}}">
-
-                    <p class="form_p">
+                    <!-- <p class="form_p">
                         <span class="userk">接收人：</span>
                         <div class="xuanz">
-                            @if(isset($user))
-                                @foreach($user as $val)
-                                @if(!empty($val))
-                                    <input type="checkbox" name="jsid" value="{{$val['id']}}"/>{{$val['nickname']}}
-                                @endif
-                                @endforeach
-                            @else
-                                无选择人员...
-                            @endif
+                            <input type="checkbox" name="jsid" value=""/>
                         </div>
-                    </p>
+                    </p> -->
 
                     <p class="form_p">
-                        <span class="userk">通知标题：</span><input type="text" id="title" value="{{$start['title'] or ''}}" placeholder="通知标题">
+                        <span class="userk">通知标题：</span><input type="text" id="title" value="" placeholder="通知标题">
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">通知开始日期：</span><input type="date" id="kstime" value="">
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">通知结束日期：</span><input type="date" id="jstime" value="">
                     </p>
                     <p class="form_p">
                         <span class="userk">通知内容：</span>
-                        <textarea id="progress" placeholder="通知内容" class="textarea">{{$start['progress'] or ''}}</textarea>
+                        <textarea id="progress" placeholder="通知内容" class="textarea"></textarea>
                     </p>
-
+                    
+                    @if(!isset($store) || !empty($store))
                     <p class="submit_p"><input type="submit" value="确认发送通知" class="submit"></p>
-
+                    @endif
+                    </form>
                 </div>
             </div>
         </div>

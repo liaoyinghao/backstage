@@ -90,8 +90,12 @@ return [
         'icon'=>'icon-bubble',
         'son'=>[
             'main'=>[
-                'name'=>'通知(未做)',
+                'name'=>'进行中的通知(未做)',
                 'url'=>'main'
+            ],
+            'mainlist'=>[
+                'name'=>'全部通知(未做)',
+                'url'=>'mainlist'
             ],
         ]
     ],

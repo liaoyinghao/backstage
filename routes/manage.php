@@ -49,6 +49,7 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
 //日报
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
+    Route::get('adddaily' , 'DailyController@adddaily')->name('adddaily');
 });
 
 
@@ -89,5 +90,6 @@ Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
 //通知
 Route::group(['prefix'=>'notice' , 'as'=>'notice_'] , function(){
     Route::get('main' , 'NoticeController@main')->name('main');
+    Route::get('mainlist' , 'NoticeController@mainlist')->name('mainlist');
     Route::get('addnotice' , 'NoticeController@addnotice')->name('addnotice');
 });
