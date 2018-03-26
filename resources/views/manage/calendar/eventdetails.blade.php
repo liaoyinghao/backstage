@@ -44,21 +44,22 @@
                 </div>
                 <div class="portlet-body">
 
-                    <form method="post" action="#">
+                    <form method="post" action="{{route('manage_calendar_addcalendar')}}">
                     <input type="hidden" name="id" value="{{$start['id'] or ''}}">
+                    <input type="hidden" name="upid" value="{{$upid or ''}}">
 
                     <p class="form_p">
-                        <span class="userk">标题名称：</span><input type="text" name="start[name]" value="{{$start['name'] or ''}}" placeholder="标题名称" required="required">
+                        <span class="userk">标题名称：</span><input type="text" name="start[title]" value="{{$start['title'] or ''}}" placeholder="标题名称" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">记事时间：</span><input type="date" name="start[jstime]" value="{{$start['jstime'] or ''}}" placeholder="记事时间" required="required">
+                        <span class="userk">记事时间：</span><input type="date" name="start[betime]" value="{{$start['betime'] or ''}}" placeholder="记事时间" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">事件备注：</span><input type="text" name="start[remarks]" value="{{$start['remarks'] or ''}}" placeholder="事件备注">
                     </p>
                     <p class="form_p">
                         <span class="userk">事件内容：</span>
-                        <textarea name="start[content]" placeholder="事件内容" class="textarea" required="required">{{$start['content'] or ''}}</textarea>
+                        <textarea name="start[progress]" placeholder="事件内容" class="textarea" required="required">{{$start['progress'] or ''}}</textarea>
                     </p>
 
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>

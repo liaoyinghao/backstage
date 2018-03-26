@@ -27,7 +27,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">**的销售利润详情</span>
+                        <span class="caption-subject bold uppercase">{{$nickname or ''}}的销售利润详情</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -62,7 +62,7 @@
                             <th>客户名称</th>
                             <th>获得利润</th>
                             <th>获得销售额</th>
-                            <th>时间</th>
+                            <th>转入项目时间</th>
                         </tr>
                         </thead>
                         <tbody>

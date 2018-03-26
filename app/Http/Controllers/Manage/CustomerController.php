@@ -315,4 +315,26 @@ class CustomerController extends Controller
         $data['zid'] = $id;
         return view('manage.customer.zuyuankh',$data);
     }
+
+    //财务确定完之后选择客服人员
+    public function khterxm(){
+        $id=request()->input('id');
+
+        $user=$GLOBALS['m']['user'];
+        $data['user'] = Accountnum::userinfo($user);//进来这个人的信息
+        $data['info'] = Customer::where('id',$id)->select("id","name")->first();//项目信息
+        $data['list'] = Accountnum::where("status",1)->whereRaw("position = ? or position = ?",['客服主管','客服'])->get();//查询所有客服
+
+        if($data['user']['position'] == '销售主管' || $data['user']['position'] == '销售'){
+            $data['user']['type'] = 1;
+        }else if($data['user']['position'] == '客服主管' || $data['user']['position'] == '客服'){
+          $data['user']['type'] = 2;
+        }elseif($data['user']['position'] == '财务'){
+          $data['user']['type'] = 3;
+        }else{
+          $data['user']['type'] = 4;    //总经理
+        }
+        
+        return view('manage.customer.khterxm',$data);
+    }
 }

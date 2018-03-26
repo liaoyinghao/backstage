@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Customer;
+use App\Models\Accountnum;
 
 class Project extends Model
 {
@@ -32,6 +33,44 @@ class Project extends Model
 			}elseif($user['position'] == '财务'){
 				$list['type'] = 3;
 			}else{
+				$list['type'] = 4;		//总经理
+			}
+		}
+
+		foreach ($list as $key => $val) {
+			if(!empty($val['cwid'])){
+				$infos = Accountnum::where('id',$val['cwid'])->select("nickname")->first();
+				$list[$key]['cwid'] = $infos['nickname'];
+			}
+			if(!empty($val['kfid'])){
+				$infost = Accountnum::where('id',$val['kfid'])->select("nickname")->first();
+				$list[$key]['kfid'] = $infost['nickname'];
+			}
+		}
+		return $list;
+	}
+
+	public static function projectlistgr($user){
+		//状态0放弃1确认中2进行中3完成4申请退
+		$list = [];
+		if($user['position'] == '销售主管' || $user['position'] == '销售'){
+			$sukh = Customer::where('fromuser',$user['id'])->select("id")->get();
+			if(!empty($sukh[0])){
+				foreach ($sukh as $key => $val) {
+					$cust[$key] = $val['id'];
+				}
+				$list = self::whereIn('kid',$cust)->get();
+				$list['type'] = 1;
+			}
+		}else{
+			if($user['position'] == '客服主管' || $user['position'] == '客服'){
+				$list = self::where('kfid',$user['id'])->where('status',2)->get();//状态2是进行中
+				$list['type'] = 2;
+			}elseif($user['position'] == '财务'){
+				$list = self::where('cwid',$user['id'])->where('status',1)->get();//状态1是确认中
+				$list['type'] = 3;
+			}else{
+				$list = self::get();
 				$list['type'] = 4;		//总经理
 			}
 		}

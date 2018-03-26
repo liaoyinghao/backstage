@@ -8,6 +8,25 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".zhuantai").on("click",function(){
+                $id = $(this).attr("data-id");
+                $status = $(this).attr("data-v");
+                $.ajax({
+                    url:"{{route('manage_calendar_updatestatus')}}",
+                    type:"post",
+                    data:{"id":$id,"status":$status},
+                    dataType:"json",
+                    success:function(d){
+                        if(d==1){
+                            alert("状态修改成功！");
+                            location.href="{{route('manage_calendar_main')}}";
+                        }else{
+                            alert("状态修改失败！");
+                        }
+                    }
+                })
+            })
         });
 
 
@@ -18,6 +37,9 @@
 <style type="text/css">
 li{list-style-type: none;}
 .pfp{color:#fff;text-decoration:none}
+.spanbz,.spannr{max-height: 38px;display: block;overflow: hidden;}
+.spanbz{max-width: 150px;}
+.spannr{max-width: 280px;}
 </style>
 
     <div class="row">
@@ -43,34 +65,62 @@ li{list-style-type: none;}
                             <th>备注</th>
                             <th>事件</th>
                             <th>状态</th>
-                            <th>操作</th>
+                            <th width="111px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td width="50px">1</td>
-                                <td>某某某</td>
-                                <td>2018-12-13</td>
-                                <td>思思思</td>
-                                <td>某某某</td>
-                                <td>
-                                    <button class="btn btn-danger btn-xs">未完成</button>
-                                    <!-- <button class="btn success btn-xs">已完成</button> -->
-                                </td>
-                                <td>
-                                   <div class="btn-group">
-                                      <button type="button" class="btn blue btn-xs">
-                                            <a href="{{route('manage_calendar_eventdetails')}}" class="pfp">修改事件</a>
-                                      </button>
-                                      <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-                                      <ul class="dropdown-menu pull-right" role="menu">
-                                          <li>
-                                            <a href="">已完成</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                                </td>
-                            </tr>
+                            @if(isset($info))
+                            @foreach($info as $val)
+                            @if(!empty($val))
+                                    <tr>
+                                        <td>{{$val['id'] or ''}}</td>
+                                        <td>{{$val['title'] or ''}}</td>
+                                        <td>{{$val['betime'] or ''}}</td>
+                                        <td><span class="spanbz">{{$val['remarks'] or ''}}</span></td>
+                                        <td><span class="spannr">{{$val['progress'] or ''}}</span></td>
+                                        <td>
+                                            @if($val['status'] == 1)
+                                                <button class="btn btn-danger btn-xs">未完成</button>
+                                            @elseif($val['status'] == 2)
+                                                <button class="btn success btn-xs">已完成</button>
+                                            @else
+                                                <button class="btn success btn-xs">已删除</button>
+                                            @endif
+                                            
+                                        </td>
+                                        <td>
+                                           <div class="btn-group">
+                                              <button type="button" class="btn blue btn-xs">
+                                                    <a href="{{route('manage_calendar_eventdetails',['upid'=>$val['id']])}}" class="pfp">修改事件</a>
+                                              </button>
+                                              <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                              <ul class="dropdown-menu pull-right" role="menu">
+                                                  @if($val['status'] == 1)
+                                                      <li>
+                                                        <a class="zhuantai" data-v="2" data-id="{{$val['id']}}">已完成</a>
+                                                      </li>
+                                                  @elseif($val['status'] == 2)
+                                                      <li>
+                                                        <a class="zhuantai" data-v="1" data-id="{{$val['id']}}">转为未完成</a>
+                                                      </li>
+                                                  @else
+                                                  @endif
+                                                  
+                                                  <li>
+                                                  @if($val['status'] == 0)
+                                                    <a class="zhuantai" data-v="1" data-id="{{$val['id']}}">恢复此备忘录</a>
+                                                  @else
+                                                    <a class="zhuantai" data-v="0" data-id="{{$val['id']}}">删除此备忘录</a>
+                                                  @endif
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                        </td>
+                                    </tr>
+                            @endif
+                            @endforeach
+                            @endif
+                            
                         </tbody>
                     </table>
                 </div>

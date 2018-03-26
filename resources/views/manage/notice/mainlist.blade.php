@@ -46,6 +46,7 @@ li{list-style-type: none;}
                             <th>查看详情</th>
                         </tr>
                         </thead>
+<<<<<<< HEAD
                         <tbody>
                             @if(isset($lists))
                             @foreach($lists as $v)
@@ -80,6 +81,32 @@ li{list-style-type: none;}
                             </tr>
                             @endforeach
                             @endif
+=======
+                        <tbody>   
+
+                            <tr>
+                                <td>1</td>
+                                <td>总经理名字</td>
+                                <td>明天开会</td>
+                                <td><span class="neirong">开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知开会通知</span></td>
+                                <!-- 通知状态按照时间定：未开始，进行中，已过期 -->
+                                <td><button class="btn warning btn-xs">已过期</button></td>
+                                <td>2018-3-21</td>
+                                <td>2018-3-23</td>
+                                <td><a href="{{route('manage_notice_addnotice',['id'=>1])}}">查看详情</a></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>总经理名字</td>
+                                <td>后天开会</td>
+                                <td><span class="neirong">开会通知</span></td>
+                                <!-- 通知状态按照时间定：未开始，进行中，已过期 -->
+                                <td><button class="btn btn-danger btn-xs">进行中</button></td>
+                                <td>2018-3-21</td>
+                                <td>2018-3-28</td>
+                                <td><a href="{{route('manage_notice_addnotice',['id'=>1])}}">查看详情</a></td>
+                            </tr>
+>>>>>>> origin
                         </tbody>
                     </table>
                 </div>

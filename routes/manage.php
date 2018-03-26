@@ -42,19 +42,22 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
     Route::any('followuppost' , 'CustomerController@followuppost')->name('followuppost');
     Route::get('chzuyuan' , 'CustomerController@chzuyuan')->name('chzuyuan');
     Route::get('zuyuankh' , 'CustomerController@zuyuankh')->name('zuyuankh');
+    Route::get('khterxm' , 'CustomerController@khterxm')->name('khterxm');
 });
 
 
 //日报
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
+    Route::get('adddaily' , 'DailyController@adddaily')->name('adddaily');
 });
 
 
 //项目管理
 Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::get('main' , 'ProjectController@main')->name('main');
-    Route::get('addproject' , 'ProjectController@addproject')->name('addproject');
+    Route::get('list' , 'ProjectController@list')->name('list');
+    Route::any('addproject' , 'ProjectController@addproject')->name('addproject');
     Route::any('addprojectpost' , 'ProjectController@addprojectpost')->name('addprojectpost');
     Route::post('updatastatus' , 'ProjectController@updatastatus')->name('updatastatus');
 });
@@ -65,6 +68,8 @@ Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
     Route::get('main' , 'CalendarController@main')->name('main');
     Route::get('eventdetails' , 'CalendarController@eventdetails')->name('eventdetails');
     Route::get('eventlist' , 'CalendarController@eventlist')->name('eventlist');
+    Route::post('addcalendar' , 'CalendarController@addcalendar')->name('addcalendar');
+    Route::post('updatestatus' , 'CalendarController@updatestatus')->name('updatestatus');
 });
 
 
@@ -78,11 +83,15 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 //请假
 Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
+    Route::get('mainlist' , 'LeaveController@mainlist')->name('mainlist');
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
+    Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
 });
 
 
 //通知
 Route::group(['prefix'=>'notice' , 'as'=>'notice_'] , function(){
     Route::get('main' , 'NoticeController@main')->name('main');
+    Route::get('mainlist' , 'NoticeController@mainlist')->name('mainlist');
+    Route::get('addnotice' , 'NoticeController@addnotice')->name('addnotice');
 });

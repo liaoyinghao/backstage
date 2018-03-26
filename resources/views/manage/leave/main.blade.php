@@ -18,6 +18,9 @@
 <style type="text/css">
 li{list-style-type: none;}
 .pfp{color:#fff;text-decoration:none}
+.neirong{max-width: 300px;max-height: 38px;display: block;overflow: hidden;}
+.leixingbg{background: #b2fcc7}
+.leixingbgs{background: #b5b2fc}
 </style>
 
     <div class="row">
@@ -40,33 +43,62 @@ li{list-style-type: none;}
                             <th>姓名</th>
                             <th>职位</th>
                             <th>类型</th>
-                            <th>时间</th>
+                            <th width="150px">时间</th>
                             <th>原因</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>某某某</td>
-                                <td>销售</td>
-                                <td>请假</td>
-                                <td>2018-12-13 至 2018-12-15</td>
-                                <td>事假</td>
-                                <td>
-                                   <div class="btn-group">
-                                      <button type="button" class="btn blue btn-xs">
-                                            <a href="#" class="pfp">修改</a>
-                                      </button>
-                                      <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-                                      <ul class="dropdown-menu pull-right" role="menu">
-                                          <li>
-                                            <a href="">暂未定</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                                </td>
-                            </tr>
+                            @if(isset($list))
+                            @foreach($list as $val)
+                            @if(!empty($val))
+                                <tr>
+                                    <td>{{$val['id'] or ''}}</td>
+                                    <td>{{$val['username'] or ''}}</td>
+                                    <td>{{$val['position'] or ''}}</td>
+                                    <td>
+                                        @if($val['type'] == 1) 
+                                         <button class="btn btn-xs leixingbg">请假</button>
+                                        @else
+                                         <button class="btn btn-xs leixingbgs">外勤</button>
+                                        @endif
+                                    </td>
+                                    <td>{{$val['kstime'] or ''}} 至 {{$val['jstime'] or ''}}</td>
+                                    <td><span class="neirong">{{$val['progress'] or ''}}</span></td>
+                                    <td>
+                                        @if($val['status'] == 1)
+                                        <button class="btn btn-danger btn-xs">申请中</button>
+                                        @elseif($val['status'] == 2)
+                                        <button class="btn success btn-xs">已允许</button>
+                                        @else
+                                        <button class="btn btn-danger btn-xs">被拒绝</button>
+                                        @endif
+                                    </td>
+                                    <td>
+                                       <div class="btn-group">
+                                          <button type="button" class="btn blue btn-xs">
+                                                <a href="#" class="pfp">查看</a>
+                                          </button>
+                                        @if(isset($info))
+                                            @if($info['position'] == '总经理')
+                                          <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                          <ul class="dropdown-menu pull-right" role="menu">
+                                              <li>
+                                                <a href="">允许申请</a>
+                                              </li>
+                                              <li>
+                                                <a href="">拒绝申请</a>
+                                              </li>
+                                          </ul>
+                                            @endif
+                                        @endif
+                                      </div>
+                                    </td>
+                                </tr>
+                            @endif
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

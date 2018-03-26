@@ -190,7 +190,7 @@
                                         @elseif($lists['type'] == 3 && $v->status > 1)
                                             <a class="genghuanzt pfp yggzter">更换状态</a>  <!-- 财务 -->
                                         @else
-                                            <a class="genghuanzt pfp" data-toggle="modal" data-target="#tap-change" data-id="{{$v->id}}">更换状态</a>
+                                            <a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a>
                                         @endif
                                       </li>
 

@@ -29,6 +29,10 @@ return [
                 'name'=>'项目管理',
                 'url'=>'main'
             ],
+            'list'=>[
+                'name'=>'全部项目',
+                'url'=>'list'
+            ],
         ]
     ],
     'daily'=>[
@@ -36,7 +40,7 @@ return [
         'icon'=>'icon-bag',
         'son'=>[
             'main'=>[
-                'name'=>'日报下载(未做)',
+                'name'=>'全部日报(未做)',
                 'url'=>'main'
             ],
         ]
@@ -46,8 +50,12 @@ return [
         'icon'=>'icon-drawer',
         'son'=>[
             'main'=>[
-                'name'=>'备忘录(未做)',
+                'name'=>'备忘录',
                 'url'=>'main'
+            ],
+            'eventlist'=>[
+                'name'=>'全部备忘录',
+                'url'=>'eventlist'
             ],
         ]
     ],
@@ -56,7 +64,7 @@ return [
         'icon'=>'icon iconfont icon-zhanghu',
         'son'=>[
             'main'=>[
-                'name'=>'销售利润(未做)',
+                'name'=>'销售利润',
                 'url'=>'main'
             ],
         ]
@@ -72,12 +80,16 @@ return [
         ]
     ],
     'leave'=>[
-        'name'=>'打卡',
+        'name'=>'请假和外出',
         'icon'=>'icon-users',
         'son'=>[
             'main'=>[
-                'name'=>'请假(未做)',
+                'name'=>'申请列表(未做)',
                 'url'=>'main'
+            ],
+            'mainlist'=>[
+                'name'=>'全部列表(未做)',
+                'url'=>'mainlist'
             ],
         ]
     ],
@@ -86,8 +98,12 @@ return [
         'icon'=>'icon-bubble',
         'son'=>[
             'main'=>[
-                'name'=>'通知(未做)',
+                'name'=>'进行中的通知(未做)',
                 'url'=>'main'
+            ],
+            'mainlist'=>[
+                'name'=>'全部通知(未做)',
+                'url'=>'mainlist'
             ],
         ]
     ],

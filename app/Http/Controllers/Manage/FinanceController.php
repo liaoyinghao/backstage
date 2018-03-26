@@ -12,10 +12,23 @@ class FinanceController extends Controller
 {
 
     public function main(){
-        $accountnum=Accountnum::get();
+        
+        $accountnum = Accountnum::where("username",$GLOBALS['m']['user'])->get();
+        if($accountnum[0]['position'] == '总经理' || $accountnum[0]['position'] == '财务'){
+            $accountnum=Accountnum::orderBy('id','desc')->get();
+        }
+        if ($accountnum[0]['position'] == '销售主管') {
+            $accountnum = Accountnum::whereRaw('(fromuser = ? or id = ?)',[$accountnum[0]['id'],$accountnum[0]['id']])->get();
+        }
+
+        if ($accountnum[0]['position'] == '客服' || $accountnum[0]['position'] == '客服主管') {
+            $accountnum = [];
+        }
+
         $arr = [];
         $i = 1;
         foreach ($accountnum as $key => $value) {
+          if(!empty($value)){
           $kid=Customer::where('fromuser',$value['id'])->pluck('id')->toArray();//找出属于同一个职员的
           $xsz=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('contractamount');//同一个职员下的总销售
           $dijia=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('floorprice');//同一个职员下的总利润
@@ -36,6 +49,7 @@ class FinanceController extends Controller
           $arr[$i]['id']=$i;
           $arr[$i]['kid']=$value['id'];
           $i ++ ;
+          }
         }
         $data['lists']=$arr;
         return view('manage.finance.main',$data);

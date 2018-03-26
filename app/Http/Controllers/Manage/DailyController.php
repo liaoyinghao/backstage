@@ -13,4 +13,8 @@ class DailyController extends Controller
         return view('manage.daily.main');
     }
 
+    public function adddaily(){
+        return view('manage.daily.adddaily');
+    }
+
 }
