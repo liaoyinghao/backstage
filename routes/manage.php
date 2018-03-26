@@ -49,7 +49,7 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
 //日报
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
-    Route::get('adddaily' , 'DailyController@adddaily')->name('adddaily');
+    Route::any('adddaily' , 'DailyController@adddaily')->name('adddaily');
     Route::any('rb' , 'DailyController@rb')->name('rb');
 });
 
