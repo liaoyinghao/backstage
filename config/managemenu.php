@@ -84,11 +84,11 @@ return [
         'icon'=>'icon-users',
         'son'=>[
             'main'=>[
-                'name'=>'申请列表(未做)',
+                'name'=>'申请列表',
                 'url'=>'main'
             ],
             'mainlist'=>[
-                'name'=>'全部列表(未做)',
+                'name'=>'全部列表',
                 'url'=>'mainlist'
             ],
         ]

@@ -25,7 +25,7 @@ class Accountnum extends Model
 	}
 
 	public static function userid($id){
-		return self::where("id",$id)->select("id","username",'position')->first();
+		return self::where("id",$id)->select("id","nickname",'position')->first();
 	}
 
 	public static function userfromuser($fromuser){

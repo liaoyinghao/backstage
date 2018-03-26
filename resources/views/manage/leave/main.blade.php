@@ -8,6 +8,31 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".shengqing").on("click",function(){
+                var id = $(this).attr("data-id");
+                var status = $(this).attr("data-status");
+                
+                if(id=='' || status==''){
+                    return false;
+                }
+                $.ajax({
+                    url:"{{route('manage_leave_leavestatus')}}",
+                    type:"post",
+                    data:{"id":id,"status":status},
+                    dataType:"json",
+                    success:function(d){
+                        if(d==1){
+                            alert("状态更改成功！");
+                            location.href="{{route('manage_leave_main')}}";
+                        }else{
+                            alert("更改状态失败！");
+                        }
+                    }
+                })
+            })
+
+
         });
 
 
@@ -21,6 +46,7 @@ li{list-style-type: none;}
 .neirong{max-width: 300px;max-height: 38px;display: block;overflow: hidden;}
 .leixingbg{background: #b2fcc7}
 .leixingbgs{background: #b5b2fc}
+.leixingbgst{background: #f6fcb2}
 </style>
 
     <div class="row">
@@ -55,7 +81,7 @@ li{list-style-type: none;}
                             @if(!empty($val))
                                 <tr>
                                     <td>{{$val['id'] or ''}}</td>
-                                    <td>{{$val['username'] or ''}}</td>
+                                    <td>{{$val['nickname'] or ''}}</td>
                                     <td>{{$val['position'] or ''}}</td>
                                     <td>
                                         @if($val['type'] == 1) 
@@ -72,23 +98,23 @@ li{list-style-type: none;}
                                         @elseif($val['status'] == 2)
                                         <button class="btn success btn-xs">已允许</button>
                                         @else
-                                        <button class="btn btn-danger btn-xs">被拒绝</button>
+                                        <button class="btn btn-xs leixingbgst">被拒绝</button>
                                         @endif
                                     </td>
                                     <td>
                                        <div class="btn-group">
                                           <button type="button" class="btn blue btn-xs">
-                                                <a href="#" class="pfp">查看</a>
+                                                <a href="{{route('manage_leave_ldetails',['id'=>$val['id']])}}" class="pfp">查看</a>
                                           </button>
                                         @if(isset($info))
                                             @if($info['position'] == '总经理')
                                           <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                           <ul class="dropdown-menu pull-right" role="menu">
                                               <li>
-                                                <a href="">允许申请</a>
+                                                <a data-id="{{$val['id']}}" data-status="2" class="shengqing">允许申请</a>
                                               </li>
                                               <li>
-                                                <a href="">拒绝申请</a>
+                                                <a data-id="{{$val['id']}}" data-status="0" class="shengqing">拒绝申请</a>
                                               </li>
                                           </ul>
                                             @endif

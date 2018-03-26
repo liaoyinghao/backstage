@@ -84,9 +84,10 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 //请假
 Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
-    Route::get('mainlist' , 'LeaveController@mainlist')->name('mainlist');
+    Route::get('mainlist' , 'LeaveController@dailylist')->name('mainlist');
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
     Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
+    Route::post('leavestatus' , 'LeaveController@leavestatus')->name('leavestatus');
 });
 
 
