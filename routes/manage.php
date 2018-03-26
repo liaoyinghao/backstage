@@ -50,6 +50,7 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
     Route::get('adddaily' , 'DailyController@adddaily')->name('adddaily');
+    Route::any('rb' , 'DailyController@rb')->name('rb');
 });
 
 
@@ -94,4 +95,5 @@ Route::group(['prefix'=>'notice' , 'as'=>'notice_'] , function(){
     Route::get('main' , 'NoticeController@main')->name('main');
     Route::get('mainlist' , 'NoticeController@mainlist')->name('mainlist');
     Route::get('addnotice' , 'NoticeController@addnotice')->name('addnotice');
+    Route::any('tz' , 'NoticeController@tz')->name('tz');
 });
