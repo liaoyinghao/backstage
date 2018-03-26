@@ -17,7 +17,7 @@ class NoticeController extends Controller
             $data['flag'] = 1;
         }
         $time=date('Y-m-d',time());
-        $data['lists'] =Notice::where('kstime','<',$time)->where('jstime','>',$time)->get();
+        $data['lists'] =Notice::where('kstime','<',$time)->where('jstime','>=',$time)->get();
         return view('manage.notice.main',$data);
     }
 

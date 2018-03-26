@@ -56,7 +56,7 @@ li{list-style-type: none;}
                                 <td><span class="neirong">{{$v->progress}}</span></td>
                                 <!-- 通知状态按照时间定：未开始，进行中，已过期 -->
                                 <td>
-                                @if($time > $v->kstime && $time < $v->jstime)
+                                @if($time > $v->kstime && $time <= $v->jstime)
                                 <button class="btn btn-danger btn-xs">
                                 进行中
                                 </button>
