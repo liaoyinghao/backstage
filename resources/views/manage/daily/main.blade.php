@@ -26,7 +26,7 @@ li{list-style-type: none;}
                     <div class="caption font-dark">
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
-                    <div class="actions"> 
+                    <div class="actions">
                         <a class="btn blue btn-outline" href="{{route('manage_daily_adddaily')}}"><i class="fa fa-plus"></i> 添加日报</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
@@ -43,15 +43,19 @@ li{list-style-type: none;}
                         </tr>
                         </thead>
                         <tbody>
+                            @if(isset($lists))
+                            @foreach($lists as $v)
                             <tr>
-                                <td width="50px">1</td>
-                                <td>小销</td>
-                                <td>今日内容</td>
+                                <td width="50px">{{$v->id}}</td>
+                                <td>{{$user[$v->nid]}}</td>
+                                <td>{{$v->title}}</td>
                                 <td><span class="neirong">
-                                    今天表现良好，还行！
+                                    {{$v->progress}}
                                 </span></td>
-                                <td>2018-12-12 12:14</td>
-                            </tr> 
+                                <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
+                            </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
