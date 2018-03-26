@@ -40,7 +40,7 @@ return [
         'icon'=>'icon-bag',
         'son'=>[
             'main'=>[
-                'name'=>'全部日报(未做)',
+                'name'=>'全部日报',
                 'url'=>'main'
             ],
         ]
@@ -98,11 +98,11 @@ return [
         'icon'=>'icon-bubble',
         'son'=>[
             'main'=>[
-                'name'=>'进行中的通知(未做)',
+                'name'=>'进行中的通知',
                 'url'=>'main'
             ],
             'mainlist'=>[
-                'name'=>'全部通知(未做)',
+                'name'=>'全部通知',
                 'url'=>'mainlist'
             ],
         ]
