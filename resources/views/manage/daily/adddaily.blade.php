@@ -43,11 +43,7 @@
                 </div>
                 <div class="portlet-body">
 
-<<<<<<< HEAD
                     <form method="post" action="{{route('manage_daily_rb')}}">
-=======
-                    <form method="post" action="">
->>>>>>> origin
 
                     <p class="form_p">
                         <span class="userk">日报标题：</span><input type="text" name="title" value="" placeholder="日报标题" required="required">
@@ -56,10 +52,7 @@
                         <span class="userk">日报内容：</span>
                         <textarea name="progress" placeholder="日报内容"></textarea>
                     </p>
-<<<<<<< HEAD
                     <input type='hidden' name='id' value='{{$id->id}}'>
-=======
->>>>>>> origin
 
                     <p class="submit_p"><input type="submit" value="确认发送" class="submit"></p>
                     </form>

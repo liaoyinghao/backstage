@@ -79,11 +79,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-<<<<<<< HEAD
                     <form method="post" action="{{route('manage_notice_tz')}}">
-=======
-                    <form method="post" action="">
->>>>>>> origin
 
                     <!-- <p class="form_p">
                         <span class="userk">接收人：</span>
@@ -93,7 +89,6 @@
                     </p> -->
 
                     <p class="form_p">
-<<<<<<< HEAD
                         <span class="userk">通知标题：</span><input type="text" name= 'title' id="title" @if($kid && $flag !=1) value="{{$lists->title}}"@else value= '' @endif placeholder="通知标题">
                     </p>
                     <p class="form_p">
@@ -118,25 +113,6 @@
                     <p class="submit_p"><input type="submit" value="确认发送通知" class="submit"></p>
                     @endif
                     @endif
-=======
-                        <span class="userk">通知标题：</span><input type="text" id="title" value="" placeholder="通知标题">
-                    </p>
-                    <p class="form_p">
-                        <span class="userk">通知开始日期：</span><input type="date" id="kstime" value="">
-                    </p>
-                    <p class="form_p">
-                        <span class="userk">通知结束日期：</span><input type="date" id="jstime" value="">
-                    </p>
-                    <p class="form_p">
-                        <span class="userk">通知内容：</span>
-                        <textarea id="progress" placeholder="通知内容" class="textarea"></textarea>
-                    </p>
-                    
-<!-- ************** 如果是“查看详情，就没有这个提交按钮，只让他看”  ***************** -->
-                    @if(!isset($store) || !empty($store))
-                    <p class="submit_p"><input type="submit" value="确认发送通知" class="submit"></p>
-                    @endif
->>>>>>> origin
                     </form>
                 </div>
             </div>
