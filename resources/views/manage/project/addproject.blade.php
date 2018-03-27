@@ -87,7 +87,7 @@
                       <select name='start[cwid]' class="job" required="required">
                         @if(isset($list))
                             @foreach($list as $val)
-                              <option value="{{$val['id']}}" @if($start['cwid']==$val['cwid']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
+                              <option value="{{$val['id']}}" @if(isset($start['cwid']) && $start['cwid']==$val['id']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
                             @endforeach
                         @endif
                       </select>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Accountnum;
 use App\Models\Customer;
+use App\Models\Project;
 
 class CustomerController extends Controller
 {
@@ -322,7 +323,8 @@ class CustomerController extends Controller
 
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);//进来这个人的信息
-        $data['info'] = Customer::where('id',$id)->select("id","name")->first();//项目信息
+        // $data['info'] = Customer::where('id',$id)->select("id","name")->first();//项目信息
+        $data['info'] = Project::where('id',$id)->select("id","proname")->first();//项目信息
         $data['list'] = Accountnum::where("status",1)->whereRaw("position = ? or position = ?",['客服主管','客服'])->get();//查询所有客服
 
         if($data['user']['position'] == '销售主管' || $data['user']['position'] == '销售'){
