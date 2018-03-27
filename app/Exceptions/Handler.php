@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
         if(env('APP_ENV') !='mac' && !env('APP_DEBUG')){
             $data['err']=$exception->__toString();
             $data['msg']="系统繁忙".$exception->getCode();
-            return response()->view('h5.common.error' , $data);
+            return response()->view('manage.common.error' , $data);
         }
 
 

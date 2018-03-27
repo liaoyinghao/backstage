@@ -81,17 +81,13 @@ class UserController extends Controller
       $pas=md5($request['password']);
       $job=$request['job'];
       $nickname=$request['nickanme'];
-      $account=Accountnum::where('username',$user)->first();
-      if($account){
-        return view('h5.common.error',['msg'=>'用户名已经存在！']);
-      }else{
-        Accountnum::where('id',$id)->update([
-          'username'=>$user,
-          'password'=>$pas,
-          'position'=>$job,
-          'nickname'=>$nickname,
-        ]);
-      }
+      Accountnum::where('id',$id)->update([
+        'username'=>$user,
+        'password'=>$pas,
+        'position'=>$job,
+        'nickname'=>$nickname,
+      ]);
+      
       return redirect()->route('manage_user_main');
     }
 

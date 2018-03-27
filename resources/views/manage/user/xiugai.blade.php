@@ -55,12 +55,12 @@
                     </p>
                     <p class="form_p">
                       <span class="userk">所属职位：</span><select name= 'job' value="{{$user['position']}}" class="job">
-                        <option  value='总经理'  name ="generalmanager">总经理</option>
-                        <option  value='销售主管'    name ="salesmanager">销售主管</option>
-                        <option  value='销售'  name="minister">销售</option>
-                        <option  value='客服主管' name="production">客服主管</option>
-                        <option  value='客服' name="quality">客服</option>
-                        <option  value='财务' name="workshop">财务</option>
+                        <option  value='总经理'   name ="generalmanager" @if($user['position']=='总经理')  selected="selected" @endif >总经理</option>
+                        <option  value='销售主管' name ="salesmanager" @if($user['position']=='销售主管')  selected="selected" @endif >销售主管</option>
+                        <option  value='销售'     name="minister" @if($user['position']=='销售')  selected="selected" @endif >销售</option>
+                        <option  value='客服主管' name="production" @if($user['position']=='客服主管')  selected="selected" @endif >客服主管</option>
+                        <option  value='客服'     name="quality" @if($user['position']=='客服')  selected="selected" @endif >客服</option>
+                        <option  value='财务'     name="workshop" @if($user['position']=='财务')  selected="selected" @endif >财务</option>
                       </select>
                     </p>
                     <p class="form_p">
