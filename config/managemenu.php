@@ -30,7 +30,7 @@ return [
                 'url'=>'main'
             ],
             'list'=>[
-                'name'=>'全部项目',
+                'name'=>'需确认项目',
                 'url'=>'list'
             ],
         ]

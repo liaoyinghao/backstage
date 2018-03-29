@@ -62,7 +62,7 @@
                 })
             })
 
-          
+
 
         });
 
@@ -130,7 +130,7 @@
                         </p>
 
                         <p class="form_p">
-                          <span class="userk">选择销售：</span>
+                          <span class="userk">选择销售或客服：</span>
                                 <div class="xuanz">
                                     @if(isset($xsinfo))
                                         @foreach($xsinfo as $val)

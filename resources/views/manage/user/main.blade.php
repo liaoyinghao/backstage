@@ -110,7 +110,7 @@
                             <td>
                               <div class="btn-group">
                               @if($v->status ==1 )
-                                  @if($v->position == '销售' || $v->position == '销售主管')
+                                  @if($v->position == '销售' || $v->position == '销售主管' || $v->position == '客服')
                                       <button type="button" class="btn blue btn-xs">
                                             <a href="{{route('manage_user_distribution',['id'=>$v->id])}}" class="pfp">分配</a>
                                       </button>

@@ -105,6 +105,12 @@ class UserController extends Controller
         }else{
             $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
         }
+
+        if($data['user']['position'] == '客服主管'){
+            $data['xsinfo'] = Accountnum::where("status",1)->where("position",'客服')->where('fromuser','')->get();
+        }else{
+            $data['xsstore'] = Accountnum::where("status",1)->where("position",'客服主管')->get();
+        }
         return view('manage.user.distribution',$data);
     }
 
@@ -125,7 +131,7 @@ class UserController extends Controller
               }
             }
         }
-        
+
         return 1;
     }
 }
