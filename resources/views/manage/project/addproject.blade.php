@@ -83,11 +83,11 @@
 
 
                     <p class="form_p">
-                      <span class="userk">选择需要确认该项目的财务人员：</span>
-                      <select name='start[cwid]' class="job" required="required">
+                      <span class="userk">选择确认的客服人员：</span>
+                      <select name='start[kfid]' class="job" required="required">
                         @if(isset($list))
                             @foreach($list as $val)
-                              <option value="{{$val['id']}}" @if(isset($start['cwid']) && $start['cwid']==$val['id']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
+                              <option value="{{$val['id']}}" @if(isset($start['kfid']) && $start['kfid']==$val['id']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
                             @endforeach
                         @endif
                       </select>

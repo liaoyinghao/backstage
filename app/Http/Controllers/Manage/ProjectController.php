@@ -22,7 +22,7 @@ class ProjectController extends Controller
     public function addproject(){
     	$aid = request()->input('aid');
     	$id = request()->input('id');
-        $data['list'] = Accountnum::where("status",1)->where("position",'财务')->get();
+        $data['list'] = Accountnum::whereRaw("status = ? and (position = ? or position = ?)",['1','客服主管','客服'])->get();
         if(!empty($aid)){
     		$start = Customer::customerinfo($aid);
     		if($start){
@@ -67,7 +67,8 @@ class ProjectController extends Controller
     	$id = request()->input('id');
     	$type = request()->input('type');//1.丢弃，2找回，3选择其他状态
         $status = request()->input('status');
-    	$kfid = request()->input('kfid');
+        $kfid = request()->input('kfid');
+    	$cwid = request()->input('cwid');
     	if($type == 1){
     		$isok = Project::where("id",$id)->update(['status'=>0]);
     		if($isok){
@@ -86,10 +87,10 @@ class ProjectController extends Controller
     	}
     	if($type == 3){
             if(empty($status)){ return redirect()->route('manage_project_main'); }
-            if(empty($kfid)){
+            if(empty($cwid)){
                 $isok = Project::where("id",$id)->update(['status'=>$status]);
             }else{
-    		   $isok = Project::where("id",$id)->update(['status'=>$status,'kfid'=>$kfid]);
+    		   $isok = Project::where("id",$id)->update(['status'=>$status,'cwid'=>$cwid]);
             }
     		return redirect()->route('manage_project_main');
     	}

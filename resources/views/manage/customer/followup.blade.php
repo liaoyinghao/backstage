@@ -129,10 +129,10 @@
                         @else
                             <div class="form_d">
                                 <div class="form_d_1">
-                                    <span class="userk">选择时间：</span><input type="date" name="stoer[time1]" value=""  required="required">
+                                    <span class="userk">选择时间：</span><input type="date" name="stoer[time1]" value="">
                                 </div>
                                 <div class="form_d_2">
-                                    <textarea name="stoer[main1]" required="required"></textarea>
+                                    <textarea name="stoer[main1]"></textarea>
                                 </div>
                             </div>
                         @endif       

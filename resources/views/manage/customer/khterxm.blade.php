@@ -66,6 +66,7 @@
                     </p>
 
                     @if(isset($user) && $user['type'] == 3)
+                    <input type="hidden" name="cwid" value="{{$user['id'] or ''}}">
                     <p class="form_p">
                       <span class="userk">选择需要确认该项目的客服人员：</span>
                       <select name='kfid' class="job" required="required">

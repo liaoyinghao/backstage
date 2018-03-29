@@ -26,11 +26,11 @@ return [
         'icon'=>'icon-direction',
         'son'=>[
             'main'=>[
-                'name'=>'项目管理',
+                'name'=>'需确认项目',
                 'url'=>'main'
             ],
             'list'=>[
-                'name'=>'需确认项目',
+                'name'=>'项目管理',
                 'url'=>'list'
             ],
         ]
