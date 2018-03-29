@@ -175,11 +175,11 @@
                             <td>
                               <div class="btn-group">
                                   
+                                  @if($lists['type'] != 1) <!-- 销售不能更改状态 -->
+                                  
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
                                   </button>
-                                  
-                                  @if($lists['type'] != 1) <!-- 销售不能更改状态 -->
                                   <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                   <ul class="dropdown-menu pull-right" role="menu">
                                       <li>

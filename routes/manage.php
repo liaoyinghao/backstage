@@ -49,7 +49,7 @@ Route::group(['prefix'=>'customer' , 'as'=>'customer_'] , function(){
 //日报
 Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
-    Route::get('adddaily' , 'DailyController@adddaily')->name('adddaily');
+    Route::any('adddaily' , 'DailyController@adddaily')->name('adddaily');
     Route::any('rb' , 'DailyController@rb')->name('rb');
 });
 
@@ -84,9 +84,10 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 //请假
 Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
-    Route::get('mainlist' , 'LeaveController@mainlist')->name('mainlist');
+    Route::get('mainlist' , 'LeaveController@dailylist')->name('mainlist');
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
     Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
+    Route::post('leavestatus' , 'LeaveController@leavestatus')->name('leavestatus');
 });
 
 

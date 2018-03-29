@@ -99,9 +99,7 @@
                     </p>
                     <p class="form_p">
                         <span class="userk">通知内容：</span>
-                        <textarea id="progress" placeholder="通知内容" name= 'progress' class="textarea">
-                            @if($kid && $flag !=1) {{$lists->progress}}  @endif
-                        </textarea>
+                        <textarea id="progress" placeholder="通知内容" name= 'progress' class="textarea">@if($kid && $flag !=1){{$lists->progress}}@endif</textarea>
                     </p>
 
 

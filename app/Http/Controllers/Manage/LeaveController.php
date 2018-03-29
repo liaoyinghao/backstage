@@ -16,12 +16,17 @@ class LeaveController extends Controller
         return view('manage.leave.main',$data);
     }
 
-    public function mainlist(){
-    	$info = Accountnum::userinfo($GLOBALS['m']['user']);
-        return view('manage.leave.mainlist');
+    public function dailylist(){
+        $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
+        $data['list'] = Leave::dailylistst($data['info']);
+        return view('manage.leave.mainlist',$data);
     }
 
     public function ldetails(){
+        $id = request()->input("id");
+        if(!empty($id)){
+            $data['stoer'] = Leave::dailyinfo($id);
+        }
     	$data['info'] = Accountnum::where('username',$GLOBALS['m']['user'])->select('nickname')->first();
         return view('manage.leave.ldetails',$data);
     }
@@ -37,6 +42,17 @@ class LeaveController extends Controller
     	}else{
     		return view('manage.common.error',['msg'=>'申请请假添加失败！']);
     	}
+    }
+
+    public function leavestatus(){
+        $id = request()->input("id");
+        $status = request()->input("status");
+        if(!empty($id) || !empty($status)){
+            Leave::where("id",$id)->update(['status'=>$status]);
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 }

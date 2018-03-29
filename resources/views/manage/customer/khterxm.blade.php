@@ -34,7 +34,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">客户名字：{{$info['name'] or ''}}</span>
+                        <span class="caption-subject bold uppercase">项目名称：{{$info['proname'] or ''}}</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>

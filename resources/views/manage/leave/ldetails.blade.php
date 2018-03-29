@@ -36,7 +36,13 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">申请请假/外勤</span>
+                        <span class="caption-subject bold uppercase">
+                        @if(!isset($stoer))
+                            申请请假/外勤
+                        @else
+                            查看详情
+                        @endif
+                    </span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -52,22 +58,24 @@
                     <p class="form_p">
                         <span class="userk">类型：</span>
                           <select name='start[type]' class="job" required="required">
-                            <option value='1'>请假</option>
-                            <option value='2'>外勤</option>
+                            <option value='1' @if(isset($stoer) && $stoer['type'] == '1') selected='selected' @endif >请假</option>
+                            <option value='2' @if(isset($stoer) && $stoer['type'] == '2') selected='selected' @endif >外勤</option>
                           </select>
                     </p>
                     <p class="form_p">
                         <span class="userk">请假时间：</span>
-                        <input type="date" name="start[kstime]" value="" required="required"> 
+                        <input type="date" name="start[kstime]" value="{{$stoer['kstime'] or ''}}" required="required"> 
                         至
-                        <input type="date" name="start[jstime]" value="" required="required">
+                        <input type="date" name="start[jstime]" value="{{$stoer['jstime'] or ''}}" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">请假原因：</span>
-                        <textarea name="start[progress]" placeholder="请假原因" class="textarea" required="required"></textarea>
+                        <textarea name="start[progress]" placeholder="请假原因" class="textarea" required="required">{{$stoer['progress'] or ''}}</textarea>
                     </p>
 
+                    @if(!isset($stoer))
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
+                    @endif
                     </form>
                 </div>
             </div>

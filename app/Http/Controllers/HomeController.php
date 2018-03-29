@@ -34,6 +34,6 @@ class HomeController extends Controller
 
     public function error(){
         $data=request()->all();
-        return view('h5.common.error',$data);
+        return view('manage.common.error',$data);
     }
 }

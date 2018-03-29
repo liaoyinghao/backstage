@@ -15,7 +15,7 @@ class Leave extends Model
 	}
 
 	public static function dailylist($info){
-		if($info['position'] = '总经理'){
+		if($info['position'] == '总经理'){
 			//显示全部人的状态为1未读的的申请列表
 			$stoer = self::where("status",1)->get();
 		}else{
@@ -25,11 +25,27 @@ class Leave extends Model
 		foreach ($stoer as $key => $val) {
 			if(!empty($val)){
 				$str = Accountnum::userid($val['qid']);
-				$stoer[$key]['username'] = $str['username'];
+				$stoer[$key]['nickname'] = $str['nickname'];
 				$stoer[$key]['position'] = $str['position'];
 			}
 		}
 
+		return $stoer;
+	}
+
+	public static function dailylistst($info){
+		if($info['position'] == '总经理'){
+			$stoer = self::get();
+		}else{
+			$stoer = self::where("qid",$info['id'])->get();
+		}
+		foreach ($stoer as $key => $val) {
+			if(!empty($val)){
+				$str = Accountnum::userid($val['qid']);
+				$stoer[$key]['nickname'] = $str['nickname'];
+				$stoer[$key]['position'] = $str['position'];
+			}
+		}
 		return $stoer;
 	}
 

@@ -59,7 +59,7 @@
                     </p>
                     <p class="form_p">
                         <span class="userk">项目内容：</span>
-                        <textarea name="start[projectcontent]" placeholder="项目内容" class="textarea">{{$start['projectcontent'] or ''}}</textarea>
+                        <textarea name="start[projectcontent]" placeholder="项目内容" class="textarea" required="required">{{$start['projectcontent'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
                         <span class="userk">合同金额：</span><input type="number" name="start[contractamount]" step="0.01" value="{{$start['contractamount'] or ''}}" placeholder="输入金额" required="required">
@@ -87,7 +87,7 @@
                       <select name='start[cwid]' class="job" required="required">
                         @if(isset($list))
                             @foreach($list as $val)
-                              <option value="{{$val['id']}}" @if($start['cwid']==$val['cwid']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
+                              <option value="{{$val['id']}}" @if(isset($start['cwid']) && $start['cwid']==$val['id']) selected="selected" @endif">{{$val['nickname'] or $val['username']}}</option>
                             @endforeach
                         @endif
                       </select>

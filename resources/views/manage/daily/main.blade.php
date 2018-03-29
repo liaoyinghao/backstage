@@ -40,6 +40,7 @@ li{list-style-type: none;}
                             <th>标题</th>
                             <th>内容</th>
                             <th>发送时间</th>
+                            <th>查看</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,11 @@ li{list-style-type: none;}
                                     {{$v->progress}}
                                 </span></td>
                                 <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
+                                <td>
+                                    <button type="button" class="btn blue btn-xs">
+                                        <a href="{{route('manage_daily_adddaily',['id'=>$v->id])}}" class="pfp">查看详情</a>
+                                  </button>
+                                </td>
                             </tr>
                             @endforeach
                             @endif

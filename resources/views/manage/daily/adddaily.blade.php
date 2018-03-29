@@ -35,7 +35,13 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">添加日报</span>
+                        <span class="caption-subject bold uppercase">
+                        @if(!isset($store))
+                            添加
+                        @else
+                            查看  
+                        @endif
+                        日报</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -46,15 +52,17 @@
                     <form method="post" action="{{route('manage_daily_rb')}}">
 
                     <p class="form_p">
-                        <span class="userk">日报标题：</span><input type="text" name="title" value="" placeholder="日报标题" required="required">
+                        <span class="userk">日报标题：</span><input type="text" name="title" value="{{$store['title'] or ''}}" placeholder="日报标题" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">日报内容：</span>
-                        <textarea name="progress" placeholder="日报内容"></textarea>
+                        <textarea name="progress" placeholder="日报内容">{{$store['progress'] or ''}}</textarea>
                     </p>
-                    <input type='hidden' name='id' value='{{$id->id}}'>
-
+                    <input type='hidden' name='id' value='{{$id->id or ''}}'>
+                    
+                    @if(!isset($store))
                     <p class="submit_p"><input type="submit" value="确认发送" class="submit"></p>
+                    @endif
                     </form>
                 </div>
             </div>
