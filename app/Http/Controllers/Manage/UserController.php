@@ -87,7 +87,7 @@ class UserController extends Controller
         'position'=>$job,
         'nickname'=>$nickname,
       ]);
-      
+
       return redirect()->route('manage_user_main');
     }
 
@@ -96,17 +96,21 @@ class UserController extends Controller
         $id=request()->input('id');
         $type=request()->input('type');
         $data['user']=Accountnum::where('id',$id)->first();
-        if($data['user']['position'] == '销售主管'){
-            $data['xsinfo'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
-        }else{
-            $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
-        }
 
-        if($data['user']['position'] == '客服主管'){
-            $data['xsinfo'] = Accountnum::where("status",1)->where("position",'客服')->where('fromuser','')->get();
-        }else{
-            $data['xsstore'] = Accountnum::where("status",1)->where("position",'客服主管')->get();
-        }
+          if($data['user']['position'] == '销售主管'){
+              $data['xsinfo'] = Accountnum::where("status",1)->where("position",'销售')->where('fromuser','')->get();
+          }
+          if($data['user']['position'] == '销售'){
+              $data['xsstore'] = Accountnum::where("status",1)->where("position",'销售主管')->get();
+          }
+          if($data['user']['position'] == '客服主管'){
+              $data['xsinfo'] = Accountnum::where("status",1)->where("position",'客服')->where('fromuser','')->get();
+          }
+          if($data['user']['position'] == '客服'){
+              $data['xsstore'] = Accountnum::where("status",1)->where("position",'客服主管')->get();
+          }
+
+
         return view('manage.user.distribution',$data);
     }
 
