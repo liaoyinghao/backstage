@@ -12,7 +12,7 @@ class FinanceController extends Controller
 {
 
     public function main(){
-        
+
         $accountnum = Accountnum::where("username",$GLOBALS['m']['user'])->get();
         if($accountnum[0]['position'] == '总经理' || $accountnum[0]['position'] == '财务'){
             $accountnum=Accountnum::orderBy('id','desc')->get();
@@ -29,6 +29,10 @@ class FinanceController extends Controller
         $i = 1;
         foreach ($accountnum as $key => $value) {
           if(!empty($value)){
+            $BeginDate=date('Y-m-01', strtotime(date("Y-m-d")));
+            $EndDate=date('Y-m-d', strtotime("$BeginDate +1 month -1 day"));
+            $start=strtotime($BeginDate);
+            $end=strtotime($EndDate);
           $kid=Customer::where('fromuser',$value['id'])->pluck('id')->toArray();//找出属于同一个职员的
           $xsz=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('contractamount');//同一个职员下的总销售
           $dijia=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('floorprice');//同一个职员下的总利润
@@ -37,13 +41,9 @@ class FinanceController extends Controller
           $arr[$i]['xslr']=$xslr;
           $arr[$i]['nickname']=$value['nickname'];
           $arr[$i]['position']=$value['position'];
-          $BeginDate=date('Y-m-01', strtotime(date("Y-m-d")));
-          $EndDate=date('Y-m-d', strtotime("$BeginDate +1 month -1 day"));
-          $start=strtotime($BeginDate);
-          $end=strtotime($EndDate);
-          $xszdy=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('contractamount');//当月同一个职员下的总销售
-          $dijiady=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('floorprice');//当月同一个职员下的总利润
-          $xslrdy=$xsz-$dijia;
+          $xszdy=Project::whereIn('kid',$kid)->where('status', '>', '0')->where('addtime','<',$end)->where('addtime','>',$start)->sum('contractamount');//当月同一个职员下的总销售
+          $dijiady=Project::whereIn('kid',$kid)->where('status', '>', '0')->where('addtime','<',$end)->where('addtime','>',$start)->sum('floorprice');//当月同一个职员下的总利润
+          $xslrdy=$xszdy-$dijiady;
           $arr[$i]['xszdy']=$xszdy;
           $arr[$i]['xslrdy']=$xslrdy;
           $arr[$i]['id']=$i;
