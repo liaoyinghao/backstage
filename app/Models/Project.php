@@ -67,7 +67,7 @@ class Project extends Model
 				$list = self::where('kfid',$user['id'])->where('status',2)->get();//状态2是进行中
 				$list['type'] = 2;
 			}elseif($user['position'] == '财务'){
-				$list = self::where('cwid',$user['id'])->where('status',1)->get();//状态1是确认中
+				$list = self::where('status',1)->get();//状态1是确认中
 				$list['type'] = 3;
 			}else{
 				$list = self::get();
