@@ -175,7 +175,7 @@
                             <td>
                               <div class="btn-group">
                                   
-                                  @if($lists['type'] != 1) <!-- 销售不能更改状态 -->
+                                  @if($lists['type'] == 4) <!-- 销售不能更改状态 -->
                                   
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
@@ -194,15 +194,26 @@
                                         @endif
                                       </li>
 
-                                        @if($lists['type'] == 4) <!-- 总经理能够放弃和恢复此项目 -->
-                                            @if($v->status == 0) 
-                                                <li><a class="huifuxm pfp" data-id="{{$v->id}}">恢复此项目</a><li>
-                                            @else 
-                                                <li><a class="fangqixm pfp" data-id="{{$v->id}}">放弃此项目</a><li>
-                                            @endif
+                                        @if($v->status == 0) 
+                                            <li><a class="huifuxm pfp" data-id="{{$v->id}}">恢复此项目</a><li>
+                                        @else 
+                                            <li><a class="fangqixm pfp" data-id="{{$v->id}}">放弃此项目</a><li>
                                         @endif
                                       
                                    </ul>
+                                   @endif
+                                   @if($lists['type'] != 1 &&  $lists['type'] != 4) <!-- 财务和客服 -->
+                                       <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
+                                            @if($lists['type'] == 2 && $v->status > 2)   <!-- 客服 -->
+                                                <a class="genghuanzt pfp yggzt">更换状态</a>
+                                            @elseif($lists['type'] == 2 && $v->status == 1)  <!-- 客服 -->
+                                                <a class="genghuanzt pfp yggztyi">更换状态</a>
+                                            @elseif($lists['type'] == 3 && $v->status > 1)
+                                                <a class="genghuanzt pfp yggzter">更换状态</a>  <!-- 财务 -->
+                                            @else
+                                                <a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a>
+                                            @endif
+                                      </button>
                                    @endif
                                </div>
                             </td>

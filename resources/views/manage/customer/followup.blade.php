@@ -53,7 +53,9 @@
         .form_d_2>textarea{width: 72%;margin: 15px 0 35px 24%;}
         .genjin{margin-top: 30px;}
         .form_d_1>input{width: 200px;height: 35px;border-radius: 5px;border: 1px solid #999;}
-        #sy_width{display: block;width: 1050px;}
+        #sy_width{display: block;width: 1050px;background: #f3f5f9;box-shadow: none;}
+        .bordered{background: #f3f5f9 !important;box-shadow: none !important;}
+        .portlet.light.bordered{border: none !important;}
         .yigenjin{position: absolute;top: 80px;left: 55%;width: 500px;height: auto;border: 1px solid #ccc;box-shadow: 0 0 10px 1px #999;padding: 5px 0 20px 0}
         .yigenjin_pst{padding-left: 5px;}
         .userk_input{

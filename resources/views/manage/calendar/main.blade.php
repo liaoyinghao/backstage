@@ -41,7 +41,7 @@ li{list-style-type: none;}
 .spanbz{max-width: 150px;}
 .spannr{max-width: 280px;}
 .sjid{position: relative;}
-.sjid>span{position: absolute;top: 0;right: 0;width: 8px;height: 8px;border-radius: 50%;display: block;background: red;}
+.sjid>span{position: absolute;top: 2px;right: 5px;width: 8px;height: 8px;border-radius: 50%;display: block;background: red;}
 </style>
 
     <div class="row">

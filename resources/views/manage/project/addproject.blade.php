@@ -2,7 +2,10 @@
 @section('userjs')
     <script>
         $(function(){
-
+            $("#yfdng").change(function(){
+                var val = $(this).val();
+                alert("您确定修改已付定金为"+val+" 元？");
+            })
         });
     </script>
 @endsection
@@ -65,7 +68,7 @@
                         <span class="userk">合同金额：</span><input type="number" name="start[contractamount]" step="0.01" value="{{$start['contractamount'] or ''}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required">
+                        <span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required" id="yfdng">
                     </p>
                     <p class="form_p">
                         <span class="userk">底价：</span><input type="number" name="start[floorprice]" step="0.01" value="{{$start['floorprice'] or '0'}}" placeholder="输入金额" required="required">
