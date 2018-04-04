@@ -13,6 +13,18 @@ class CalendarController extends Controller
     public function main(){
         $info = Accountnum::userinfo($GLOBALS['m']['user']);
         $data['info'] = Calendar::datalistwz($info['id']);
+        foreach ($data['info'] as $key => $value) {
+            if(!empty($value)){
+                $jrtime = strtotime($value['betime']);
+                $jstime = strtotime($value['betime']) + 86400;
+                $time = time();
+                if($time > $jrtime && $time < $jstime){
+                    $data['info'][$key]['jrtime'] = 1;
+                }else{
+                    $data['info'][$key]['jrtime'] = 0;
+                }
+            }
+        }
         return view('manage.calendar.main',$data);
     }
 
@@ -33,6 +45,18 @@ class CalendarController extends Controller
     public function eventlist(){
         $info = Accountnum::userinfo($GLOBALS['m']['user']);
         $data['info'] = Calendar::datalist($info['id']);
+        foreach ($data['info'] as $key => $value) {
+            if(!empty($value)){
+                $jrtime = strtotime($value['betime']);
+                $jstime = strtotime($value['betime']) + 86400;
+                $time = time();
+                if($time > $jrtime && $time < $jstime){
+                    $data['info'][$key]['jrtime'] = 1;
+                }else{
+                    $data['info'][$key]['jrtime'] = 0;
+                }
+            }
+        }
         return view('manage.calendar.eventlist',$data);
     }
 

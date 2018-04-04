@@ -69,7 +69,7 @@ li{list-style-type: none;}
                             <th>姓名</th>
                             <th>职位</th>
                             <th>类型</th>
-                            <th width="150px">时间</th>
+                            <th width="170px">时间</th>
                             <th>原因</th>
                             <th>状态</th>
                             <th>操作</th>

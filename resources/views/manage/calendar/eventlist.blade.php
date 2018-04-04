@@ -40,6 +40,8 @@ li{list-style-type: none;}
 .spanbz,.spannr{max-height: 38px;display: block;overflow: hidden;}
 .spanbz{max-width: 150px;}
 .spannr{max-width: 280px;}
+.sjid{position: relative;}
+.sjid>span{position: absolute;top: 0;right: 0;width: 8px;height: 8px;border-radius: 50%;display: block;background: red;}
 </style>
 
     <div class="row">
@@ -73,7 +75,7 @@ li{list-style-type: none;}
                             @foreach($info as $val)
                             @if(!empty($val))
                                     <tr>
-                                        <td>{{$val['id'] or ''}}</td>
+                                        <td class="sjid">{{$val['id'] or ''}} @if($val['jrtime'] == 1)<span></span> @endif </td>
                                         <td>{{$val['title'] or ''}}</td>
                                         <td>{{$val['betime'] or ''}}</td>
                                         <td><span class="spanbz">{{$val['remarks'] or ''}}</span></td>

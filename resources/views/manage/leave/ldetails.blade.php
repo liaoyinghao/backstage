@@ -64,9 +64,9 @@
                     </p>
                     <p class="form_p">
                         <span class="userk">请假时间：</span>
-                        <input type="date" name="start[kstime]" value="{{$stoer['kstime'] or ''}}" required="required"> 
+                        <input type="datetime-local" name="start[kstime]" value="{{$stoer['kstime'] or ''}}" required="required"> 
                         至
-                        <input type="date" name="start[jstime]" value="{{$stoer['jstime'] or ''}}" required="required">
+                        <input type="datetime-local" name="start[jstime]" value="{{$stoer['jstime'] or ''}}" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">请假原因：</span>

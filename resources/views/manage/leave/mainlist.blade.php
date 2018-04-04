@@ -22,6 +22,8 @@ li{list-style-type: none;}
 .leixingbg{background: #b2fcc7}
 .leixingbgs{background: #b5b2fc}
 .leixingbgst{background: #f6fcb2}
+.inputs{width: 200px;height: 35px;border-radius: 5px;border: 1px solid #999;margin-right: 10px;}
+.buttons{width: 90px;height: 35px;background: deepskyblue;border-radius: 5px;border: none;box-shadow: 2px 2px 8px #999;color: #fff}
 </style>
 
     <div class="row">
@@ -35,6 +37,14 @@ li{list-style-type: none;}
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
+                <div>
+                    <form method="post" action="{{route('manage_leave_mainlist')}}">
+                        选择时间查询数据：
+                        <input type="date" name="kstime" value="" class="inputs">
+                        <input type="date" name="jstime" value="" class="inputs">
+                        <button class="buttons">查 询</button>
+                    </form>
+                </div><br>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
@@ -43,7 +53,7 @@ li{list-style-type: none;}
                             <th>姓名</th>
                             <th>职位</th>
                             <th>类型</th>
-                            <th width="150px">时间</th>
+                            <th width="170px">时间</th>
                             <th>原因</th>
                             <th>状态</th>
                             <th>操作</th>

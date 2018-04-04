@@ -20,12 +20,12 @@
                 }
         .job{width: 300px;height: 35px;border-radius: 5px;}
         .userk{text-align: right;width: 150px;display: inline-block;}
-        .textarea{width: 300px;height: 100px;}
+        .textarea{width: 300px;height: 80px;vertical-align:top}
 
         .form_d{width: 100%;margin-top: 10px;border-left: 1px solid #999}
         .form_d_1{display: inline-block;width: 45%;}
         .form_d_2{display: inline-block;width: 50%;vertical-align: top;}
-        .form_p>input{width: 200px;height: 35px;border-radius: 5px;border: 1px solid #999;text-indent: 5px;}
+        .form_p>input{width: 250px;height: 35px;border-radius: 5px;border: 1px solid #999;text-indent: 5px;}
         .form_d_2>textarea{width: 90%;}
         .genjin{margin-top: 30px;}
 
@@ -65,10 +65,10 @@
                         <span class="userk">合同金额：</span><input type="number" name="start[contractamount]" step="0.01" value="{{$start['contractamount'] or ''}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">底价：</span><input type="number" name="start[floorprice]" step="0.01" value="{{$start['floorprice'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">底价：</span><input type="number" name="start[floorprice]" step="0.01" value="{{$start['floorprice'] or '0'}}" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">签单时间：</span><input type="date" name="start[signingtime]" value="{{$start['signingtime'] or ''}}">

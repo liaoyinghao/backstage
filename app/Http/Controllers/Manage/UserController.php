@@ -15,6 +15,9 @@ class UserController extends Controller
       $user=Accountnum::where('username',$topuser)->first();
       if($user['position'] == '总经理'){
         $data['lists']=Accountnum::get();
+      }else{
+        $data['lists']=Accountnum::where('username',$topuser)->get();
+        $data['ltype'] = 1;
       }
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
         return view('manage.user.main',$data);
@@ -69,6 +72,10 @@ class UserController extends Controller
     public function xiugai()
     {
       $data['id']=request()->input('id');
+      $ltype=request()->input('ltype');
+      if(!empty($ltype)){
+          $data['ltype'] = $ltype;
+      }
       $data['user'] = Accountnum::where('id',$data['id'])->first();
       return view('manage.user.xiugai',$data);
     }
@@ -78,15 +85,23 @@ class UserController extends Controller
     {
       $id=$request['id'];
       $user=$request['name'];
+      if(!empty($user)){
+        $m['username'] = $user;
+      }
       $pas=md5($request['password']);
+      if(!empty($pas)){
+        $m['password'] = $pas;
+      }
       $job=$request['job'];
+      if(!empty($job)){
+        $m['position'] = $job;
+      }
       $nickname=$request['nickanme'];
-      Accountnum::where('id',$id)->update([
-        'username'=>$user,
-        'password'=>$pas,
-        'position'=>$job,
-        'nickname'=>$nickname,
-      ]);
+      if(!empty($nickname)){
+        $m['nickname'] = $nickname;
+      }
+      
+      Accountnum::where('id',$id)->update($m);
 
       return redirect()->route('manage_user_main');
     }

@@ -16,7 +16,7 @@
 
 @section('content')
     <style type="text/css">
-        .portlet-body{text-align: center;padding: 20px 0 20px 0}
+        .portlet-body{padding: 20px 0 20px 0}
         .form_p input{  width: 300px;
                         height: 35px;
                         border-radius: 5px;
@@ -32,7 +32,8 @@
                 margin-top: 20px;}
         .job{width: 300px;height: 35px;border-radius: 5px;}
         .userk{text-align: right;width: 150px;display: inline-block;}
-        .textarea{width: 300px;height: 100px;}
+        .textarea{width: 300px;height: 80px;vertical-align:top}
+        .submitp{text-align: center;margin-top: 50px;}
     </style>
 
     <div class="row">
@@ -63,7 +64,8 @@
                         <span class="userk">报价(单位:元)：</span><input type="number" name="start[offer]" step="0.01" value="" placeholder="输入金额" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">备注：</span><input type="text" name="start[remarks]" value="">
+                        <span class="userk">备注：</span>
+                        <textarea name="start[remarks]" placeholder="备注" class="textarea"></textarea>
                     </p>
                     <p class="form_p">
                       <span class="userk">客户评级(单位:星)：</span><select name='start[grade]' class="job">
@@ -81,7 +83,7 @@
                       </select>
                     </p>
                     
-                    <p><input type="submit" value="确认添加" class="submit"></p>
+                    <p class="submitp"><input type="submit" value="确认添加" class="submit"></p>
 
                     </form>
                 </div>

@@ -13,12 +13,25 @@ class LeaveController extends Controller
     public function main(){
     	$data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
     	$data['list'] = Leave::dailylist($data['info']);
+        foreach ($data['list'] as $key => $value) {
+            if(!empty($value)){
+                $data['list'][$key]['kstime'] = str_replace("T",' ',$value['kstime']);
+                $data['list'][$key]['jstime'] = str_replace("T",' ',$value['jstime']);
+            }
+        }
+        // dd($data['list']);
         return view('manage.leave.main',$data);
     }
 
     public function dailylist(){
         $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
         $data['list'] = Leave::dailylistst($data['info']);
+        foreach ($data['list'] as $key => $value) {
+            if(!empty($value)){
+                $data['list'][$key]['kstime'] = str_replace("T",' ',$value['kstime']);
+                $data['list'][$key]['jstime'] = str_replace("T",' ',$value['jstime']);
+            }
+        }
         return view('manage.leave.mainlist',$data);
     }
 

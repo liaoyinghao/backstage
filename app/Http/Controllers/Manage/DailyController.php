@@ -14,12 +14,25 @@ class DailyController extends Controller
         $topuser=$GLOBALS['m']['user'];
         $user=Accountnum::where('username',$topuser)->first();
         $data['user']=Accountnum::pluck('nickname','id')->toArray();
+        $uid = request()->input('uid');
+        if(!empty($uid)){
+            $data['lists'] = Daily::where('nid',$uid)->get();
+            $listsuser = Accountnum::where('id',$uid)->first();
+            $data['listsuser'] = $listsuser['nickname'];
+            return view('manage.daily.main',$data);
+        }
         if($user){
             if($user['position'] == '总经理'){
-                $data['lists'] = Daily::get();
+                $data['lists'] = Accountnum::where('status','1')->get();
+                foreach ($data['lists'] as $key => $value) {
+                    if(!empty($value)){
+                        $data['lists'][$key]['count'] = daily::where("nid",$value['id'])->count();
+                    }
+                }
+                return view('manage.daily.mains',$data);
             }else{
                 $data['lists'] = Daily::where('nid',$user['id'])->get();
-
+                return view('manage.daily.main',$data);
             }
         }
         return view('manage.daily.main',$data);

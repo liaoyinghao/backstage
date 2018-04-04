@@ -108,6 +108,13 @@
                             <td>{{date("Y-m-d H:i:s",$v->addtime)}}</td>
                             <th>@if($v->status ==1 ) 正常@endif @if($v->status ==0 )离职@endif</th>
                             <td>
+                                @if(isset($ltype)) <!-- 如果定义了，就不是总经理，开始 -->
+                                    <button type="button" class="btn blue btn-xs">
+                                        <a href="{{route('manage_user_xiugai',['id'=>$v->id,'ltype'=>$ltype])}}" class="pfp">修改密码</a>
+                                    </button>
+                                @else
+
+
                               <div class="btn-group">
                               @if($v->status ==1 )
                                   @if($v->position == '销售' || $v->position == '销售主管' || $v->position == '客服' || $v->position == '客服主管')
@@ -141,6 +148,9 @@
                               @endif
                                   </ul>
                                   </div>
+
+                                  @endif <!-- 如果定义了，就不是总经理，结束 -->
+
                                 </td>
                           </tr>
                           @endforeach
