@@ -24,6 +24,10 @@ class LeaveController extends Controller
     }
 
     public function dailylist(Request $request){
+        if($request['kstime'] && $request['jstime']){
+            $data['kstime'] = $request['kstime'];
+            $data['jstime'] = $request['jstime'];
+          }
         $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
         $data['list'] = Leave::dailylistst($data['info'],$request);
         foreach ($data['list'] as $key => $value) {

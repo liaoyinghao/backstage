@@ -35,8 +35,8 @@
                 <div>
                     <form method="post" action="{{route('manage_finance_main')}}">
                         选择时间查询数据：
-                        <input type="date" name="kstime" value="" class="inputs">
-                        <input type="date" name="jstime" value="" class="inputs">
+                        <input type="date" name="kstime" value="{{$kstime or ''}}" class="inputs">
+                        <input type="date" name="jstime" value="{{$jstime or ''}}" class="inputs">
                         <button class="buttons">查 询</button>
                     </form>
                 </div><br>

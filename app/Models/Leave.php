@@ -38,7 +38,7 @@ class Leave extends Model
 	public static function dailylistst($info,$request){
 		if($request['kstime'] && $request['jstime']){
 			$start=strtotime($request['kstime']);
-			$end=strtotime($request['jstime']);
+			$end=strtotime($request['jstime']) + 86400;
 			if($info['position'] == '总经理'){
 				$stoer = self::where('addtime','<',$end)->where('addtime','>',$start)->get();
 			}else{
