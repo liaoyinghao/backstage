@@ -21,7 +21,42 @@ class FinanceController extends Controller
 
         $accountnum = Accountnum::where("username",$GLOBALS['m']['user'])->get();
         if($accountnum[0]['position'] == '总经理' || $accountnum[0]['position'] == '财务'){
-            $accountnum=Accountnum::orderBy('id','desc')->get();
+            // $accountnum=Accountnum::orderBy('id','desc')->get();
+            $jingli2 = [];
+            $jingli=Accountnum::where('position','总经理')->where("status",1)->get();
+            foreach ($jingli as $key1 => $val1) {
+                $jingli2[$key1] = $val1;
+            }
+            $zhuguan2 = [];
+            $zhuguan=Accountnum::where('position','销售主管')->where("status",1)->get();
+            foreach ($zhuguan as $key2 => $val2) {
+                $zhuguan2[$key2] = $val2;
+            }
+            $kfzhuguan2 = [];
+            $kfzhuguan=Accountnum::where('position','客服主管')->where("status",1)->get();
+            foreach ($kfzhuguan as $key3 => $val3) {
+                $kfzhuguan2[$key3] = $val3;
+            }
+            $xs2 = [];
+            $xs=Accountnum::where('position','销售')->where("status",1)->get();
+            foreach ($xs as $key4 => $val4) {
+                $xs2[$key4] = $val4;
+            }
+            $kf2 = [];
+            $kf=Accountnum::where('position','客服')->where("status",1)->get();
+            foreach ($kf as $key5 => $val5) {
+                $kf2[$key5] = $val5;
+            }
+            $cw2 = [];
+            $cw=Accountnum::where('position','财务')->where("status",1)->get();
+            foreach ($cw as $key6 => $val6) {
+                $cw2[$key6] = $val6;
+            }
+
+            $accountnum  = array_merge_recursive($cw2,$kf2,$xs2,$kfzhuguan2,$zhuguan2,$jingli2);
+
+            // dd($accountnum);
+
         }
         if ($accountnum[0]['position'] == '销售主管') {
             $accountnum = Accountnum::whereRaw('(fromuser = ? or id = ?)',[$accountnum[0]['id'],$accountnum[0]['id']])->get();
