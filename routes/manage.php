@@ -76,7 +76,7 @@ Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
 
 //财务管理
 Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
-    Route::get('main' , 'FinanceController@main')->name('main');
+    Route::any('main' , 'FinanceController@main')->name('main');
     Route::get('fdetails' , 'FinanceController@fdetails')->name('fdetails');
 });
 
@@ -84,7 +84,7 @@ Route::group(['prefix'=>'finance' , 'as'=>'finance_'] , function(){
 //请假
 Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('main' , 'LeaveController@main')->name('main');
-    Route::get('mainlist' , 'LeaveController@dailylist')->name('mainlist');
+    Route::any('mainlist' , 'LeaveController@dailylist')->name('mainlist');
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
     Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
     Route::post('leavestatus' , 'LeaveController@leavestatus')->name('leavestatus');

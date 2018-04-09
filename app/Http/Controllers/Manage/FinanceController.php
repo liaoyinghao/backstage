@@ -11,8 +11,7 @@ use App\Models\Project;
 class FinanceController extends Controller
 {
 
-    public function main(){
-
+    public function main(Request $request){
         $accountnum = Accountnum::where("username",$GLOBALS['m']['user'])->get();
         if($accountnum[0]['position'] == '总经理' || $accountnum[0]['position'] == '财务'){
             $accountnum=Accountnum::orderBy('id','desc')->get();
@@ -33,6 +32,10 @@ class FinanceController extends Controller
             $EndDate=date('Y-m-d', strtotime("$BeginDate +1 month -1 day"));
             $start=strtotime($BeginDate);
             $end=strtotime($EndDate);
+            if($request['kstime'] && $request['jstime']){
+              $start=strtotime($request['kstime']);
+              $end=strtotime($request['jstime']);
+            }
           $kid=Customer::where('fromuser',$value['id'])->pluck('id')->toArray();//找出属于同一个职员的
           $xsz=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('contractamount');//同一个职员下的总销售
           $dijia=Project::whereIn('kid',$kid)->where('status', '>', '0')->sum('floorprice');//同一个职员下的总利润

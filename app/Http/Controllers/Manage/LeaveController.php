@@ -23,9 +23,9 @@ class LeaveController extends Controller
         return view('manage.leave.main',$data);
     }
 
-    public function dailylist(){
+    public function dailylist(Request $request){
         $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
-        $data['list'] = Leave::dailylistst($data['info']);
+        $data['list'] = Leave::dailylistst($data['info'],$request);
         foreach ($data['list'] as $key => $value) {
             if(!empty($value)){
                 $data['list'][$key]['kstime'] = str_replace("T",' ',$value['kstime']);

@@ -15,13 +15,15 @@ class Leave extends Model
 	}
 
 	public static function dailylist($info){
-		if($info['position'] == '总经理'){
-			//显示全部人的状态为1未读的的申请列表
-			$stoer = self::where("status",1)->get();
-		}else{
-			//显示自己的状态为1未读和0拒绝的的申请列表
-			$stoer = self::whereRaw("qid = ? and (status = ? or status = ?)",[$info['id'],'1','0'])->get();
-		}
+			if($info['position'] == '总经理'){
+				//显示全部人的状态为1未读的的申请列表
+				$stoer = self::where("status",1)->get();
+			}else{
+				//显示自己的状态为1未读和0拒绝的的申请列表
+				$stoer = self::whereRaw("qid = ? and (status = ? or status = ?)",[$info['id'],'1','0'])->get();
+			}
+
+
 		foreach ($stoer as $key => $val) {
 			if(!empty($val)){
 				$str = Accountnum::userid($val['qid']);
@@ -33,12 +35,23 @@ class Leave extends Model
 		return $stoer;
 	}
 
-	public static function dailylistst($info){
-		if($info['position'] == '总经理'){
-			$stoer = self::get();
+	public static function dailylistst($info,$request){
+		if($request['kstime'] && $request['jstime']){
+			$start=strtotime($request['kstime']);
+			$end=strtotime($request['jstime']);
+			if($info['position'] == '总经理'){
+				$stoer = self::where('addtime','<',$end)->where('addtime','>',$start)->get();
+			}else{
+				$stoer = self::where("qid",$info['id'])->where('addtime','<',$end)->where('addtime','>',$start)->get();
+			}
 		}else{
-			$stoer = self::where("qid",$info['id'])->get();
+			if($info['position'] == '总经理'){
+				$stoer = self::get();
+			}else{
+				$stoer = self::where("qid",$info['id'])->get();
+			}
 		}
+
 		foreach ($stoer as $key => $val) {
 			if(!empty($val)){
 				$str = Accountnum::userid($val['qid']);
