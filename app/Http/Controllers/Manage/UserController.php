@@ -84,12 +84,19 @@ class UserController extends Controller
     public function userxiugai(Request $request)
     {
       $id=$request['id'];
+      $cz_id=$request['cz_id'];
+      if(!empty($cz_id)){
+          $passwd = md5('123456');
+          Accountnum::where('id',$cz_id)->update(['password'=>$passwd]);
+          return redirect()->route('manage_user_main');
+      }
       $user=$request['name'];
       if(!empty($user)){
         $m['username'] = $user;
       }
-      $pas=md5($request['password']);
+        $pas=$request['password'];
       if(!empty($pas)){
+        $pas=md5($pas);
         $m['password'] = $pas;
       }
       $job=$request['job'];

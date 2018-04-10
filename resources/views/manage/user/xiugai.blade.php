@@ -8,6 +8,13 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".chongzhi").on("click",function(){
+                event.returnValue = confirm("你确认要将此账号的密码重置吗？");
+                if(event.returnValue){
+                    window.location.href="{{route('manage_user_userxiugai',['cz_id'=>$id])}}";
+                }
+            })
         });
 
 
@@ -32,6 +39,8 @@
         .job{width: 300px;height: 35px;border-radius: 5px;}
         .userk{text-align: right;width: 150px;display: inline-block;}
         .centers{text-align: center;margin-top: 50px;}
+        .chongzhi{font-size: 12px;margin-left: 50px;vertical-align: middle;}
+        .chongzhi_p{color: #999;font-size: 12px;}
     </style>
 
     <div class="row">
@@ -57,13 +66,10 @@
                     </p>
                     @else
                     <p class="form_p">
-                        <span class="userk">用户名：</span><input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名" required="required">
+                        <span class="userk">账  号：</span><input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名" required="required">
                     </p>
                     <p class="form_p">
-                        <span class="userk">密  码：</span><input type="password" name="password" value="" placeholder="请输入新密码" required="required">
-                    </p>
-                    <p class="form_p">
-                      <span class="userk">所属职位：</span><select name= 'job' value="{{$user['position']}}" class="job">
+                      <span class="userk">所属职位 ：</span><select name= 'job' value="{{$user['position']}}" class="job">
                         <option  value='总经理'   name ="generalmanager" @if($user['position']=='总经理')  selected="selected" @endif >总经理</option>
                         <option  value='销售主管' name ="salesmanager" @if($user['position']=='销售主管')  selected="selected" @endif >销售主管</option>
                         <option  value='销售'     name="minister" @if($user['position']=='销售')  selected="selected" @endif >销售</option>
@@ -75,11 +81,11 @@
                     <p class="form_p">
                         <span class="userk">帐号昵称：</span><input type="text" name="nickanme" value="{{$user['nickname']}}" placeholder="输入昵称" required="required">
                     </p>
-
+                    <p class="chongzhi_p">重置密码后，默认密码为：123456</p>
                     @endif <!-- 如果定义了，就不是总经理，结束 -->
 
                     <input type='hidden'  name= 'id' value='{{$id}}'>
-                    <p class="centers"><input type="submit" value="确认修改" class="submit"></p>
+                    <p class="centers"><input type="submit" value="确认修改" class="submit"><a class="chongzhi">重置密码</a></p>
                     </form>
                 </div>
             </div>

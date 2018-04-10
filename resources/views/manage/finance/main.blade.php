@@ -8,6 +8,20 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".buttons").on("click",function(){
+                var kstime = $("#kstime").val();
+                var jstime = $("#jstime").val();
+                if(kstime == '' || jstime == ''){
+                    alert("请选择时间日期！");
+                    return false;
+                }
+                if(kstime > jstime){
+                    alert("请选择正确的时间日期！");
+                    return false;
+                }
+                window.location.href="{{route('manage_finance_main')}}?kstime="+kstime+"&jstime="+jstime;
+            })
         });
 
 
@@ -33,12 +47,12 @@
                     </div>
                 </div>
                 <div>
-                    <form method="post" action="{{route('manage_finance_main')}}">
+                    <div>
                         选择时间查询数据：
-                        <input type="date" name="kstime" value="{{$kstime or ''}}" class="inputs">
-                        <input type="date" name="jstime" value="{{$jstime or ''}}" class="inputs">
+                        <input type="date" name="kstime" value="{{$kstime or ''}}" class="inputs" id="kstime">
+                        <input type="date" name="jstime" value="{{$jstime or ''}}" class="inputs" id="jstime">
                         <button class="buttons">查 询</button>
-                    </form>
+                    </div>
                 </div><br>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
