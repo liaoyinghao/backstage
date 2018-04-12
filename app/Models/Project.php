@@ -27,12 +27,14 @@ class Project extends Model
 				$list['type'] = 1;
 			}
 		}else{
-			$list = self::get();
 			if($user['position'] == '客服主管' || $user['position'] == '客服'){
+				$list = self::where('kfid',$user['id'])->get();
 				$list['type'] = 2;
 			}elseif($user['position'] == '财务'){
+				$list = self::whereRaw('(cwid = ? or cwid is null)',[$user["id"]])->get();
 				$list['type'] = 3;
 			}else{
+				$list = self::get();
 				$list['type'] = 4;		//总经理
 			}
 		}

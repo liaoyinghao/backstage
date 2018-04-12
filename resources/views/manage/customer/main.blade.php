@@ -113,7 +113,7 @@
                           @foreach($lists as $v)
                           <tr>
                             <td>{{$v->id}}</td>
-                            <td><span @if(!empty($v->khstatus)) class="outline" @endif >{{$v->name}}</span></td>
+                            <td><span @if($v->status != 2) @if(!empty($v->khstatus)) class="outline" @endif @endif >{{$v->name}}</span></td>
                             <td>{{$v->info}}</td>
                             <td>{{$v->offer}}</td>
                             <td>
