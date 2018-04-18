@@ -54,12 +54,12 @@
                                 <option value="1">确认中</option>
                                 <option value="2">进行中</option>
                                 <option value="3">完成</option>
-                                <option value="4">申请退</option>
                             @elseif(isset($user['type']) && $user['type'] == 3)   <!-- 财务 -->
                                 <option value="2">进行中</option>
                             @elseif(isset($user['type']) && $user['type'] == 2)   <!-- 客服 -->
                                 <option value="3">完成</option>
                             @else
+                                <option value="4">申请退</option>
                         @endif
                         @endif
                       </select>
