@@ -54,7 +54,7 @@
                             <td>{{$v->customername}}</td>
                             <td>{{$v->contact}}</td>
                             <td>{{$v->contractamount}}</td>
-                            <td>{{$v->paiddeposit}}</td>
+                            <td>{{$v->paiddepositcount}}</td>
                             <td>{{$v->floorprice}}</td>
                             <td>{{$v->cwid or ''}}</td>
                             <td>{{$v->kfid or ''}}</td>

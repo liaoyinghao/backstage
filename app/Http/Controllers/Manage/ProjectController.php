@@ -21,7 +21,11 @@ class ProjectController extends Controller
     //从客户变成项目
     public function addproject(){
     	$aid = request()->input('aid');
-    	$id = request()->input('id');
+        $id = request()->input('id');
+        $type = request()->input('type');
+        if(!empty($type)){
+    	   $data['type'] = $type;
+        }
         $data['list'] = Accountnum::whereRaw("status = ? and (position = ? or position = ?)",['1','客服主管','客服'])->get();
         if(!empty($aid)){
     		$start = Customer::customerinfo($aid);
@@ -41,6 +45,12 @@ class ProjectController extends Controller
     	}
 
     	$data['start'] = Project::projectinfo($id);
+        $paiddepositcount = 0;
+        if(!empty($data['start']['paiddeposit'])){
+            $data['start']['paiddeposit'] = unserialize($data['start']['paiddeposit']);
+            $paiddepositcount= count($data['start']['paiddeposit']);
+        }
+            $data['start']['paiddepositcount'] = $paiddepositcount;
         return view('manage.project.addproject',$data);
     }
 
@@ -49,14 +59,21 @@ class ProjectController extends Controller
     	$id = request()->input('id');
     	$aid = request()->input('aid');
     	$start = request()->input('start');
-    	if(!empty($aid)){
-    		//增加
-    		$start['addtime'] = time();
+        if(!empty($aid)){
+            //增加
+            $paiddeposit[0] = $start['paiddeposit'];
+            $start['paiddeposit'] = serialize($paiddeposit);
+            $start['addtime'] = time();
     		$start['kid'] = $aid;
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
     	}else{
     		//修改
+            $start['paiddeposit'] = serialize($start['paiddeposit']);  
+            $projects = Project::where("id",$id)->first();
+            if($start['paiddeposit'] != $projects['paiddeposit']){
+                $start['status'] = 1;
+            }
     		Project::where("id",$id)->update($start);
     	}
     	return redirect()->route('manage_project_main');

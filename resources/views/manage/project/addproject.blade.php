@@ -2,9 +2,14 @@
 @section('userjs')
     <script>
         $(function(){
-            $("#yfdng").change(function(){
-                var val = $(this).val();
-                alert("您确定修改已付定金为"+val+" 元？");
+            $(function(){
+                $("#tianjiai").on("click",function(){
+                    var count = $("#paiddepositcount").val();
+                    var div = '<div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]['+count+']" step="0.01" value="" placeholder="输入金额" required="required"></div>';
+                    $("#form_tj").append(div);
+                    hang = parseInt(count) + 1;
+                    $("#paiddepositcount").val(hang);
+                })
             })
         });
     </script>
@@ -29,9 +34,23 @@
         .form_d_1{display: inline-block;width: 45%;}
         .form_d_2{display: inline-block;width: 50%;vertical-align: top;}
         .form_p>input{width: 250px;height: 35px;border-radius: 5px;border: 1px solid #999;text-indent: 5px;}
+        .form_divi{margin-top: 20px;}
         .form_d_2>textarea{width: 90%;}
         .genjin{margin-top: 30px;}
-
+        .form_tj{position: relative;}
+        #tianjiai{  top: 3px;
+                    left: 420px;
+                    cursor: pointer;
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    background: #ccc;
+                    font-size: 20px;
+                    text-align: center;
+                    line-height: 25px;
+                    position: absolute;
+                    color: #fff;
+                    z-index: 5;}
     </style>
 
     <div class="row">
@@ -39,7 +58,16 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">修改客户状态为项目状态</span>
+                    @if(isset($type))
+                        <span class="caption-subject bold uppercase">查看项目</span>
+                    @else
+                        @if(isset($aid))
+                            <span class="caption-subject bold uppercase">将客户状态转为项目</span>
+                        @else
+                            <span class="caption-subject bold uppercase">修改项目</span>
+                        @endif
+                    @endif
+                        
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -67,9 +95,25 @@
                     <p class="form_p">
                         <span class="userk">合同金额：</span><input type="number" name="start[contractamount]" step="0.01" value="{{$start['contractamount'] or ''}}" placeholder="输入金额" required="required">
                     </p>
-                    <p class="form_p">
-                        <span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required" id="yfdng">
+                    <p class="form_p form_tj">
+                        @if(isset($aid))
+                            <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required"></div>
+                        @else
+                        
+                            <span id="tianjiai">+</span>
+                            <input type="hidden" id="paiddepositcount" value="{{$start['paiddepositcount'] or 0}}" />
+                           @if(!empty($start['paiddeposit']))
+                                @foreach($start['paiddeposit'] as $key=>$val)
+                                    <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit][{{$key}}]" step="0.01" value="{{$val or 0}}" placeholder="输入金额" required="required" readonly unselectable="on"></div>
+                                @endforeach
+                           @else
+                                <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit][0]" step="0.01" value="0" placeholder="输入金额" required="required"></div>
+                           @endif
+
+                        @endif
+ 
                     </p>
+                    <p class="form_p" id="form_tj"></p>
                     <p class="form_p">
                         <span class="userk">底价：</span><input type="number" name="start[floorprice]" step="0.01" value="{{$start['floorprice'] or '0'}}" placeholder="输入金额" required="required">
                     </p>
@@ -96,8 +140,9 @@
                       </select>
                     </p>
                     
-
+                    @if(!isset($type))
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
+                    @endif
                     </form>
                 </div>
             </div>

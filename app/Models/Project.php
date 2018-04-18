@@ -24,18 +24,18 @@ class Project extends Model
 					$cust[$key] = $val['id'];
 				}
 				$list = self::whereIn('kid',$cust)->get();
-				$list['type'] = 1;
+				$type = 1;
 			}
 		}else{
 			if($user['position'] == '客服主管' || $user['position'] == '客服'){
 				$list = self::where('kfid',$user['id'])->get();
-				$list['type'] = 2;
+				$type = 2;
 			}elseif($user['position'] == '财务'){
 				$list = self::whereRaw('(cwid = ? or cwid is null)',[$user["id"]])->get();
-				$list['type'] = 3;
+				$type = 3;
 			}else{
 				$list = self::get();
-				$list['type'] = 4;		//总经理
+				$type = 4;		//总经理
 			}
 		}
 
@@ -49,6 +49,20 @@ class Project extends Model
 				$list[$key]['kfid'] = $infost['nickname'];
 			}
 		}
+
+		foreach ($list as $key => $vla) {
+			$paiddeposit = 0;
+            if(!empty($vla['paiddeposit'])){
+    			$paidd = unserialize($vla['paiddeposit']);
+    			foreach ($paidd as $k => $v) {
+                    $paiddeposit += $v;  
+                }  
+    		}  
+    		$list[$key]['paiddepositcount'] = $paiddeposit;
+        } 
+		
+		$list['type'] = $type;
+
 		return $list;
 	}
 
@@ -62,20 +76,33 @@ class Project extends Model
 					$cust[$key] = $val['id'];
 				}
 				$list = self::whereIn('kid',$cust)->get();
-				$list['type'] = 1;
+				$type = 1;
 			}
 		}else{
 			if($user['position'] == '客服主管' || $user['position'] == '客服'){
 				$list = self::where('kfid',$user['id'])->where('status',2)->get();//状态2是进行中
-				$list['type'] = 2;
+				$type = 2;
 			}elseif($user['position'] == '财务'){
 				$list = self::where('status',1)->get();//状态1是确认中
-				$list['type'] = 3;
+				$type = 3;
 			}else{
 				$list = self::get();
-				$list['type'] = 4;		//总经理
+				$type = 4;		//总经理
 			}
 		}
+		
+		foreach ($list as $key => $vla) {
+			$paiddeposit = 0;
+            if(!empty($vla['paiddeposit'])){
+    			$paidd = unserialize($vla['paiddeposit']);
+    			foreach ($paidd as $k => $v) {
+                    $paiddeposit += $v;  
+                }  
+    		}  
+    		$list[$key]['paiddepositcount'] = $paiddeposit;
+        } 
+		
+		$list['type'] = $type;
 
 		return $list;
 	}

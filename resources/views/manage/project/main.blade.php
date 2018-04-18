@@ -156,7 +156,7 @@
                             <td>{{$v->customername}}</td>
                             <td>{{$v->contact}}</td>
                             <td>{{$v->contractamount}}</td>
-                            <td>{{$v->paiddeposit}}</td>
+                            <td>{{$v->paiddepositcount}}</td>
                             <td>{{$v->floorprice}}</td>
                             <td>{{$v->signingtime}}</td>
                             <td>
@@ -203,17 +203,22 @@
                                    </ul>
                                    @endif
                                    @if($lists['type'] != 1 &&  $lists['type'] != 4) <!-- 财务和客服 -->
-                                       <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
-                                            @if($lists['type'] == 2 && $v->status > 2)   <!-- 客服 -->
-                                                <a class="genghuanzt pfp yggzt">更换状态</a>
-                                            @elseif($lists['type'] == 2 && $v->status == 1)  <!-- 客服 -->
-                                                <a class="genghuanzt pfp yggztyi">更换状态</a>
-                                            @elseif($lists['type'] == 3 && $v->status > 1)
-                                                <a class="genghuanzt pfp yggzter">更换状态</a>  <!-- 财务 -->
-                                            @else
-                                                <a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a>
-                                            @endif
-                                      </button>
+                                    <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
+                                        <a href="{{route('manage_project_addproject',['id'=>$v->id,'type'=>1])}}" class="pfp">查看项目</a>
+                                  </button>
+                                  <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                  <ul class="dropdown-menu pull-right" role="menu">
+                                        @if($lists['type'] == 2 && $v->status > 2)   <!-- 客服 -->
+                                            <li><a class="genghuanzt pfp yggzt">更换状态</a><li>
+                                        @elseif($lists['type'] == 2 && $v->status == 1)  <!-- 客服 -->
+                                            <li><a class="genghuanzt pfp yggztyi">更换状态</a><li>
+                                        @elseif($lists['type'] == 3 && $v->status > 1)
+                                            <li><a class="genghuanzt pfp yggzter">更换状态</a><li>  <!-- 财务 -->
+                                        @else
+                                            <li><a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a><li>
+                                        @endif
+                                      
+                                   </ul>
                                    @endif
                                </div>
                             </td>
