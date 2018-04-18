@@ -17,7 +17,7 @@ class CustomerController extends Controller
       $shai= request()->input('shaixuan');
       $user=Accountnum::where('username',$topuser)->first();
       $data['user']=Accountnum::pluck('nickname','id')->toArray();
-      
+
       //总经理
       if($user['position'] == '总经理'){
 
@@ -146,7 +146,7 @@ class CustomerController extends Controller
 
       //7天跟进
       if($type == 'qi'){
-        $data['lists']=Customer::get();
+        $data['lists']=Customer::where('fromuser',$user['id'])->where('status',1)->get();
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
           $time= time();
@@ -335,7 +335,7 @@ class CustomerController extends Controller
         }else{
           $data['user']['type'] = 4;    //总经理
         }
-        
+
         return view('manage.customer.khterxm',$data);
     }
 }
