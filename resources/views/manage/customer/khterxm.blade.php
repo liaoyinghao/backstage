@@ -51,16 +51,16 @@
                       <select name='status' class="job" required="required">
                         @if(isset($user))
                         @if(isset($user['type']) && $user['type'] == 4)       <!-- 总经理 -->
-                                <option value="1">确认中</option>
-                                <option value="2">进行中</option>
-                                <option value="3">完成</option>
+                                <option value="1" @if($info['status'] == '1') selected @endif>确认中</option>
+                                <option value="2" @if($info['status'] == '2') selected @endif>进行中</option>
+                                <option value="3" @if($info['status'] == '3') selected @endif>完成</option>
                             @elseif(isset($user['type']) && $user['type'] == 3)   <!-- 财务 -->
                                 <option value="2">进行中</option>
                             @elseif(isset($user['type']) && $user['type'] == 2)   <!-- 客服 -->
                                 <option value="3">完成</option>
                             @else
-                                <option value="4">申请退</option>
                         @endif
+                                <option value="4" @if($info['status'] == '4') selected @endif>申请退</option>
                         @endif
                       </select>
                     </p>

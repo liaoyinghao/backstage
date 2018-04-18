@@ -324,9 +324,8 @@ class CustomerController extends Controller
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);//进来这个人的信息
         // $data['info'] = Customer::where('id',$id)->select("id","name")->first();//项目信息
-        $data['info'] = Project::where('id',$id)->select("id","proname","kfid")->first();//项目信息
+        $data['info'] = Project::where('id',$id)->select("id","proname","kfid","status")->first();//项目信息
         $data['list'] = Accountnum::where("id",$data['info']['kfid'])->get();//查询指定的客服
-
         if($data['user']['position'] == '销售主管' || $data['user']['position'] == '销售'){
             $data['user']['type'] = 1;
         }else if($data['user']['position'] == '客服主管' || $data['user']['position'] == '客服'){
