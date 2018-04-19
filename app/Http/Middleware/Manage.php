@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 use Closure;
+use App\Models\Calendar;
+use App\Models\Accountnum;
 
 class Manage
 {
@@ -22,6 +24,16 @@ class Manage
        $GLOBALS['m']['user']=$request->cookie('backstage_user');
        $GLOBALS['m']['quanxian']=$request->cookie('backstage_user_quanxian');
 
+        $info = Accountnum::userinfo($GLOBALS['m']['user']);
+        $infos = Calendar::where("uid",$info['id'])->where("status",1)->get();
+        $count = 0;
+        foreach ($infos as $key => $val) {
+            $times = date("Y-m-d",time());
+            if($val['betime'] <= $times){
+              $count++;
+            }
+        }
+        view()->share('calendarcount' , $count);
         return $next($request);
     }
 }
