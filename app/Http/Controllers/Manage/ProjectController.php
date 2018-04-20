@@ -58,7 +58,18 @@ class ProjectController extends Controller
     public function addprojectpost(){
     	$id = request()->input('id');
     	$aid = request()->input('aid');
-    	$start = request()->input('start');
+        $start = request()->input('start');
+
+    	$type = request()->input('type');//这是销售添加的已付定金
+        if(!empty($type)){
+            $paiddeposit = serialize($start['paiddeposit']);
+            $projects = Project::where("id",$id)->first();
+            if($start['paiddeposit'] != $projects['paiddeposit']){
+                Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>1]);
+            }
+            return redirect()->route('manage_project_main');
+        }
+
         if(!empty($aid)){
             //增加
             $paiddeposit[0] = $start['paiddeposit'];
@@ -119,6 +130,19 @@ class ProjectController extends Controller
         $data['user'] = Accountnum::userinfo($user);
         $data['lists'] =Project::projectlist($data['user']);
         return view('manage.project.list',$data);
+    }
+
+    //添加定金
+    public function addprojectst(){
+        $id = request()->input('id');
+        $data['start'] = Project::projectinfo($id);
+        $paiddepositcount = 0;
+        if(!empty($data['start']['paiddeposit'])){
+            $data['start']['paiddeposit'] = unserialize($data['start']['paiddeposit']);
+            $paiddepositcount= count($data['start']['paiddeposit']);
+        }
+        $data['start']['paiddepositcount'] = $paiddepositcount;
+        return view('manage.project.addprojectst',$data);
     }
 
 }

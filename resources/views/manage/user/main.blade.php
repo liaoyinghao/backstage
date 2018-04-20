@@ -75,7 +75,9 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
+                    @if($info['id'] == '1')
                         <a href="{{route('manage_user_userdetailed')}}" class="btn blue btn-outline"><i class="fa fa-plus"></i> 添加</a>
+                    @endif
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>

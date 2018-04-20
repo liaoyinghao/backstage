@@ -220,6 +220,13 @@
                                       
                                    </ul>
                                    @endif
+
+                                   @if($lists['type'] == 1) <!-- 销售 -->
+                                        <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
+                                            <a href="{{route('manage_project_addprojectst',['id'=>$v->id])}}" class="pfp">添加定金</a>
+                                        </button>
+                                   @endif
+
                                </div>
                             </td>
                           </tr>

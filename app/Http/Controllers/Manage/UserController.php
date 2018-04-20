@@ -13,6 +13,7 @@ class UserController extends Controller
     public function main(){
       $topuser=$GLOBALS['m']['user'];
       $user=Accountnum::where('username',$topuser)->first();
+      $data['info'] = $user;
       if($user['position'] == '总经理'){
         $data['lists']=Accountnum::get();
       }else{
@@ -57,7 +58,7 @@ class UserController extends Controller
     public function del()
     {
       $id=request()->input('id');
-      Accountnum::where('id',$id)->update(['status'=>0]);
+      Accountnum::where('id',$id)->delete();
       return 1;
     }
     //恢复

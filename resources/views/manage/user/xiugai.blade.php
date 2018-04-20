@@ -68,6 +68,11 @@
                     <p class="form_p">
                         <span class="userk">账  号：</span><input type="text" name="name" value="{{$user['username']}}" placeholder="输入用户名" required="required">
                     </p>
+                    @if($user['id'] == 1)
+                        <p class="form_p">
+                            <span class="userk">请输入您的新密码：</span><input type="password" name="password" value="" placeholder="******" required="required">
+                        </p>
+                    @endif
                     <p class="form_p">
                       <span class="userk">所属职位 ：</span><select name= 'job' value="{{$user['position']}}" class="job">
                         <option  value='总经理'   name ="generalmanager" @if($user['position']=='总经理')  selected="selected" @endif >总经理</option>
