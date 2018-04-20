@@ -58,7 +58,7 @@ class UserController extends Controller
     public function del()
     {
       $id=request()->input('id');
-      Accountnum::where('id',$id)->delete();
+      Accountnum::where('id',$id)->update(['status'=>0]);
       return 1;
     }
     //恢复

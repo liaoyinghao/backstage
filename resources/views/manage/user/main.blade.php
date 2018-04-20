@@ -65,7 +65,8 @@
 @if(isset($lists))
 <style type="text/css">
     li{list-style-type: none;}
-    .pfp{color:#fff;text-decoration:none}
+    .pfps{padding: 0 !important;}
+    .pfp{color:#fff;text-decoration:none;width: 40px;height: 23px;line-height: 23px;display: inline-block;}
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -120,7 +121,7 @@
                               <div class="btn-group">
                               @if($v->status ==1 )
                                   @if($v->position == '销售' || $v->position == '销售主管' || $v->position == '客服' || $v->position == '客服主管')
-                                      <button type="button" class="btn blue btn-xs">
+                                      <button type="button" class="btn blue btn-xs pfps">
                                             <a href="{{route('manage_user_distribution',['id'=>$v->id])}}" class="pfp">分配</a>
                                       </button>
                                     <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
@@ -129,7 +130,7 @@
                                     <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}">修改</a>
                                   <li>
                                   @else
-                                        <button type="button" class="btn blue btn-xs">
+                                        <button type="button" class="btn blue btn-xs pfps">
                                             <a href="{{route('manage_user_xiugai',['id'=>$v->id])}}" class="pfp">修改</a>
                                         </button>
                                         <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>

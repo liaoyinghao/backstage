@@ -217,6 +217,10 @@
                                         @else
                                             <li><a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a><li>
                                         @endif
+
+                                        @if($lists['type'] == 2) <!-- 客服 -->
+                                        <li><a class="genghuanzt pfp" href="{{route('manage_project_gaidijia',['id'=>$v->id])}}">更改底价</a><li>
+                                        @endif
                                       
                                    </ul>
                                    @endif

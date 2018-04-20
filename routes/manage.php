@@ -62,6 +62,7 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::any('addprojectst' , 'ProjectController@addprojectst')->name('addprojectst');
     Route::any('addprojectpost' , 'ProjectController@addprojectpost')->name('addprojectpost');
     Route::post('updatastatus' , 'ProjectController@updatastatus')->name('updatastatus');
+    Route::any('gaidijia' , 'ProjectController@gaidijia')->name('gaidijia');
 });
 
 

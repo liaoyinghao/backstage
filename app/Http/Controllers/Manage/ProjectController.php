@@ -70,6 +70,12 @@ class ProjectController extends Controller
             return redirect()->route('manage_project_main');
         }
 
+        $dijia = request()->input('dijia');//这是客服修改底价
+        if(!empty($dijia)){
+            Project::where("id",$id)->update(['floorprice'=>$start['floorprice']]);
+            return redirect()->route('manage_project_main');
+        }
+
         if(!empty($aid)){
             //增加
             $paiddeposit[0] = $start['paiddeposit'];
@@ -143,6 +149,13 @@ class ProjectController extends Controller
         }
         $data['start']['paiddepositcount'] = $paiddepositcount;
         return view('manage.project.addprojectst',$data);
+    }
+
+    //更改底价
+    public function gaidijia(){
+        $id = request()->input('id');
+        $data['start'] = Project::projectinfo($id);
+        return view('manage.project.gaidijia',$data);
     }
 
 }

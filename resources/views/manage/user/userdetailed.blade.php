@@ -8,6 +8,16 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".submit").on("click",function(){
+                var submit = $(".submit").val();
+                if(submit=='确认添加'){
+                    $(".submit").val("正在添加");
+                    document.form1.submit();
+                }
+                 return false;
+            })
+
         });
 
 
@@ -45,7 +55,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <form method="post" action="{{route('manage_user_userzhuce')}}">
+                    <form method="post" action="{{route('manage_user_userzhuce')}}" name="form1" onsubmit="return false">
 
                     <p class="form_p">
                         <span class="userk">用户名：</span><input type="text" name="name" value="" placeholder="输入用户名">

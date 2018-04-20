@@ -8,6 +8,17 @@
                     [ 0, "desc" ]
                 ]
             });
+
+        $(".submit").on("click",function(){
+            var submit = $(".submit").val();
+            if(submit=='确认添加'){
+                $(".submit").val("正在添加");
+                document.form1.submit();
+            }
+             return false;
+        })
+
+
         });
 
 
@@ -49,7 +60,7 @@
                 </div>
                 <div class="portlet-body">
 
-                    <form method="post" action="{{route('manage_customer_khaddpost')}}">
+                    <form method="post" action="{{route('manage_customer_khaddpost')}}" name="form1" onsubmit="return false">
                     <p class="form_p">
                         <span class="userk">客户姓名：</span><input type="text" name="start[name]" value" placeholder="客户姓名" required="required">
                     </p>
