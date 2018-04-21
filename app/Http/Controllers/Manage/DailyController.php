@@ -19,6 +19,7 @@ class DailyController extends Controller
             $data['lists'] = Daily::where('nid',$uid)->get();
             $listsuser = Accountnum::where('id',$uid)->first();
             $data['listsuser'] = $listsuser['nickname'];
+            $data['flag']=2;
             return view('manage.daily.main',$data);
         }
         if($user){
@@ -32,6 +33,7 @@ class DailyController extends Controller
                 return view('manage.daily.mains',$data);
             }else{
                 $data['lists'] = Daily::where('nid',$user['id'])->get();
+                $data['flag']=1;
                 return view('manage.daily.main',$data);
             }
         }
@@ -39,10 +41,7 @@ class DailyController extends Controller
     }
 
     public function adddaily(){
-        $id = request()->input('id');
-        if(!empty($id)){
-            $data['store'] = Daily::dailyinfo($id);
-        }
+        
         $topuser=$GLOBALS['m']['user'];
         $data['id']=Accountnum::where('username',$topuser)->first();
         return view('manage.daily.adddaily',$data);
@@ -57,6 +56,22 @@ class DailyController extends Controller
         Daily::insert($m);
 
         return redirect()->route('manage_daily_main');
+    }
+
+    public function shan()
+    {
+        $id=request()->input('id');
+        Daily::where('id',$id)->delete();
+        return redirect()->route('manage_daily_main');
+    }
+
+    public function adddailynew()
+    {
+        $id = request()->input('id');
+        if(!empty($id)){
+            $data['store'] = Daily::dailyinfo($id);
+        }
+        return view('manage.daily.adddailynew',$data);
     }
 
 }
