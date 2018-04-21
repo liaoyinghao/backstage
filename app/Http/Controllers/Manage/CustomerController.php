@@ -280,6 +280,45 @@ class CustomerController extends Controller
       return view('manage.customer.followup',$data);
     }
 
+    public function khdetail(){
+      $id=request()->input('id');
+      $data['zid']=request()->input('zid');
+      $data['start']=Customer::customerinfo($id);
+      if(!empty($data['start']['progress'])){
+          $tprogresst = @unserialize($data['start']['progress']);
+          $count = count($tprogresst);
+          if($count > 1){
+              $data['count'] = $count / 2;
+              $data['progress'] = [];
+              $key = [];
+              $val = [];
+              $i = 1;
+              $j = 1;
+              $h = 1;
+              $t = 1;
+              foreach ($tprogresst as $k => $v) {
+                if ($i%2==0){
+                    $val[$h] = $v;
+                    $h++;
+                }else{
+                    $key[$j] = $v;
+                    $j++;
+                }
+                $i++;
+              }
+
+              foreach ($key as $v1 => $v2) {
+                 $data['progress'][$v1]['time'] = $v2;
+                 $data['progress'][$v1]['main'] = $val[$v1];
+                 $data['progress'][$v1]['timename'] = 'time'.$t;
+                 $data['progress'][$v1]['mainname'] = 'main'.$t;
+                 $t++;
+              }
+          }
+      }
+      return view('manage.customer.khdetail',$data);
+    }
+
     //资料修改跟进信息post
     public function followuppost(){
       $id=request()->input('id');           //id

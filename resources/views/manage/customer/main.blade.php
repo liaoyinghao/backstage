@@ -107,14 +107,6 @@
                     <option value="A">A</option>
                     <option value="S">S</option>
                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select id="zuyuan">
-                    <option value="0">按组员筛选条件</option>
-                    @if(isset($zuyuan))
-                    @foreach($zuyuan as $v)
-                    <option value="{{$v->id}}">{{$v->nickname}}</option>
-                    @endforeach
-                    @endif
-                </select>
                 <P class='tishired'>*标有红框的客户是为七天内未跟进客户</P>
                 <div class="portlet-body">
                     <table class="table" id="news-table">

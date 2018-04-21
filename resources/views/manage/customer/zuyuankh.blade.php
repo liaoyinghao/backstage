@@ -94,7 +94,7 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn blue btn-xs">
-                                        <a href="{{route('manage_customer_followup',['id'=>$v->id,'zid'=>$zid])}}" class="tap-street acolor">修改跟进信息</a>
+                                        <a href="{{route('manage_customer_khdetail',['id'=>$v->id,'zid'=>$zid])}}" class="tap-street acolor">查看详情</a>
                                     </button>
                                 </div>
                             </td>
