@@ -41,10 +41,7 @@ class DailyController extends Controller
     }
 
     public function adddaily(){
-        $id = request()->input('id');
-        if(!empty($id)){
-            $data['store'] = Daily::dailyinfo($id);
-        }
+        
         $topuser=$GLOBALS['m']['user'];
         $data['id']=Accountnum::where('username',$topuser)->first();
         return view('manage.daily.adddaily',$data);
