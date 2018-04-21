@@ -15,9 +15,10 @@ class CustomerController extends Controller
       $type= request()->input('type');
       $quan= request()->input('quan');
       $shai= request()->input('shaixuan');
+      $zuyuan= request()->input('zuyuan');
       $user=Accountnum::where('username',$topuser)->first();
       $data['user']=Accountnum::pluck('nickname','id')->toArray();
-
+      $data['zuyuan']= Accountnum::where('fromuser',$user['id'])->get();
       //总经理
       if($user['position'] == '总经理'){
 
@@ -173,6 +174,25 @@ class CustomerController extends Controller
               }
             }
           }
+      }
+
+      if($zuyuan){
+          $data['lists']=Customer::where('fromuser',$zuyuan)->where('status','!=',0)->get();//放弃
+          $lists=Customer::where('status',0)->get();
+          $kong=[];
+          foreach ($data['lists'] as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
+            array_push($kong,$value);
+          }
+          foreach ($lists as $key => $value) {
+            if(time() - $value['progresstime'] > 604800){
+                    $value['khstatus'] = 1;
+                }
+            array_push($kong,$value);
+          }
+          $data['lists'] = $kong;
       }
 
       return view('manage.customer.main',$data);

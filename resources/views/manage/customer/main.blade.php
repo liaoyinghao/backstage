@@ -43,6 +43,19 @@
                 @endif
             })
 
+            $("#zuyuan").change(function(){
+                var zuyuan = $(this).val();
+                if(zuyuan == 0){
+                    return false;
+                }
+
+                @if(isset($quan) && $quan ==1)
+                    window.location.href="{{route('manage_customer_main')}}?zuyuan="+zuyuan+"&type=zuyuan&quan=1";
+                @else
+                    window.location.href="{{route('manage_customer_main')}}?zuyuan="+zuyuan+"&type=zuyuan";
+                @endif
+            })
+
             $(".ahrefs").on("click",function(){
                 event.returnValue = confirm("你确认要将此客户的状态转为项目吗？");
                 if(event.returnValue){
@@ -62,7 +75,8 @@
     .td_select{width: 100%;}
     .td_s_sp{font-size: 12px;}
     #news-table_length{display: none}
-    #shaixuan{position: absolute;top: 78px;left: 35px;width: 140px;height: 30px;border-radius: 5px;}
+    #shaixuan{position: absolute;top: 73px;left: 35px;width: 140px;height: 30px;border-radius: 5px;}
+    #zuyuan{width: 140px;height: 30px;border-radius: 5px;}
     .acolor{color:#fff;text-decoration:none}
     .td_span{width: 100%;height: 20px;display: block;overflow: hidden;}
     .outline{outline: 1px solid red;}
@@ -84,6 +98,7 @@
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
+
                 <select id="shaixuan">
                     <option value="0">请选择筛选条件</option>
                     <option value="D">D</option>
@@ -91,6 +106,14 @@
                     <option value="B">B</option>
                     <option value="A">A</option>
                     <option value="S">S</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select id="zuyuan">
+                    <option value="0">按组员筛选条件</option>
+                    @if(isset($zuyuan))
+                    @foreach($zuyuan as $v)
+                    <option value="{{$v->id}}">{{$v->nickname}}</option>
+                    @endforeach
+                    @endif
                 </select>
                 <P class='tishired'>*标有红框的客户是为七天内未跟进客户</P>
                 <div class="portlet-body">
@@ -128,9 +151,9 @@
                             </td>
                             <td>{{$user[$v->fromuser]}}</td>
                             <td>
-                                @if($v->status ==1)      正常 
+                                @if($v->status ==1)      正常
                                 @elseif($v->status ==2)  已转入项目
-                                @else                    放弃 
+                                @else                    放弃
                                 @endif
                             </td>
                             <td><span class="td_span">{{$v->remarks or ''}}</span></td>
