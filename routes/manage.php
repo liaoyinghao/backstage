@@ -51,6 +51,8 @@ Route::group(['prefix'=>'daily' , 'as'=>'daily_'] , function(){
     Route::get('main' , 'DailyController@main')->name('main');
     Route::any('adddaily' , 'DailyController@adddaily')->name('adddaily');
     Route::any('rb' , 'DailyController@rb')->name('rb');
+    Route::any('shan' , 'DailyController@shan')->name('shan');
+    Route::any('adddailynew' , 'DailyController@adddailynew')->name('adddailynew');
 });
 
 

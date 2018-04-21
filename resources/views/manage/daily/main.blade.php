@@ -29,7 +29,7 @@ li{list-style-type: none;}
                     <div class="actions">
                         @if(!isset($listsuser))
                         <a class="btn blue btn-outline" href="{{route('manage_daily_adddaily')}}"><i class="fa fa-plus"></i> 添加日报</a>
-                        @endif 
+                        @endif
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -43,6 +43,7 @@ li{list-style-type: none;}
                             <th>内容</th>
                             <th>发送时间</th>
                             <th>查看</th>
+                            <th>删除</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,9 +59,16 @@ li{list-style-type: none;}
                                 <td>{{date('Y-m-d H:i:s',$v->addtime)}}</td>
                                 <td>
                                     <button type="button" class="btn blue btn-xs">
-                                        <a href="{{route('manage_daily_adddaily',['id'=>$v->id])}}" class="pfp">查看详情</a>
+                                        <a href="{{route('manage_daily_adddailynew',['id'=>$v->id])}}" class="pfp">查看详情</a>
                                   </button>
                                 </td>
+                                @if($flag == 1)
+                                <td>
+                                    <button type="button" class="btn blue btn-xs">
+                                        <a href="{{route('manage_daily_shan',['id'=>$v->id])}}" class="pfp">删除</a>
+                                  </button>
+                                </td>
+                                @endif
                             </tr>
                             @endforeach
                             @endif

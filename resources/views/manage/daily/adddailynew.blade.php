@@ -60,7 +60,7 @@
                     </p>
                     <input type='hidden' name='id' value='{{$id->id or ''}}'>
 
-                    <p class="submit_p"><input type="submit" value="确认发送" class="submit"></p>
+
                     </form>
                 </div>
             </div>
