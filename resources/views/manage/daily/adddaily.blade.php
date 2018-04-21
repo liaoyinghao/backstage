@@ -25,7 +25,7 @@
         .form_d_1{display: inline-block;width: 45%;}
         .form_d_2{display: inline-block;width: 50%;vertical-align: top;}
         .form_p input{width: 300px;height: 35px;border-radius: 5px;border: 1px solid #999;text-indent: 5px;}
-        .form_p textarea{width: 300px;height: 150px;vertical-align: top;}
+        .form_p textarea{width:600px;height:300px;vertical-align: top;}
         .genjin{margin-top: 30px;}
         /*.portlet-body{text-align: center;}*/
     </style>
@@ -39,7 +39,7 @@
                         @if(!isset($store))
                             添加
                         @else
-                            查看  
+                            查看
                         @endif
                         日报</span>
                     </div>
@@ -59,7 +59,7 @@
                         <textarea name="progress" placeholder="日报内容">{{$store['progress'] or ''}}</textarea>
                     </p>
                     <input type='hidden' name='id' value='{{$id->id or ''}}'>
-                    
+
                     @if(!isset($store))
                     <p class="submit_p"><input type="submit" value="确认发送" class="submit"></p>
                     @endif
