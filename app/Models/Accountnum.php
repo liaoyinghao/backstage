@@ -38,4 +38,14 @@ class Accountnum extends Model
 		return $info;
 	}
 
+	public static function userfromXs(){
+		$info = self::where("position",'like','%销售%')->where("status",1)->get();
+		foreach ($info as $key => $value) {
+			if(!empty($value)){
+				$info[$key]['khcount'] = Customer::where("status",1)->where("fromuser",$value['id'])->count();
+			}
+		}
+		return $info;
+	}
+
 }

@@ -364,6 +364,11 @@ class CustomerController extends Controller
             $data['zuyuan'] = Accountnum::userfromuser($user['id']);
             return view('manage.customer.chzuyuan',$data);
         }
+        if($user['position'] == '总经理'){
+            $data['zuyuan'] = Accountnum::userfromXs();
+            return view('manage.customer.chzuyuan',$data);
+
+        }
     }
 
     //组员的客户
