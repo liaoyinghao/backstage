@@ -85,7 +85,6 @@
                         <span class="caption-subject bold uppercase">修改客户跟进信息</span>
                     </div>
                     <div class="actions">
-                        <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -163,7 +162,7 @@
                         @endif
                     </div>
 
-                    <p class="submit_p"><input id = "fanhui" type="button" value="确认" class="submit"></p>
+                    <p class="submit_p"><input id = "fanhui" type="button" value="返回" class="submit"></p>
                     </form>
                 </div>
             </div>

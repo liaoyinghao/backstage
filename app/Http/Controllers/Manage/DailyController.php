@@ -31,6 +31,21 @@ class DailyController extends Controller
                     }
                 }
                 return view('manage.daily.mains',$data);
+            }else if(strpos($user['position'],'主管')){
+                  $kong=[];
+                  $list = Accountnum::userfromuser($user['id']);
+                  foreach ($list as $key => $value) {
+                    array_push($kong,$value);
+                  }
+                  array_push($kong,$user);
+                  $data['lists']=$kong;
+                  // dd($data['lists']);
+                  foreach ($data['lists'] as $key => $value) {
+                      if(!empty($value)){
+                          $data['lists'][$key]['count'] = daily::where("nid",$value['id'])->count();
+                      }
+                  }
+                  return view('manage.daily.mains',$data);
             }else{
                 $data['lists'] = Daily::where('nid',$user['id'])->get();
                 $data['flag']=1;
@@ -41,7 +56,7 @@ class DailyController extends Controller
     }
 
     public function adddaily(){
-        
+
         $topuser=$GLOBALS['m']['user'];
         $data['id']=Accountnum::where('username',$topuser)->first();
         return view('manage.daily.adddaily',$data);

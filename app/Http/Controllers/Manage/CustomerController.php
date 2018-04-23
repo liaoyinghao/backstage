@@ -30,10 +30,10 @@ class CustomerController extends Controller
               $data['quan']=1;
               $data['lists']=Customer::where('grade',$shai)->where('status','!=',0)->get();
             }
-            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+            // $lists=Customer::where('status','!=',0)->where('grade',$shai)->get();
           }else{
             $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();
-            $lists=Customer::where('status',0)->get();
+            // $lists=Customer::where('status','=',0)->get();
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
@@ -42,14 +42,15 @@ class CustomerController extends Controller
                 }
             array_push($kong,$value);
           }
-          foreach ($lists as $key => $value) {
-            if(time() - $value['progresstime'] > 604800){
-                    $value['khstatus'] = 1;
-                }
-            array_push($kong,$value);
-          }
+          // dd($data);
+          // foreach ($lists as $key => $value) {
+          //   if(time() - $value['progresstime'] > 604800){
+          //           $value['khstatus'] = 1;
+          //       }
+          //   array_push($kong,$value);
+          // }
           $data['lists'] = $kong;
-
+          // dd($data);
       }
 
       //销售主管
@@ -57,10 +58,10 @@ class CustomerController extends Controller
           $data['flag']=2;
           if($type == 'shaixuan'){
             $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
-            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+            // $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
             $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
-            $lists=Customer::where('status',0)->get();
+            // $lists=Customer::where('status',0)->get();
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
@@ -69,12 +70,12 @@ class CustomerController extends Controller
               }
               array_push($kong,$value);
           }
-          foreach ($lists as $key => $value) {
-              if(time() - $value['progresstime'] > 604800){
-                    $value['khstatus'] = 1;
-                }
-              array_push($kong,$value);
-          }
+          // foreach ($lists as $key => $value) {
+          //     if(time() - $value['progresstime'] > 604800){
+          //           $value['khstatus'] = 1;
+          //       }
+          //     array_push($kong,$value);
+          // }
           $data['lists'] = $kong;
 
 
@@ -86,10 +87,10 @@ class CustomerController extends Controller
           $data['flag']=3;
           if($type == 'shaixuan'){
             $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
-            $lists=Customer::where('status',0)->where('grade',$shai)->get();
+            // $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
             $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
-            $lists=Customer::where('status',0)->get();
+            // $lists=Customer::where('status',0)->get();
           }
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
@@ -98,15 +99,21 @@ class CustomerController extends Controller
                 }
             array_push($kong,$value);
           }
-          foreach ($lists as $key => $value) {
-            if(time() - $value['progresstime'] > 604800){
-                    $value['khstatus'] = 1;
-                }
-            array_push($kong,$value);
-          }
+          // foreach ($lists as $key => $value) {
+          //   if(time() - $value['progresstime'] > 604800){
+          //           $value['khstatus'] = 1;
+          //       }
+          //   array_push($kong,$value);
+          // }
           $data['lists'] = $kong;
 
       }
+
+      //总经理查全部
+      if($type == 'giveup'){
+        $data['lists']=Customer::where('fromuser',$user['id'])->where('status','=',0)->get();//放弃
+      }
+
 
       //总经理查全部
       if($type == 'quan'){

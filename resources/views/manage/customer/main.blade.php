@@ -91,6 +91,7 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
+                        <a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'giveup'])}}">查看已放弃客户</a>
                         @if(isset($flag))<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>@endif
                         @if(isset($flag) && $flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看组员客户</a>@endif
                         @if(isset($flag) && $flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看全部客户</a>@endif
