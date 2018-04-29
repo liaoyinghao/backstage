@@ -16,7 +16,7 @@
 <style type="text/css">
 li{list-style-type: none;}
 .pfp{color:#fff;text-decoration:none}
-.neirong{max-width: 333px;max-height: 38px;display: block;overflow: hidden;}
+.neirong{width: 100%;max-height: 38px;display: block;overflow: hidden;}
 </style>
 
     <div class="row">
@@ -38,10 +38,10 @@ li{list-style-type: none;}
                         <thead>
                         <tr>
                             <th width="50px">ID</th>
-                            <th>发送人</th>
-                            <th>标题</th>
+                            <th width="100px">发送人</th>
+                            <th width="115px">标题</th>
                             <th>内容</th>
-                            <th>发送时间</th>
+                            <th width="100px;">发送时间</th>
                             <th>查看</th>
                             <th>删除</th>
                         </tr>

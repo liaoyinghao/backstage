@@ -136,12 +136,13 @@
                         <tr>
                             <th width="50px">ID</th>
                             <th>项目名称</th>
+                            <th>项目编号</th>
                             <th>客户名称</th>
-                            <th>联系方式</th>
+                            <!-- <th>联系方式</th> -->
                             <th>合同金额</th>
                             <th>已付定金</th>
                             <th>底价</th>
-                            <th>签单时间</th>
+                            <th width="100px">签单时间</th>
                             <th>状态</th>
                             <th width="120px">操作</th>
                         </tr>
@@ -152,9 +153,10 @@
                             @if(isset($v->id))
                           <tr>
                             <td>{{$v->id}}</td>
+                            <td>{{$v->xmunion or '--'}}</td>
                             <td>{{$v->proname}}</td>
                             <td>{{$v->customername}}</td>
-                            <td>{{$v->contact}}</td>
+                            <!-- <td>{{$v->contact}}</td> -->
                             <td>{{$v->contractamount}}</td>
                             <td>{{$v->paiddepositcount}}</td>
                             <td>{{$v->floorprice}}</td>

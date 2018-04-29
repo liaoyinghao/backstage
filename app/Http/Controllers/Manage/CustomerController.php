@@ -202,6 +202,7 @@ class CustomerController extends Controller
           $data['lists'] = $kong;
       }
 
+      $data['userinfos'] = $user;
       return view('manage.customer.main',$data);
     }
 
@@ -223,6 +224,19 @@ class CustomerController extends Controller
       $start['addtime'] = time();
       $start['progresstime'] = time();
       $start['fromuser'] = $user['id'];
+
+        //添加编号
+        $flag = 1;
+        //查找数据库是否存在该编号
+        while ($flag) {
+          $code = date("YmdHis",time()).rand(1000,9999);
+          $verCode = Customer::where("khunion",$code)->select("id")->first();
+          if(!$verCode){
+              $flag=0;
+          }
+        }
+        $start['khunion'] = $code;
+
       $m = Customer::insert($start);
       if($m){
         return redirect()->route('manage_customer_main');

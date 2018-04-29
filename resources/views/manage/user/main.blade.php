@@ -66,7 +66,7 @@
 <style type="text/css">
     li{list-style-type: none;}
     .pfps{padding: 0 !important;}
-    .pfp{color:#fff;text-decoration:none;width: 40px;height: 23px;line-height: 23px;display: inline-block;}
+    .pfp{color:#fff;text-decoration:none;height: 23px;line-height: 23px;display: inline-block;}
 </style>
     <div class="row">
         <div class="col-md-12">

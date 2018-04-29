@@ -82,6 +82,19 @@ class ProjectController extends Controller
             $start['paiddeposit'] = serialize($paiddeposit);
             $start['addtime'] = time();
     		$start['kid'] = $aid;
+
+        //添加编号
+            $flag = 1;
+            //查找数据库是否存在该编号
+            while ($flag) {
+              $code = date("YmdHis",time()).rand(1000,9999);
+              $verCode = Project::where("xmunion",$code)->select("id")->first();
+              if(!$verCode){
+                  $flag=0;
+              }
+            }
+            $start['xmunion'] = $code;
+
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
     	}else{
@@ -122,9 +135,23 @@ class ProjectController extends Controller
     	if($type == 3){
             if(empty($status)){ return redirect()->route('manage_project_main'); }
             if(empty($cwid)){
-                $isok = Project::where("id",$id)->update(['status'=>$status]);
+                if($status == 3){
+                    $statusinfo['status'] = 3;
+                    $statusinfo['wctime'] = time();
+                }else{
+                    $statusinfo['status'] = $status;
+                }
+                $isok = Project::where("id",$id)->update($statusinfo);
             }else{
-    		   $isok = Project::where("id",$id)->update(['status'=>$status,'cwid'=>$cwid]);
+                if($status == 3){
+                    $statusinfo['status'] = 3;
+                    $statusinfo['wctime'] = time();
+                    $statusinfo['cwid'] = $cwid;
+                }else{
+                    $statusinfo['status'] = $status;
+                    $statusinfo['cwid'] = $cwid;
+                }
+    		   $isok = Project::where("id",$id)->update($statusinfo);
             }
     		return redirect()->route('manage_project_main');
     	}

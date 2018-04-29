@@ -24,7 +24,7 @@
                     success:function(d){
                         if(d==1){
                             alert("状态更改成功！");
-                            location.href="{{route('manage_leave_main')}}";
+                            location.href="{{route('manage_leave_sqlist')}}";
                         }else{
                             alert("更改状态失败！");
                         }
@@ -47,8 +47,6 @@ li{list-style-type: none;}
 .leixingbg{background: #b2fcc7}
 .leixingbgs{background: #b5b2fc}
 .leixingbgst{background: #f6fcb2}
-.listcounta{position: relative;}
-.listcount{display: inline-block;padding: 0px 5px 0px 5px;border-radius: 50%;position: absolute;top: 5px;right: 2px;background: red;font-size: 12px;font-weight: 100;color: #fff;}
 </style>
 
     <div class="row">
@@ -56,17 +54,9 @@ li{list-style-type: none;}
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
+                        <span class="caption-subject bold uppercase"> 审批列表 </span>
                     </div>
                     <div class="actions">
-                    @if($info['position'] == '销售主管' || $info['position'] == '客服主管')
-                        <a class="btn blue btn-outline listcounta" href="{{route('manage_leave_sqlist')}}">审批列表 
-                        @if(isset($stoer) && $stoer > 0)
-                        &nbsp;&nbsp;&nbsp;<span class="listcount">{{$stoer}}</span>
-                        @endif
-                        </a>
-                    @endif
-                        <a class="btn blue btn-outline" href="{{route('manage_leave_ldetails')}}"><i class="fa fa-plus"></i> 添加</a>
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
@@ -115,8 +105,6 @@ li{list-style-type: none;}
                                           <button type="button" class="btn blue btn-xs">
                                                 <a href="{{route('manage_leave_ldetails',['id'=>$val['id']])}}" class="pfp">查看</a>
                                           </button>
-                                        @if(isset($info))
-                                            @if($info['position'] == '总经理')
                                           <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                           <ul class="dropdown-menu pull-right" role="menu">
                                               <li>
@@ -126,8 +114,6 @@ li{list-style-type: none;}
                                                 <a data-id="{{$val['id']}}" data-status="0" class="shengqing">拒绝申请</a>
                                               </li>
                                           </ul>
-                                            @endif
-                                        @endif
                                       </div>
                                     </td>
                                 </tr>

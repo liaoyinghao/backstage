@@ -83,6 +83,9 @@
     .btnxs{margin-left: 5px !important;}
     .tishired{position: absolute;top: 95px;left: 35px;color: red;font-size: 12px;}
 </style>
+@if(isset($userinfos) && ($userinfos['position'] == '客服主管' || $userinfos['position'] == '客服'))
+    <div class="rowst">对不起，您暂无权限查看客户列表！</div>
+@else
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -114,14 +117,15 @@
                         <thead>
                         <tr>
                             <th width="50px">ID</th>
+                            <th>客户编号</th>
                             <th>客户姓名</th>
                             <th>联系方式</th>
-                            <th>报价</th>
+                            <!-- <th>报价</th> -->
                             <th>客户评级</th>
                             <th>跟进人员</th>
                             <th>客户状态</th>
                             <th width="150px">备注</th>
-                            <th width="170px">操作</th>
+                            <th width="180px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -129,9 +133,10 @@
                           @foreach($lists as $v)
                           <tr>
                             <td>{{$v->id}}</td>
+                            <td>{{$v->khunion or '--'}}</td>
                             <td><span @if($v->status != 2) @if(!empty($v->khstatus)) class="outline" @endif @endif >{{$v->name}}</span></td>
                             <td>{{$v->info}}</td>
-                            <td>{{$v->offer}}</td>
+                            <!-- <td>{{$v->offer}}</td> -->
                             <td>
                                 <select class="td_select">
                                     <option value="D" @if($v->grade == "D") selected="selected" @endif >D</option>
@@ -174,5 +179,5 @@
             </div>
         </div>
     </div>
-
+@endif
 @endsection

@@ -63,6 +63,7 @@
                             <th>获得利润</th>
                             <th>获得销售额</th>
                             <th>转入项目时间</th>
+                            <th>项目完成时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,6 +76,13 @@
                                 <td>{{$v->contractamount - $v->floorprice}}</td>
                                 <td>{{$v->contractamount}}</td>
                                 <td>{{date('Y-m-d',$v->addtime)}}</td>
+                                <td>    
+                                    @if(!empty($v->wctime))
+                                        {{date('Y-m-d H:i',$v->wctime)}}
+                                    @else
+                                        --
+                                    @endif
+                               </td>
                             </tr>
                             @endforeach
                             @endif

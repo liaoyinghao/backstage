@@ -19,7 +19,20 @@ class LeaveController extends Controller
                 $data['list'][$key]['jstime'] = str_replace("T",' ',$value['jstime']);
             }
         }
-        // dd($data['list']);
+        
+        if($data['info']['position'] == '销售主管' || $data['info']['position'] == '客服主管'){
+            //如果是主管
+            $userid = Accountnum::where("fromuser",$data['info']['id'])->get();
+            $nameid = [];
+            foreach ($userid as $k => $v) {
+                if(!empty($v)){
+                    $nameid[$k] = $v['id'];
+                }
+            } 
+            $time = time() - 86400*3;
+            $data['stoer'] = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->count();
+        }
+        
         return view('manage.leave.main',$data);
     }
 
@@ -70,6 +83,34 @@ class LeaveController extends Controller
         }else{
             return 0;
         }
+    }
+
+
+    public function sqlist(){
+        $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']); 
+
+        //显示自己的状态为1未读和0拒绝的的申请列表
+        $userid = Accountnum::where("fromuser",$data['info']['id'])->get();
+        $nameid = [];
+        foreach ($userid as $k => $v) {
+            if(!empty($v)){
+                $nameid[$k] = $v['id'];
+            }
+        } 
+        $time = time() - 86400*3;
+        $stoer = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->get(); 
+        foreach ($stoer as $key => $val) {
+            if(!empty($val)){
+                $str = Accountnum::userid($val['qid']);
+                $stoer[$key]['nickname'] = $str['nickname'];
+                $stoer[$key]['position'] = $str['position'];
+                $stoer[$key]['kstime'] = str_replace("T",' ',$val['kstime']);
+                $stoer[$key]['jstime'] = str_replace("T",' ',$val['jstime']);
+            }
+        }
+        $data['list'] = $stoer;
+
+        return view('manage.leave.sqlist',$data);
     }
 
 }

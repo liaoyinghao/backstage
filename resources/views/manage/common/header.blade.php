@@ -11,6 +11,13 @@
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+        <a href="{{route('manage_leave_main')}}" style="line-height: 75px;color: red;margin-left: 10px">{{$stoercount or ''}}</a>
+        <a href="{{route('manage_project_main')}}" style="line-height: 75px;color: red;margin-left: 10px">{{$querencountst or ''}}</a>
+
+        @if(isset($calendarcount) && $calendarcount > 0)
+        <a href="{{route('manage_calendar_main')}}" style="line-height: 75px;color: red;margin-left: 10px">你有 <b>{{$calendarcount or '0'}} </b> 条备忘录还未完成</a>
+        @endif
+
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
@@ -36,9 +43,6 @@
                     <li class="dropdown dropdown-user ">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <span class="username username-hide-on-mobile">
-                            @if(isset($calendarcount) && $calendarcount > 0)
-                            <span style="margin-right: 30px;color: red;font-weight: 100">你有 <b>{{$calendarcount}}</b> 条备忘录还未完成</span>
-                            @endif
                             欢迎{{request()->cookie('backstage_user_nickname')}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">

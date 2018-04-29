@@ -93,6 +93,7 @@ Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::get('ldetails' , 'LeaveController@ldetails')->name('ldetails');
     Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
     Route::post('leavestatus' , 'LeaveController@leavestatus')->name('leavestatus');
+    Route::any('sqlist' , 'LeaveController@sqlist')->name('sqlist');
 });
 
 
