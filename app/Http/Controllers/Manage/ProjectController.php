@@ -31,6 +31,7 @@ class ProjectController extends Controller
                     $paiddeposit += $v;
                 }
             }
+            $data['lists'][$key]['lastding'] = $v;
             $data['lists'][$key]['paiddepositcount'] = $paiddeposit;
         }
         return view('manage.project.main',$data);

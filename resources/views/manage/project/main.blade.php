@@ -149,6 +149,7 @@
                             <!-- <th>联系方式</th> -->
                             <th>合同金额</th>
                             <th>已付定金</th>
+                            <th>最新付款定金</th>
                             <th>底价</th>
                             <th>项目类型</th>
                             <th width="100px">签单时间</th>
@@ -168,6 +169,7 @@
                             <!-- <td>{{$v->contact}}</td> -->
                             <td>{{$v->contractamount}}</td>
                             <td>{{$v->paiddepositcount}}</td>
+                            <td>{{$v->lastding}}</td>
                             <td>{{$v->floorprice}}</td>
                             <td>@if($v->prosta == 1) 直接项目 @elseif($v->prosta ==2)代理记账 @endif</td>
                             <td>{{$v->signingtime}}</td>
