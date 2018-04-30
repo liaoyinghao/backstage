@@ -55,12 +55,12 @@ class Project extends Model
             if(!empty($vla['paiddeposit'])){
     			$paidd = unserialize($vla['paiddeposit']);
     			foreach ($paidd as $k => $v) {
-                    $paiddeposit += $v;  
-                }  
-    		}  
+                    $paiddeposit += $v;
+                }
+    		}
     		$list[$key]['paiddepositcount'] = $paiddeposit;
-        } 
-		
+        }
+
 		$list['type'] = $type;
 
 		return $list;
@@ -90,18 +90,18 @@ class Project extends Model
 				$type = 4;		//总经理
 			}
 		}
-		
+
 		foreach ($list as $key => $vla) {
 			$paiddeposit = 0;
             if(!empty($vla['paiddeposit'])){
     			$paidd = unserialize($vla['paiddeposit']);
     			foreach ($paidd as $k => $v) {
-                    $paiddeposit += $v;  
-                }  
-    		}  
+                    $paiddeposit += $v;
+                }
+    		}
     		$list[$key]['paiddepositcount'] = $paiddeposit;
-        } 
-		
+        }
+
 		$list['type'] = $type;
 
 		return $list;

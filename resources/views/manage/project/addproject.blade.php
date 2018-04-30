@@ -63,11 +63,13 @@
                     @else
                         @if(isset($aid))
                             <span class="caption-subject bold uppercase">将客户状态转为项目</span>
+                        @elseif(isset($did))
+                            <span class="caption-subject bold uppercase">将客户状态转为项目</span>
                         @else
                             <span class="caption-subject bold uppercase">修改项目</span>
                         @endif
                     @endif
-                        
+
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -78,7 +80,7 @@
                     <form method="post" action="{{route('manage_project_addprojectpost')}}">
                     <input type="hidden" name="id" value="{{$start['id'] or ''}}">
                     <input type="hidden" name="aid" value="{{$aid or ''}}">
-
+                    <input type="hidden" name="did" value="{{$did or ''}}">
                     <p class="form_p">
                         <span class="userk">项目名称：</span><input type="text" name="start[proname]" value="{{$start['proname'] or ''}}" placeholder="项目名称" required="required">
                     </p>
@@ -98,8 +100,9 @@
                     <p class="form_p form_tj">
                         @if(isset($aid))
                             <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required"></div>
+                        @elseif(isset($did))
+                        <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit]" step="0.01" value="{{$start['paiddeposit'] or '0'}}" placeholder="输入金额" required="required"></div>
                         @else
-                        
                             <span id="tianjiai">+</span>
                             <input type="hidden" id="paiddepositcount" value="{{$start['paiddepositcount'] or 0}}" />
                            @if(!empty($start['paiddeposit']))
@@ -111,7 +114,7 @@
                            @endif
 
                         @endif
- 
+
                     </p>
                     <p class="form_p" id="form_tj"></p>
                     <p class="form_p">
@@ -139,7 +142,7 @@
                         @endif
                       </select>
                     </p>
-                    
+
                     @if(!isset($type))
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
                     @endif

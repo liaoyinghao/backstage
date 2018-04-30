@@ -64,6 +64,14 @@
                 }
             })
 
+            $(".ahrefsd").on("click",function(){
+                event.returnValue = confirm("你确认要将此客户的状态转为代理记账项目吗？");
+                if(event.returnValue){
+                    var did = $(this).siblings(".did").val();
+                    window.location.href="{{route('manage_project_addproject')}}?did="+did;
+                }
+            })
+
         });
 
 
@@ -157,17 +165,23 @@
                             <td><span class="td_span">{{$v->remarks or ''}}</span></td>
                             <td>
                                 @if($v->status != 2)
-                                <div class="btn-group">
-                                    @if(isset($flag))
-                                    <button type="button" class="btn blue btn-xs">
-                                        <a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a>
-                                    </button>
-                                    <button type="button" class="btn blue btn-xs btnxs">
-                                        <a class="tap-street acolor ahrefs">转入项目</a>
+                                @if(isset($flag))
+
+                                <button type="button" class="btn blue-steel dropdown-toggle btn-xs " data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li><a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a></li>
+                                    <li>
+                                        <a class="tap-street acolor ahrefs">转入直接项目</a>
                                         <input type="hidden" value="{{$v->id}}" class="aid">
-                                    </button>
-                                    @endif
-                                </div>
+                                    </li>
+                                    <li>
+                                        <a class="tap-street acolor ahrefsd">转入代理记账</a>
+                                        <input type="hidden" value="{{$v->id}}" class="did">
+                                    </li>
+
+                                 </ul>
+                                 @endif
+
                                 @endif
                             </td>
                           </tr>

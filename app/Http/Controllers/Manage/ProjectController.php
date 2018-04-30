@@ -14,13 +14,32 @@ class ProjectController extends Controller
     public function main(){
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);
-        $data['lists'] =Project::projectlistgr($data['user']);
+
+        if($data['user']['position'] == '财务'){
+            $data['flag'] = 1;
+            $data['lists'] =Project::where('status',1)->get();
+        }else{
+            $data['lists'] =Project::where('status',1)->where('kfid',$data['user']['id'])->get();
+            $data['flag'] = 2;
+        }
+
+        foreach ($data['lists'] as $key => $vla) {
+            $paiddeposit = 0;
+            if(!empty($vla['paiddeposit'])){
+                $paidd = unserialize($vla['paiddeposit']);
+                foreach ($paidd as $k => $v) {
+                    $paiddeposit += $v;
+                }
+            }
+            $data['lists'][$key]['paiddepositcount'] = $paiddeposit;
+        }
         return view('manage.project.main',$data);
     }
 
     //从客户变成项目
     public function addproject(){
     	$aid = request()->input('aid');
+        $did = request()->input('did');
         $id = request()->input('id');
         $type = request()->input('type');
         if(!empty($type)){
@@ -44,6 +63,23 @@ class ProjectController extends Controller
     		}
     	}
 
+        if(!empty($did)){
+    		$start = Customer::customerinfo($did);
+    		if($start){
+    			$time = date("Y-m-d",time());
+    			$data['start']['id'] = $start['id'];
+    			$data['start']['customername'] = $start['name'];
+    			$data['start']['contact'] = $start['info'];
+    			$data['start']['contractamount'] = $start['offer'];
+    			$data['start']['remarks'] = $start['remarks'];
+    			$data['start']['status'] = 1;
+    			$data['start']['signingtime'] = $time;
+    			$data['start']['timepayment'] = $time;
+    			$data['did'] = $did;
+    			return view('manage.project.addproject',$data);
+    		}
+    	}
+
     	$data['start'] = Project::projectinfo($id);
         $paiddepositcount = 0;
         if(!empty($data['start']['paiddeposit'])){
@@ -58,6 +94,7 @@ class ProjectController extends Controller
     public function addprojectpost(){
     	$id = request()->input('id');
     	$aid = request()->input('aid');
+        $did = request()->input('did');
         $start = request()->input('start');
 
     	$type = request()->input('type');//这是销售添加的已付定金
@@ -75,7 +112,9 @@ class ProjectController extends Controller
             Project::where("id",$id)->update(['floorprice'=>$start['floorprice']]);
             return redirect()->route('manage_project_main');
         }
-
+        if($did){
+            $aid = $did;
+        }
         if(!empty($aid)){
             //增加
             $paiddeposit[0] = $start['paiddeposit'];
@@ -94,12 +133,14 @@ class ProjectController extends Controller
               }
             }
             $start['xmunion'] = $code;
-
+            if($did){
+                $start['prosta'] = 2;
+            }
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
     	}else{
     		//修改
-            $start['paiddeposit'] = serialize($start['paiddeposit']);  
+            $start['paiddeposit'] = serialize($start['paiddeposit']);
             $projects = Project::where("id",$id)->first();
             if($start['paiddeposit'] != $projects['paiddeposit']){
                 $start['status'] = 1;
@@ -133,7 +174,7 @@ class ProjectController extends Controller
     		}
     	}
     	if($type == 3){
-            if(empty($status)){ return redirect()->route('manage_project_main'); }
+            if(empty($status)){ return redirect()->route('manage_project_list'); }
             if(empty($cwid)){
                 if($status == 3){
                     $statusinfo['status'] = 3;
@@ -153,7 +194,7 @@ class ProjectController extends Controller
                 }
     		   $isok = Project::where("id",$id)->update($statusinfo);
             }
-    		return redirect()->route('manage_project_main');
+    		return redirect()->route('manage_project_list');
     	}
     }
 
@@ -183,6 +224,19 @@ class ProjectController extends Controller
         $id = request()->input('id');
         $data['start'] = Project::projectinfo($id);
         return view('manage.project.gaidijia',$data);
+    }
+
+    //更改状态
+    public function updateprosta()
+    {
+        $id = request()->input('id');
+        $pro = Project::projectinfo($id);
+        if($pro['prosta']  ==2){
+             Project::where('id',$id)->update(['status'=>3]);
+        }else{
+            Project::where('id',$id)->update(['status'=>2]);
+        }
+        return redirect()->route('manage_project_main');
     }
 
 }
