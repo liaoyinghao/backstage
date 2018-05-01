@@ -70,6 +70,17 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
 });
 
 
+//低价标
+Route::group(['prefix'=>'exproject' , 'as'=>'exproject_'] , function(){
+    Route::get('main' , 'ExprojectController@main')->name('main');
+    Route::any('detail' , 'ExprojectController@detail')->name('detail');
+    Route::any('addproject' , 'ExprojectController@addproject')->name('addproject');
+    Route::any('addprojectpost' , 'ExprojectController@addprojectpost')->name('addprojectpost');
+    Route::any('updata' , 'ExprojectController@updata')->name('updata');
+    Route::any('updataprojectpost' , 'ExprojectController@updataprojectpost')->name('updataprojectpost');
+});
+
+
 //日历
 Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
     Route::get('main' , 'CalendarController@main')->name('main');

@@ -19,7 +19,7 @@ class LeaveController extends Controller
                 $data['list'][$key]['jstime'] = str_replace("T",' ',$value['jstime']);
             }
         }
-        
+
         if($data['info']['position'] == '销售主管' || $data['info']['position'] == '客服主管'){
             //如果是主管
             $userid = Accountnum::where("fromuser",$data['info']['id'])->get();
@@ -28,11 +28,22 @@ class LeaveController extends Controller
                 if(!empty($v)){
                     $nameid[$k] = $v['id'];
                 }
-            } 
-            $time = time() - 86400*3;
-            $data['stoer'] = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->count();
+            }
+            // $time = time() - 86400*3;
+            // $data['stoer'] = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->count();
+
+            $stoer = Leave::where("status",'1')->whereIn("qid",$nameid)->get();
+            $kong=[];
+            foreach ($stoer as $key => $value) {
+              $starttime = explode('T',$value['kstime']);
+              $endtime = explode('T',$value['jstime']);
+              if(strtotime($endtime[0]) - strtotime($starttime[0]) < 86400*3){
+                array_push($kong,$value);
+              }
+            }
+            $data['stoer'] = count($kong);
         }
-        
+        // dd($data);
         return view('manage.leave.main',$data);
     }
 
@@ -87,7 +98,7 @@ class LeaveController extends Controller
 
 
     public function sqlist(){
-        $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']); 
+        $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
 
         //显示自己的状态为1未读和0拒绝的的申请列表
         $userid = Accountnum::where("fromuser",$data['info']['id'])->get();
@@ -96,10 +107,17 @@ class LeaveController extends Controller
             if(!empty($v)){
                 $nameid[$k] = $v['id'];
             }
-        } 
-        $time = time() - 86400*3;
-        $stoer = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->get(); 
-        foreach ($stoer as $key => $val) {
+        }
+        $stoer = Leave::where("status",'1')->whereIn("qid",$nameid)->get();
+        $kong=[];
+        foreach ($stoer as $key => $value) {
+          $starttime = explode('T',$value['kstime']);
+          $endtime = explode('T',$value['jstime']);
+          if(strtotime($endtime[0]) - strtotime($starttime[0]) < 86400*3){
+            array_push($kong,$value);
+          }
+        }
+        foreach ($kong as $key => $val) {
             if(!empty($val)){
                 $str = Accountnum::userid($val['qid']);
                 $stoer[$key]['nickname'] = $str['nickname'];
@@ -108,7 +126,7 @@ class LeaveController extends Controller
                 $stoer[$key]['jstime'] = str_replace("T",' ',$val['jstime']);
             }
         }
-        $data['list'] = $stoer;
+        $data['list'] = $kong;
 
         return view('manage.leave.sqlist',$data);
     }

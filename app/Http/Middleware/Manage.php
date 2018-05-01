@@ -37,7 +37,7 @@ class Manage
             }
         }
         view()->share('calendarcount' , $count);
- 
+
         //检查有请假申请审批
         if($info['position'] == '销售主管' || $info['position'] == '客服主管'){
             //如果是主管
@@ -47,9 +47,17 @@ class Manage
                 if(!empty($v)){
                     $nameid[$k] = $v['id'];
                 }
-            } 
-            $time = time() - 86400*3;
-            $stoercount = Leave::where("status",'1')->where("addtime",'>',$time)->whereIn("qid",$nameid)->count();
+            }
+            $stoer = Leave::where("status",'1')->whereIn("qid",$nameid)->get();
+            $kong=[];
+            foreach ($stoer as $key => $value) {
+              $starttime = explode('T',$value['kstime']);
+              $endtime = explode('T',$value['jstime']);
+              if(strtotime($endtime[0]) - strtotime($starttime[0]) < 86400*3){
+                array_push($kong,$value);
+              }
+            }
+            $stoercount = count($kong);
             if($stoercount > 0){
               $stoercounts = "您有".$stoercount."条请假审批";
             }else{
@@ -75,9 +83,18 @@ class Manage
                         }
                     }
 
-                $time = time() - 86400*3;
                 $stoers  = Leave::where("status",1)->whereIn("qid",$nameid)->count();//没有上级的
-                $stoerst = Leave::where("status",1)->where("addtime",'<',$time)->whereIn("qid",$nameids)->count();//有上级的超过三天了
+
+                $stoer = Leave::where("status",'1')->whereIn("qid",$nameids)->get();
+                $kong=[];
+                foreach ($stoer as $key => $value) {
+                  $starttime = explode('T',$value['kstime']);
+                  $endtime = explode('T',$value['jstime']);
+                  if(strtotime($endtime[0]) - strtotime($starttime[0]) > 86400*3){
+                    array_push($kong,$value);
+                  }
+                }
+                $stoerst = count($kong);
 
                 $stoercountst = $stoers + $stoerst;
                 if($stoercountst > 0){

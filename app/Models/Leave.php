@@ -34,7 +34,18 @@ class Leave extends Model
 
 				$time = time() - 86400*3;
 				$stoers = self::where("status",1)->whereIn("qid",$nameid)->get();//没有上级的
-				$stoerst = self::where("status",1)->where("addtime",'<',$time)->whereIn("qid",$nameids)->get();//有上级的超过三天了
+
+
+				$stoer = self::where("status",'1')->whereIn("qid",$nameids)->get();
+				$kong=[];
+				foreach ($stoer as $key => $value) {
+					$starttime = explode('T',$value['kstime']);
+					$endtime = explode('T',$value['jstime']);
+					if(strtotime($endtime[0]) - strtotime($starttime[0]) > 86400*3){
+						array_push($kong,$value);
+					}
+				}
+				$stoerst = $kong;
 				$stoer = [];
 				$i = 0;
 				foreach ($stoers as $key => $val) {

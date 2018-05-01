@@ -107,5 +107,15 @@ return [
             ],
         ]
     ],
+    'exproject'=>[
+        'name'=>'低价标',
+        'icon'=>'icon-direction',
+        'son'=>[
+            'main'=>[
+                'name'=>'全部列表',
+                'url'=>'main'
+            ],
+        ]
+    ],
 
 ];

@@ -77,7 +77,7 @@
                             <td>
                               <div class="btn-group">
 
-                                  @if($lists['type'] == 4) <!-- 销售不能更改状态 -->
+                                  @if($lists['type'] == 4 && $v->status != 3) <!-- 销售不能更改状态 -->
 
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
@@ -127,7 +127,7 @@
                                    </ul>
                                    @endif
 
-                                   @if($lists['type'] == 1) <!-- 销售 -->
+                                   @if($lists['type'] == 1 && $lists['status'] != 2) <!-- 销售 -->
                                         <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                             <a href="{{route('manage_project_addprojectst',['id'=>$v->id])}}" class="pfp">添加定金</a>
                                         </button>

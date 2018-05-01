@@ -102,88 +102,39 @@
                         <span class="caption-subject bold uppercase"> {{$left_menu[$view_path[1]]['son'][$view_path[2]]['name'] or '列表'}}</span>
                     </div>
                     <div class="actions">
-                        <a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'giveup'])}}">查看已放弃客户</a>
-                        @if(isset($flag))<a class="btn blue btn-outline" href="{{route('manage_customer_main',['type'=>'qi'])}}">超过七天未更新跟进信息</a>@endif
-                        @if(isset($flag) && $flag ==2)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看组员客户</a>@endif
-                        @if(isset($flag) && $flag ==1)<a class="btn blue btn-outline" href="{{route('manage_customer_chzuyuan')}}"> 查看全部客户</a>@endif
-                        @if(isset($flag))<a class="btn blue btn-outline" href="{{route('manage_customer_khadd')}}"><i class="fa fa-plus"></i> 客户录入</a>@endif
+                        @if($flag == 1)<a class="btn blue btn-outline" href="{{route('manage_exproject_addproject')}}"><i class="fa fa-plus"></i> 事例录入</a>@endif
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
-
-                <select id="shaixuan">
-                    <option value="0">请选择筛选条件</option>
-                    <option value="D">D</option>
-                    <option value="C">C</option>
-                    <option value="B">B</option>
-                    <option value="A">A</option>
-                    <option value="S">S</option>
-                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <P class='tishired'>*标有红框的客户是为七天内未跟进客户</P>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
                             <th width="50px">ID</th>
-                            <th>客户编号</th>
-                            <th>客户姓名</th>
-                            <th>联系方式</th>
-                            <!-- <th>报价</th> -->
-                            <th>客户评级</th>
-                            <th>跟进人员</th>
-                            <th>客户状态</th>
-                            <th width="150px">备注</th>
+                            <th>名称</th>
+                            <th>价格</th>
                             <th width="180px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                          @if(isset($lists))
-                          @foreach($lists as $v)
+                          @if(isset($list))
+                          @foreach($list as $v)
                           <tr>
-                            <td>{{$v->id}}</td>
-                            <td>{{$v->khunion or '--'}}</td>
-                            <td><span @if($v->status != 2) @if(!empty($v->khstatus)) class="outline" @endif @endif >{{$v->name}}</span></td>
-                            <td>{{$v->info}}</td>
-                            <!-- <td>{{$v->offer}}</td> -->
-                            <td>
-                                <select class="td_select">
-                                    <option value="D" @if($v->grade == "D") selected="selected" @endif >D</option>
-                                    <option value="C" @if($v->grade == "C") selected="selected" @endif >C</option>
-                                    <option value="B" @if($v->grade == "B") selected="selected" @endif >B</option>
-                                    <option value="A" @if($v->grade == "A") selected="selected" @endif >A</option>
-                                    <option value="S" @if($v->grade == "S") selected="selected" @endif >S</option>
-                                </select>
-                                <input type="hidden" class="tid" value="{{$v->id}}">
-                            </td>
-                            <td>{{$user[$v->fromuser]}}</td>
-                            <td>
-                                @if($v->status ==1)      正常
-                                @elseif($v->status ==2)  已转入项目
-                                @else                    放弃
-                                @endif
-                            </td>
-                            <td><span class="td_span">{{$v->remarks or ''}}</span></td>
+                            <td>{{$v->exproject_id}}</td>
+                            <td>{{$v->proname or '--'}}</td>
+                            <td>{{$v->price or '--'}}</td>
                             <td>
                                 <div class="btn-group">
 
                                   @if($v->status != 2)
-                                  @if(isset($flag))
-
                                   <button type="button" class="btn blue-steel dropdown-toggle btn-xs " data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                   <ul class="dropdown-menu pull-right" role="menu">
-                                     <li><a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a></li>
-                                     <li>
-                                         <a class="tap-street acolor ahrefs">转入直接项目</a>
-                                         <input type="hidden" value="{{$v->id}}" class="aid">
-                                     </li>
-                                     <li>
-                                         <a class="tap-street acolor ahrefsd">转入代理记账</a>
-                                         <input type="hidden" value="{{$v->id}}" class="did">
-                                     </li>
-
-                                  </ul>
+                                  <li><a href="{{route('manage_exproject_detail',['id'=>$v->exproject_id])}}" class="tap-street acolor">查看详情</a></li>
+                                  @if($flag == 1)
+                                     <li><a href="{{route('manage_exproject_updata',['id'=>$v->exproject_id])}}" class="tap-street acolor">修改事例</a></li>
                                   @endif
 
+                                  </ul>
                                   @endif
                                  </div>
                             </td>
