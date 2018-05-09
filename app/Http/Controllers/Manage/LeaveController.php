@@ -52,7 +52,14 @@ class LeaveController extends Controller
             $data['kstime'] = $request['kstime'];
             $data['jstime'] = $request['jstime'];
           }
+
         $data['info'] = Accountnum::userinfo($GLOBALS['m']['user']);
+
+        if($data['info']['position'] == '销售主管' || $data['info']['position'] == '客服主管'){
+          // dd(1);
+          $data['flag'] = 2;
+          // dd($data['flag']);
+        }
         $data['list'] = Leave::dailylistst($data['info'],$request);
         foreach ($data['list'] as $key => $value) {
             if(!empty($value)){
@@ -61,6 +68,44 @@ class LeaveController extends Controller
             }
         }
         return view('manage.leave.mainlist',$data);
+    }
+
+    public function zuleave(){
+          $user = Accountnum::userinfo($GLOBALS['m']['user']);
+          if($user['position'] == '销售主管'){
+              $data['zuyuan'] = Accountnum::userfromleave($user['id']);
+              return view('manage.leave.zuleave',$data);
+          }
+          if($user['position'] == '客服主管'){
+              $data['zuyuan'] = Accountnum::userfromleave($user['id']);
+              return view('manage.leave.zuleave',$data);
+          }
+    }
+
+    public function zuyuanqj(){
+        $id=request()->input('id');
+        $lists = Leave::where('qid',$id)->where('status','!=',0)->get();
+
+
+        $userList = [];
+        $i = 0;
+        foreach ($lists as $key => $val) {
+          if(!empty($val)){
+            $userList[$i] = $val;
+            $str = Accountnum::userid($val['qid']);
+            $userList[$i]['nickname'] = $str['nickname'];
+            $userList[$i]['position'] = $str['position'];
+            $i++;
+          }
+        }
+        $data['list'] = $userList;
+        foreach ($data['list'] as $key => $value) {
+            if(!empty($value)){
+                $data['list'][$key]['kstime'] = str_replace("T",' ',$value['kstime']);
+                $data['list'][$key]['jstime'] = str_replace("T",' ',$value['jstime']);
+            }
+        }
+        return view('manage.leave.zuyuanqj',$data);
     }
 
     public function ldetails(){

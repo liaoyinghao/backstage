@@ -39,7 +39,7 @@ class ProjectController extends Controller
 
     //从客户变成项目
     public function addproject(){
-    	$aid = request()->input('aid');
+    	  $aid = request()->input('aid');
         $did = request()->input('did');
         $id = request()->input('id');
         $type = request()->input('type');
@@ -89,6 +89,14 @@ class ProjectController extends Controller
         }
             $data['start']['paiddepositcount'] = $paiddepositcount;
         return view('manage.project.addproject',$data);
+    }
+
+    //项目增加和修改
+    public function editprojectpost(){
+      $did = request()->input('did');
+      Project::where("id",$did)->update(['prosta'=>2,'status'=>1]);
+
+    	return redirect()->route('manage_project_list');
     }
 
     //项目增加和修改

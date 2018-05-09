@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Userlist;
 use App\Models\Customer;
+use App\Models\Leave;
 class Accountnum extends Model
 {
 	public $timestamps = false;//取消updated_at字段
@@ -33,6 +34,16 @@ class Accountnum extends Model
 		foreach ($info as $key => $value) {
 			if(!empty($value)){
 				$info[$key]['khcount'] = Customer::where("status",1)->where("fromuser",$value['id'])->count();
+			}
+		}
+		return $info;
+	}
+
+	public static function userfromleave($fromuser){
+		$info = self::where("fromuser",$fromuser)->where("status",1)->get();
+		foreach ($info as $key => $value) {
+			if(!empty($value)){
+				$info[$key]['khcount'] = Leave::where("status",'!=',0)->where("qid",$value['id'])->count();
 			}
 		}
 		return $info;

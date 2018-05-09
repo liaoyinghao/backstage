@@ -7,6 +7,14 @@
                     [ 0, "desc" ]
                 ]
             });
+
+            $(".ahrefsd").on("click",function(){
+                event.returnValue = confirm("你确认要将此客户的状态转为代理记账项目吗？");
+                if(event.returnValue){
+                    var did = $(this).siblings(".did").val();
+                    window.location.href="{{route('manage_project_editprojectpost')}}?did="+did;
+                }
+            })
         });
     </script>
 @endsection
@@ -95,6 +103,12 @@
                                             <a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a>
                                         @endif
                                       </li>
+                                      @if($v->prosta == 1)
+                                        <li>
+                                            <a class="tap-street acolor ahrefsd">转入代理记账</a>
+                                            <input type="hidden" value="{{$v->id}}" class="did">
+                                        </li>
+                                      @endif
 
                                         @if($v->status == 0)
                                             <li><a class="huifuxm pfp" data-id="{{$v->id}}">恢复此项目</a><li>

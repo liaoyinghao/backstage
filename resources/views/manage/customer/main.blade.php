@@ -64,13 +64,13 @@
                 }
             })
 
-            $(".ahrefsd").on("click",function(){
-                event.returnValue = confirm("你确认要将此客户的状态转为代理记账项目吗？");
-                if(event.returnValue){
-                    var did = $(this).siblings(".did").val();
-                    window.location.href="{{route('manage_project_addproject')}}?did="+did;
-                }
-            })
+            // $(".ahrefsd").on("click",function(){
+            //     event.returnValue = confirm("你确认要将此客户的状态转为代理记账项目吗？");
+            //     if(event.returnValue){
+            //         var did = $(this).siblings(".did").val();
+            //         window.location.href="{{route('manage_project_addproject')}}?did="+did;
+            //     }
+            // })
 
         });
 
@@ -173,13 +173,13 @@
                                   <ul class="dropdown-menu pull-right" role="menu">
                                      <li><a href="{{route('manage_customer_followup',['id'=>$v->id])}}" class="tap-street acolor">修改跟进信息</a></li>
                                      <li>
-                                         <a class="tap-street acolor ahrefs">转入直接项目</a>
+                                         <a class="tap-street acolor ahrefs">转入项目</a>
                                          <input type="hidden" value="{{$v->id}}" class="aid">
                                      </li>
-                                     <li>
+                                     <!--<li>
                                          <a class="tap-street acolor ahrefsd">转入代理记账</a>
                                          <input type="hidden" value="{{$v->id}}" class="did">
-                                     </li>
+                                     </li>-->
 
                                   </ul>
                                   @endif

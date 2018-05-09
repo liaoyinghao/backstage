@@ -67,6 +67,7 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::post('updatastatus' , 'ProjectController@updatastatus')->name('updatastatus');
     Route::any('gaidijia' , 'ProjectController@gaidijia')->name('gaidijia');
     Route::any('updateprosta' , 'ProjectController@updateprosta')->name('updateprosta');
+    Route::any('editprojectpost' , 'ProjectController@editprojectpost')->name('editprojectpost');
 });
 
 
@@ -106,6 +107,8 @@ Route::group(['prefix'=>'leave' , 'as'=>'leave_'] , function(){
     Route::post('addldetails' , 'LeaveController@addldetails')->name('addldetails');
     Route::post('leavestatus' , 'LeaveController@leavestatus')->name('leavestatus');
     Route::any('sqlist' , 'LeaveController@sqlist')->name('sqlist');
+    Route::any('zuleave' , 'LeaveController@zuleave')->name('zuleave');
+    Route::any('zuyuanqj' , 'LeaveController@zuyuanqj')->name('zuyuanqj');
 });
 
 

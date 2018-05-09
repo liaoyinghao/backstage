@@ -54,12 +54,6 @@ li{list-style-type: none;}
                     </div>
                 </div>
                 <div>
-                    <div>
-                        选择时间查询数据：
-                        <input type="date" name="kstime" value="{{$kstime or ''}}" class="inputs" id="kstime">
-                        <input type="date" name="jstime" value="{{$jstime or ''}}" class="inputs" id="jstime">
-                        <button class="buttons">查 询</button>
-                    </div>
                 </div><br>
                 <div class="portlet-body">
                     <table class="table" id="news-table">
