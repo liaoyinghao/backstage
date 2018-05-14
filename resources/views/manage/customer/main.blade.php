@@ -124,23 +124,20 @@
                     <table class="table" id="news-table">
                         <thead>
                         <tr>
-                            <th width="50px">ID</th>
-                            <th>客户编号</th>
+                            <th width="150px">客户编号</th>
                             <th>客户姓名</th>
                             <th>联系方式</th>
                             <!-- <th>报价</th> -->
                             <th>客户评级</th>
-                            <th>跟进人员</th>
-                            <th>客户状态</th>
-                            <th width="150px">备注</th>
-                            <th width="180px">操作</th>
+                            <th>客户需求</th>
+                            <th width="350px">最新更近信息</th>
+                            <th width="150px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
                           @if(isset($lists))
                           @foreach($lists as $v)
                           <tr>
-                            <td>{{$v->id}}</td>
                             <td>{{$v->khunion or '--'}}</td>
                             <td><span @if($v->status != 2) @if(!empty($v->khstatus)) class="outline" @endif @endif >{{$v->name}}</span></td>
                             <td>{{$v->info}}</td>
@@ -155,14 +152,8 @@
                                 </select>
                                 <input type="hidden" class="tid" value="{{$v->id}}">
                             </td>
-                            <td>{{$user[$v->fromuser]}}</td>
-                            <td>
-                                @if($v->status ==1)      正常
-                                @elseif($v->status ==2)  已转入项目
-                                @else                    放弃
-                                @endif
-                            </td>
-                            <td><span class="td_span">{{$v->remarks or ''}}</span></td>
+                            <td>{{$v->demand}}</td>
+                            <td><span class="td_span">{{$v->progressname or ''}}</span></td>
                             <td>
                                 <div class="btn-group">
 

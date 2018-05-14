@@ -47,7 +47,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">添加低价表</span>
+                        <span class="caption-subject bold uppercase">事例详情</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -71,6 +71,9 @@
                     <p class="form_p">
                         <span class="userk">备注：</span>
                         <textarea name="start[remark]" placeholder="备注" disabled="disabled" class="textarea">{{$detail['remark'] or ''}}</textarea>
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">分类：</span><input type="text" name="start[proname]" value="{{$detail['typename'] or ''}}" readonly="readonly">
                     </p>
                 </div>
             </div>

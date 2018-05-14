@@ -75,18 +75,6 @@
                         <span class="userk">备注：</span>
                         <textarea name="start[remark]" placeholder="备注" class="textarea">{{$detail['remark'] or ''}}</textarea>
                     </p>
-                    <p class="form_p">
-                        <span class="userk">分类：</span>
-                        <select name='start[type]' class="job">
-
-                            @if(isset($typeList))
-                              <option  name = "start[type]" @if($detail['type'] == 0) selected="selected" @endif  value='0'>未选择</option>
-                            @foreach($typeList as $v)
-                              <option   name = "start[type]" @if($v->id == $detail['type']) selected="selected" @endif  value='{{$v->id}}' >{{$v->name}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </p>
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
                     </form>
                 </div>

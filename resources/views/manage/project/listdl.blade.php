@@ -41,15 +41,14 @@
                         <thead>
                         <tr>
                             <th width="50px">项目编号</th>
-                            <th>项目名称</th>
                             <th>客户名称</th>
+                            <th>公司名称</th>
                             <th>联系方式</th>
-                            <th>合同金额</th>
                             <th>已付定金</th>
-                            <th>底价</th>
-                            <th>项目类型</th>
-                            <th>管辖财务人员</th>
-                            <th>管辖客服人员</th>
+                            <th>合同金额</th>
+                            <th>签约时间范围</th>
+                            <th>所属销售</th>
+                            <th>所属财务</th>
                             <th>状态</th>
                             <th width="120px">操作</th>
                         </tr>
@@ -60,14 +59,13 @@
                             @if(isset($v->id))
                           <tr>
                             <td>{{$v->xmunion}}</td>
-                            <td>{{$v->proname}}</td>
                             <td>{{$v->customername}}</td>
+                            <td>{{$v->companyname}}</td>
                             <td>{{$v->contact}}</td>
-                            <td>{{$v->contractamount}}</td>
                             <td>{{$v->paiddepositcount}}</td>
-                            <td>{{$v->floorprice}}</td>
-                            <td>@if($v->prosta == 1) 直接项目 @elseif($v->prosta ==2)代理记账 @endif</td>
-                            <td>{{$v->cwid or ''}}</td>
+                            <td>{{$v->contractamount}}</td>
+                            <td>{{$v->kstime}}至{{$v->jstime}}</td>
+                            <td>{{$v->kid or ''}}</td>
                             <td>{{$v->kfid or ''}}</td>
                             <td>
                                 @if($v->status == 1)
@@ -88,7 +86,7 @@
                                   @if($lists['type'] == 4 && $v->status != 3) <!-- 销售不能更改状态 -->
 
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
-                                        <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
+                                        <a href="{{route('manage_project_adddlproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
                                   </button>
                                   <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                   <ul class="dropdown-menu pull-right" role="menu">

@@ -30,8 +30,12 @@ return [
                 'url'=>'main'
             ],
             'list'=>[
-                'name'=>'项目管理',
+                'name'=>'直接项目管理',
                 'url'=>'list'
+            ],
+            'listdl'=>[
+                'name'=>'代理项目管理',
+                'url'=>'listdl'
             ],
         ]
     ],
@@ -107,8 +111,8 @@ return [
             ],
         ]
     ],
-    'exproject'=>[
-        'name'=>'低价标',
+    'projecttype'=>[
+        'name'=>'底价表',
         'icon'=>'icon-direction',
         'son'=>[
             'main'=>[

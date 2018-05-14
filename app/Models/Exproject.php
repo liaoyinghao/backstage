@@ -10,7 +10,10 @@ class Exproject extends Model
 {
 	public $timestamps = false;//取消updated_at字段
 
-	public static function exproList(){
+	public static function exproList($id){
+		return self::where("status",1)->where("type",$id)->get();
+	}
+	public static function exproListNoId(){
 		return self::where("status",1)->get();
 	}
 

@@ -98,16 +98,18 @@
                 </div>
                 <div class="portlet-body">
 
-                    <form method="post" action="{{route('manage_project_addprojectpost')}}"  onsubmit="return check()">
+                    <form method="post" action="{{route('manage_project_adddlprojectpost')}}"  onsubmit="return check()">
                     <input type="hidden" name="id" value="{{$start['id'] or ''}}">
                     <input type="hidden" name="aid" value="{{$aid or ''}}">
                     <input type="hidden" name="did" value="{{$did or ''}}">
-
                     <p class="form_p">
                         <span class="userk">项目名称：</span><input type="text" name="start[proname]" value="{{$start['proname'] or ''}}" placeholder="项目名称" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">客户姓名：</span><input type="text" name="start[customername]" value="{{$start['customername'] or ''}}" placeholder="客户姓名" required="required">
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">公司名称：</span><input type="text" name="start[companyname]" value="{{$start['companyname'] or ''}}" placeholder="公司名称" required="required">
                     </p>
                     <p class="form_p">
                         <span class="userk">联系方式：</span><input type="text" name="start[contact]" value="{{$start['contact'] or ''}}" placeholder="联系方式" required="required">
@@ -151,6 +153,12 @@
                     <p class="form_p">
                         <span class="userk">备注：</span>
                         <textarea name="start[remarks]" placeholder="备注" class="textarea">{{$start['remarks'] or ''}}</textarea>
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">签约时间范围：</span>
+                        <input type="date" name="start[kstime]" value="{{$start['kstime'] or ''}}">
+                        至
+                        <input type="date" name="start[jstime]" value="{{$start['jstime'] or ''}}">
                     </p>
 
 

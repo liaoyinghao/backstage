@@ -47,7 +47,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">添加低价表</span>
+                        <span class="caption-subject bold uppercase">添加底价表</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
@@ -74,6 +74,18 @@
                     <p class="form_p">
                         <span class="userk">备注：</span>
                         <textarea name="start[remark]" placeholder="备注" class="textarea">{{$start['remark'] or ''}}</textarea>
+                    </p>
+                    <p class="form_p">
+                        <span class="userk">分类：</span>
+                        <select name='start[type]' class="job">
+
+                            @if(isset($typeList))
+                              <option  name = "start[type]" value='0' >未选择</option>
+                            @foreach($typeList as $v)
+                              <option   name = "start[type]" value='{{$v->id}}' >{{$v->name}}</option>
+                            @endforeach
+                            @endif
+                        </select>
                     </p>
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
                     </form>

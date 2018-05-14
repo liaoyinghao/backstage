@@ -47,48 +47,31 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">修改底价表</span>
+                        <span class="caption-subject bold uppercase">添加底价表</span>
                     </div>
                     <div class="actions">
                         <a href="javascript:;" class="btn grey-mint btn-outline fullscreen" data-original-title="全屏" title=""><i class="icon-size-fullscreen"></i> 全屏</a>
                     </div>
                 </div>
                 <div class="portlet-body">
-
-                    <form method="post" action="{{route('manage_exproject_updataprojectpost')}}">
-                    <input type="hidden" name="id" value="{{$detail['exproject_id'] or ''}}">
                     <p class="form_p">
-                        <span class="userk">名称：</span><input type="text" name="start[proname]" value="{{$detail['proname'] or ''}}" placeholder="名称">
+                        <span class="userk">名称：</span><input type="text" name="start[proname]" value="{{$detail['proname'] or ''}}" placeholder="名称" readonly="readonly">
                     </p>
                     <p class="form_p">
                         <span class="userk">所需材料：</span>
-                        <textarea name="start[material]" placeholder="所需材料" class="textarea" style = "">{{$detail['material'] or ''}}</textarea>
+                        <textarea name="start[material]" placeholder="所需材料" class="textarea" style = "" disabled="disabled">{{$detail['material'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
-                        <span class="userk">底价金额：</span><input type="number" name="start[price]" step="0.01" value="{{$detail['price'] or ''}}" placeholder="输入金额" required="required">
+                        <span class="userk">底价金额：</span><input type="number" name="start[price]" step="0.01"  required="required"value="{{$detail['price'] or ''}}" placeholder="输入金额" readonly="readonly">
                     </p>
                     <p class="form_p">
                         <span class="userk">要求：</span>
-                        <textarea name="start[demand]" placeholder="要求" class="textarea">{{$detail['demand'] or ''}}</textarea>
+                        <textarea name="start[demand]" placeholder="要求" disabled="disabled" class="textarea">{{$detail['demand'] or ''}}</textarea>
                     </p>
                     <p class="form_p">
                         <span class="userk">备注：</span>
-                        <textarea name="start[remark]" placeholder="备注" class="textarea">{{$detail['remark'] or ''}}</textarea>
+                        <textarea name="start[remark]" placeholder="备注" disabled="disabled" class="textarea">{{$detail['remark'] or ''}}</textarea>
                     </p>
-                    <p class="form_p">
-                        <span class="userk">分类：</span>
-                        <select name='start[type]' class="job">
-
-                            @if(isset($typeList))
-                              <option  name = "start[type]" @if($detail['type'] == 0) selected="selected" @endif  value='0'>未选择</option>
-                            @foreach($typeList as $v)
-                              <option   name = "start[type]" @if($v->id == $detail['type']) selected="selected" @endif  value='{{$v->id}}' >{{$v->name}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </p>
-                    <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
-                    </form>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ class ProjectController extends Controller
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);
 
-        if($data['user']['position'] == '财务'){
+        if($data['user']['position'] == '财务' or $data['user']['position'] == '总经理'){
             $data['flag'] = 1;
             $data['lists'] =Project::where('status',1)->get();
         }else{
@@ -38,6 +38,60 @@ class ProjectController extends Controller
     }
 
     //从客户变成项目
+    public function adddlproject(){
+    	  $aid = request()->input('aid');
+        $did = request()->input('did');
+        $id = request()->input('id');
+        $type = request()->input('type');
+        if(!empty($type)){
+    	   $data['type'] = $type;
+        }
+        $data['list'] = Accountnum::whereRaw("status = ? and (position = ? or position = ?)",['1','财务','总经理'])->get();
+        if(!empty($aid)){
+    		$start = Customer::customerinfo($aid);
+    		if($start){
+    			$time = date("Y-m-d",time());
+    			$data['start']['id'] = $start['id'];
+    			$data['start']['customername'] = $start['name'];
+    			$data['start']['contact'] = $start['info'];
+    			$data['start']['contractamount'] = $start['offer'];
+    			$data['start']['remarks'] = $start['remarks'];
+    			$data['start']['status'] = 1;
+    			$data['start']['signingtime'] = $time;
+    			$data['start']['timepayment'] = $time;
+    			$data['aid'] = $aid;
+    			return view('manage.project.adddlproject',$data);
+    		}
+    	}
+
+        if(!empty($did)){
+    		$start = Customer::customerinfo($did);
+    		if($start){
+    			$time = date("Y-m-d",time());
+    			$data['start']['id'] = $start['id'];
+    			$data['start']['customername'] = $start['name'];
+    			$data['start']['contact'] = $start['info'];
+    			$data['start']['contractamount'] = $start['offer'];
+    			$data['start']['remarks'] = $start['remarks'];
+    			$data['start']['status'] = 1;
+    			$data['start']['signingtime'] = $time;
+    			$data['start']['timepayment'] = $time;
+    			$data['did'] = $did;
+    			return view('manage.project.adddlproject',$data);
+    		}
+    	}
+
+    	$data['start'] = Project::projectinfo($id);
+        $paiddepositcount = 0;
+        if(!empty($data['start']['paiddeposit'])){
+            $data['start']['paiddeposit'] = unserialize($data['start']['paiddeposit']);
+            $paiddepositcount= count($data['start']['paiddeposit']);
+        }
+            $data['start']['paiddepositcount'] = $paiddepositcount;
+        return view('manage.project.adddlproject',$data);
+    }
+
+    //从客户变成项目
     public function addproject(){
     	  $aid = request()->input('aid');
         $did = request()->input('did');
@@ -46,7 +100,7 @@ class ProjectController extends Controller
         if(!empty($type)){
     	   $data['type'] = $type;
         }
-        $data['list'] = Accountnum::whereRaw("status = ? and (position = ? or position = ?)",['1','客服主管','客服'])->get();
+        $data['list'] = Accountnum::whereRaw("status = ? and (position = ? or position = ? or position = ?)",['1','客服主管','客服','总经理'])->get();
         if(!empty($aid)){
     		$start = Customer::customerinfo($aid);
     		if($start){
@@ -100,11 +154,12 @@ class ProjectController extends Controller
     }
 
     //项目增加和修改
-    public function addprojectpost(){
+    public function adddlprojectpost(){
     	$id = request()->input('id');
     	$aid = request()->input('aid');
-        $did = request()->input('did');
-        $start = request()->input('start');
+      $did = request()->input('did');
+      $start = request()->input('start');
+      $start['prosta'] = 2;
 
     	$type = request()->input('type');//这是销售添加的已付定金
         if(!empty($type)){
@@ -145,6 +200,68 @@ class ProjectController extends Controller
             if($did){
                 $start['prosta'] = 2;
             }
+    		Project::insert($start);
+    		Customer::where("id",$aid)->update(['status'=>2]);
+    	}else{
+    		//修改
+            $start['paiddeposit'] = serialize($start['paiddeposit']);
+            $projects = Project::where("id",$id)->first();
+            if($start['paiddeposit'] != $projects['paiddeposit']){
+                $start['status'] = 1;
+            }
+    		Project::where("id",$id)->update($start);
+    	}
+    	return redirect()->route('manage_project_main');
+    }
+
+    //项目增加和修改
+    public function addprojectpost(){
+    	$id = request()->input('id');
+    	$aid = request()->input('aid');
+      $did = request()->input('did');
+      $start = request()->input('start');
+
+    	$type = request()->input('type');//这是销售添加的已付定金
+        if(!empty($type)){
+            $paiddeposit = serialize($start['paiddeposit']);
+            $status = $start['status'];
+            $projects = Project::where("id",$id)->first();
+            if($start['paiddeposit'] != $projects['paiddeposit']){
+                Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$start]);
+            }
+            return redirect()->route('manage_project_main');
+        }
+
+        $dijia = request()->input('dijia');//这是客服修改底价
+        if(!empty($dijia)){
+            Project::where("id",$id)->update(['floorprice'=>$start['floorprice']]);
+            return redirect()->route('manage_project_main');
+        }
+        if($did){
+            $aid = $did;
+        }
+        if(!empty($aid)){
+            //增加
+            $paiddeposit[0] = $start['paiddeposit'];
+            $start['paiddeposit'] = serialize($paiddeposit);
+            $start['addtime'] = time();
+    		$start['kid'] = $aid;
+
+        //添加编号
+            $flag = 1;
+            //查找数据库是否存在该编号
+            while ($flag) {
+              $code = date("YmdHis",time()).rand(1000,9999);
+              $verCode = Project::where("xmunion",$code)->select("id")->first();
+              if(!$verCode){
+                  $flag=0;
+              }
+            }
+            $start['xmunion'] = $code;
+            if($did){
+                $start['prosta'] = 2;
+            }
+            $start['status'] = 1;
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
     	}else{
@@ -211,9 +328,18 @@ class ProjectController extends Controller
     public function list(){
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);
-        $data['lists'] =Project::projectlist($data['user']);
+        $data['lists'] =Project::projectlist($data['user'],1);
         // dd($data['lists']);
         return view('manage.project.list',$data);
+    }
+
+    //全部项目
+    public function listdl(){
+        $user=$GLOBALS['m']['user'];
+        $data['user'] = Accountnum::userinfo($user);
+        $data['lists'] =Project::projectlist($data['user'],2);
+        // dd($data['lists']);
+        return view('manage.project.listdl',$data);
     }
 
     //添加定金

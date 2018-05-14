@@ -203,6 +203,31 @@ class CustomerController extends Controller
       }
 
       $data['userinfos'] = $user;
+      $listi = 0;
+      foreach ($data['lists'] as $key => $value) {
+        if(!empty($value['progress'])){
+            $tprogresst = @unserialize($value['progress']);
+            $count = count($tprogresst);
+            if($count > 1){
+                $val = [];
+                $i = 1;
+                $j = 1;
+                $h = 1;
+                $t = 1;
+                foreach ($tprogresst as $k => $v) {
+                  if ($i%2==0){
+                      $val[$h] = $v;
+                      $h++;
+                  }
+                  $i++;
+                }
+                $countVal = count($val);
+                $data['lists'][$key]['progressname'] = $val[$countVal];
+            }
+        }
+        $listi++;
+      }
+      // dd($data['lists']);
       return view('manage.customer.main',$data);
     }
 
@@ -288,13 +313,13 @@ class CustomerController extends Controller
                 }
                 $i++;
               }
-
-              foreach ($key as $v1 => $v2) {
-                 $data['progress'][$v1]['time'] = $v2;
-                 $data['progress'][$v1]['main'] = $val[$v1];
-                 $data['progress'][$v1]['timename'] = 'time'.$t;
-                 $data['progress'][$v1]['mainname'] = 'main'.$t;
-                 $t++;
+              $countVal = count($val);
+              for ($i=count($val); $i > 0 ; $i--) {
+                 $data['progress'][$i]['time'] = $key[$i];
+                 $data['progress'][$i]['main'] = $val[$i];
+                 $data['progress'][$i]['timename'] = 'time'.$countVal;
+                 $data['progress'][$i]['mainname'] = 'main'.$countVal;
+                 $countVal--;
               }
           }
       }
@@ -328,12 +353,14 @@ class CustomerController extends Controller
                 $i++;
               }
 
-              foreach ($key as $v1 => $v2) {
-                 $data['progress'][$v1]['time'] = $v2;
-                 $data['progress'][$v1]['main'] = $val[$v1];
-                 $data['progress'][$v1]['timename'] = 'time'.$t;
-                 $data['progress'][$v1]['mainname'] = 'main'.$t;
-                 $t++;
+              // dd($val,$key);
+              $countVal = count($val);
+              for ($i=count($val); $i > 0 ; $i--) {
+                 $data['progress'][$i]['time'] = $key[$i];
+                 $data['progress'][$i]['main'] = $val[$i];
+                 $data['progress'][$i]['timename'] = 'time'.$countVal;
+                 $data['progress'][$i]['mainname'] = 'main'.$countVal;
+                 $countVal--;
               }
           }
       }

@@ -14,7 +14,7 @@ class Project extends Model
 		return self::where("id",$id)->first();
 	}
 
-	public static function projectlist($user){
+	public static function projectlist($user,$prosta){
 		//状态0放弃1确认中2进行中3完成4申请退
 		$list = [];
 		if($user['position'] == '销售主管' || $user['position'] == '销售'){
@@ -23,18 +23,18 @@ class Project extends Model
 				foreach ($sukh as $key => $val) {
 					$cust[$key] = $val['id'];
 				}
-				$list = self::whereIn('kid',$cust)->get();
+				$list = self::whereIn('kid',$cust)->where('prosta',$prosta)->get();
 				$type = 1;
 			}
 		}else{
 			if($user['position'] == '客服主管' || $user['position'] == '客服'){
-				$list = self::where('kfid',$user['id'])->get();
+				$list = self::where('kfid',$user['id'])->where('prosta',$prosta)->get();
 				$type = 2;
 			}elseif($user['position'] == '财务'){
-				$list = self::whereRaw('(cwid = ? or cwid is null)',[$user["id"]])->get();
+				$list = self::whereRaw('(cwid = ? or cwid is null)',[$user["id"]])->where('prosta',$prosta)->get();
 				$type = 3;
 			}else{
-				$list = self::get();
+				$list = self::where('prosta',$prosta)->get();
 				$type = 4;		//总经理
 			}
 		}
@@ -47,6 +47,12 @@ class Project extends Model
 			if(!empty($val['kfid'])){
 				$infost = Accountnum::where('id',$val['kfid'])->select("nickname")->first();
 				$list[$key]['kfid'] = $infost['nickname'];
+			}
+			if(!empty($val['kid'])){
+				$infost = Customer::where('id',$val['kid'])->first();
+				$infost = Accountnum::where('id',$infost['fromuser'])->select("nickname")->first();
+
+				$list[$key]['kid'] = $infost['nickname'];
 			}
 		}
 

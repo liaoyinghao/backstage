@@ -68,10 +68,13 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::any('gaidijia' , 'ProjectController@gaidijia')->name('gaidijia');
     Route::any('updateprosta' , 'ProjectController@updateprosta')->name('updateprosta');
     Route::any('editprojectpost' , 'ProjectController@editprojectpost')->name('editprojectpost');
+    Route::get('listdl' , 'ProjectController@listdl')->name('listdl');
+    Route::any('adddlproject' , 'ProjectController@adddlproject')->name('adddlproject');
+    Route::any('adddlprojectpost' , 'ProjectController@adddlprojectpost')->name('adddlprojectpost');
 });
 
 
-//低价标
+//底价表
 Route::group(['prefix'=>'exproject' , 'as'=>'exproject_'] , function(){
     Route::get('main' , 'ExprojectController@main')->name('main');
     Route::any('detail' , 'ExprojectController@detail')->name('detail');
@@ -81,6 +84,15 @@ Route::group(['prefix'=>'exproject' , 'as'=>'exproject_'] , function(){
     Route::any('updataprojectpost' , 'ExprojectController@updataprojectpost')->name('updataprojectpost');
 });
 
+
+//底价表
+Route::group(['prefix'=>'projecttype' , 'as'=>'projecttype_'] , function(){
+    Route::any('addprojecttype' , 'ProjecttypeController@addprojecttype')->name('addprojecttype');
+    Route::any('addprojecttypepost' , 'ProjecttypeController@addprojecttypepost')->name('addprojecttypepost');
+    Route::any('main' , 'ProjecttypeController@main')->name('main');
+    Route::any('projecttypedetail' , 'ProjecttypeController@projecttypedetail')->name('projecttypedetail');
+    Route::any('updataprojecttype' , 'ProjecttypeController@updataprojecttype')->name('updataprojecttype');
+});
 
 //日历
 Route::group(['prefix'=>'calendar' , 'as'=>'calendar_'] , function(){
