@@ -17,7 +17,7 @@
           $("input[name='start[paiddeposit][]']").each(function(){
             sum += $(this).val();
           })
-          if(parseInt(sum) >= parseInt($("input[name='start[floorprice]']").val())){
+          if(parseInt(sum) >= parseInt($("input[name='start[contractamount]']").val())){
             var r=confirm("确认项目是否完成");
             if (r==true)
               {

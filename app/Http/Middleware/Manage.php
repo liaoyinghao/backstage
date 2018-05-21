@@ -108,7 +108,7 @@ class Manage
 
         //检查是否有需要被确认的项目
         if($info['position'] == '客服主管' || $info['position'] == '客服'){
-          $querencounts = Project::where('kfid',$info['id'])->where('status',2)->count();//状态2是进行中
+          $querencounts = Project::where('kfid',$info['id'])->where('status',1)->count();//状态2是进行中
         }elseif($info['position'] == '财务'){
           $querencounts = Project::where('status',1)->count();//状态1是确认中
         }else{

@@ -48,8 +48,8 @@
                             <th>已付定金</th>
                             <th>底价</th>
                             <th>项目类型</th>
-                            <th>管辖财务人员</th>
-                            <th>管辖客服人员</th>
+                            <th>所属销售人员</th>
+                            <th>所属客服人员</th>
                             <th>状态</th>
                             <th width="120px">操作</th>
                         </tr>
@@ -67,7 +67,7 @@
                             <td>{{$v->paiddepositcount}}</td>
                             <td>{{$v->floorprice}}</td>
                             <td>@if($v->prosta == 1) 直接项目 @elseif($v->prosta ==2)代理记账 @endif</td>
-                            <td>{{$v->cwid or ''}}</td>
+                            <td>{{$v->kid or ''}}</td>
                             <td>{{$v->kfid or ''}}</td>
                             <td>
                                 @if($v->status == 1)

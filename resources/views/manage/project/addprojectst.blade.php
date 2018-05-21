@@ -68,6 +68,7 @@
 
                     <form method="post" action="{{route('manage_project_addprojectpost')}}">
                     <input type="hidden" name="id" value="{{$start['id'] or ''}}">
+                    <input type="hidden" name="start[status]" value="1">
                     <input type="hidden" name="type" value="dingjin">
 
                     <p class="form_p">
@@ -85,7 +86,7 @@
                            @else
                                 <div class="form_p form_divi"><span class="userk">已付定金：</span><input type="number" name="start[paiddeposit][0]" step="0.01" value="0" placeholder="输入金额" required="required"></div>
                            @endif
- 
+
                     </p>
                     <p class="form_p" id="form_tj"></p>
 

@@ -227,7 +227,8 @@ class ProjectController extends Controller
             $status = $start['status'];
             $projects = Project::where("id",$id)->first();
             if($start['paiddeposit'] != $projects['paiddeposit']){
-                Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$start]);
+                Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$status]);
+                // Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$start]);
             }
             return redirect()->route('manage_project_main');
         }
@@ -368,7 +369,7 @@ class ProjectController extends Controller
         $id = request()->input('id');
         $pro = Project::projectinfo($id);
         if($pro['prosta']  ==2){
-             Project::where('id',$id)->update(['status'=>3]);
+             Project::where('id',$id)->update(['status'=>2]);
         }else{
             Project::where('id',$id)->update(['status'=>2]);
         }
