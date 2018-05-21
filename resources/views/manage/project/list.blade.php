@@ -51,7 +51,7 @@
                             <th>所属销售人员</th>
                             <th>所属客服人员</th>
                             <th>状态</th>
-                            <th width="120px">操作</th>
+                            <th width="150px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -85,13 +85,19 @@
                             <td>
                               <div class="btn-group">
 
-                                  @if($lists['type'] == 4 && $v->status != 3) <!-- 销售不能更改状态 -->
+                                  @if($v->status != 3) <!-- 销售不能更改状态 -->
 
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
-                                        <a href="{{route('manage_project_addproject',['id'=>$v->id])}}" class="pfp">编辑项目</a>
+                                        @if($lists['type'] == 1 && $v->status > 0 && $v->status < 3)
+                                            <a class="pfp">查看跟进信息</a>
+                                        @else
+                                            <a class="pfp">添加跟进信息</a>
+                                        @endif
                                   </button>
                                   <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+
                                   <ul class="dropdown-menu pull-right" role="menu">
+                                      <li><a class="huifuxm pfp" href = "{{route('manage_project_addproject',['id'=>$v->id])}}" data-id="{{$v->id}}">编辑项目</a><li>
                                       @if($v->prosta == 1)
                                         <li>
                                             <a class="tap-street acolor ahrefsd" href="{{route('manage_project_adddlproject',['id'=>$v->id])}}">转入代理记账</a>
@@ -105,6 +111,13 @@
                                             <li><a class="fangqixm pfp" data-id="{{$v->id}}">放弃此项目</a><li>
                                         @endif
 
+
+
+                                        @if($lists['type'] == 1 && $v->status == 2) <!-- 销售 -->
+                                        <li>
+                                            <a href="{{route('manage_project_addprojectst',['id'=>$v->id])}}" class="genghuanzt pfp">添加定金</a>
+                                        <li>
+                                        @endif
                                    </ul>
                                    @endif
                                    @if($lists['type'] != 1 &&  $lists['type'] != 4) <!-- 财务和客服 -->
@@ -126,14 +139,7 @@
                                         @if($lists['type'] == 2) <!-- 客服 -->
                                         <li><a class="genghuanzt pfp" href="{{route('manage_project_gaidijia',['id'=>$v->id])}}">更改底价</a><li>
                                         @endif
-
                                    </ul>
-                                   @endif
-
-                                   @if($lists['type'] == 1 && $v->status == 2) <!-- 销售 -->
-                                        <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
-                                            <a href="{{route('manage_project_addprojectst',['id'=>$v->id])}}" class="pfp">添加定金</a>
-                                        </button>
                                    @endif
 
                                </div>
