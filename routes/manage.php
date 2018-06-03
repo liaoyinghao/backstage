@@ -71,6 +71,9 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::get('listdl' , 'ProjectController@listdl')->name('listdl');
     Route::any('adddlproject' , 'ProjectController@adddlproject')->name('adddlproject');
     Route::any('adddlprojectpost' , 'ProjectController@adddlprojectpost')->name('adddlprojectpost');
+    Route::any('process' , 'ProjectController@process')->name('process');
+    Route::any('addprocess' , 'ProjectController@addprocess')->name('addprocess');
+    Route::any('addproceepost' , 'ProjectController@addproceepost')->name('addproceepost');
 });
 
 

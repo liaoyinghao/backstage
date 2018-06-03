@@ -335,6 +335,106 @@ class ProjectController extends Controller
     }
 
     //全部项目
+    public function process(){
+        $id=request()->input('id');
+        $data['start']=Project::projectinfo($id);
+        if(!empty($data['start']['progress'])){
+            $tprogresst = @unserialize($data['start']['progress']);
+            $count = count($tprogresst);
+            if($count > 1){
+                $data['count'] = $count / 2;
+                $data['progress'] = [];
+                $key = [];
+                $val = [];
+                $i = 1;
+                $j = 1;
+                $h = 1;
+                $t = 1;
+                foreach ($tprogresst as $k => $v) {
+                  if ($i%2==0){
+                      $val[$h] = $v;
+                      $h++;
+                  }else{
+                      $key[$j] = $v;
+                      $j++;
+                  }
+                  $i++;
+                }
+                $countVal = count($val);
+                for ($i=count($val); $i > 0 ; $i--) {
+                   $data['progress'][$i]['time'] = $key[$i];
+                   $data['progress'][$i]['main'] = $val[$i];
+                   $data['progress'][$i]['timename'] = 'time'.$countVal;
+                   $data['progress'][$i]['mainname'] = 'main'.$countVal;
+                   $countVal--;
+                }
+            }
+        }
+        return view('manage.project.process',$data);
+    }
+
+    //全部项目
+    public function addprocess(){
+        $id=request()->input('id');
+        $data['start']=Project::projectinfo($id);
+        if(!empty($data['start']['progress'])){
+            $tprogresst = @unserialize($data['start']['progress']);
+            $count = count($tprogresst);
+            if($count > 1){
+                $data['count'] = $count / 2;
+                $data['progress'] = [];
+                $key = [];
+                $val = [];
+                $i = 1;
+                $j = 1;
+                $h = 1;
+                $t = 1;
+                foreach ($tprogresst as $k => $v) {
+                  if ($i%2==0){
+                      $val[$h] = $v;
+                      $h++;
+                  }else{
+                      $key[$j] = $v;
+                      $j++;
+                  }
+                  $i++;
+                }
+                $countVal = count($val);
+                for ($i=count($val); $i > 0 ; $i--) {
+                   $data['progress'][$i]['time'] = $key[$i];
+                   $data['progress'][$i]['main'] = $val[$i];
+                   $data['progress'][$i]['timename'] = 'time'.$countVal;
+                   $data['progress'][$i]['mainname'] = 'main'.$countVal;
+                   $countVal--;
+                }
+            }
+        }
+        return view('manage.project.addprocess',$data);
+    }
+
+    //全部项目
+    public function addproceepost(){
+      $id=request()->input('id');           //id
+      $stoer = request()->input('stoer');   //跟进信息
+
+      $customers = Project::projectinfo($id);
+      if($customers['status'] == 0){
+          $user=Accountnum::userinfo($GLOBALS['m']['user']);
+      }
+      if(count($stoer) == 2 && empty($stoer['time1']) && empty($stoer['main1'])){
+          return redirect()->route('manage_project_list');
+      }
+      foreach ($stoer as $key => $value) {
+        if(empty($value)){
+            $stoer[$key] = 0;
+        }
+      }
+      $progress = serialize($stoer);
+      $isok = Project::where("id",$id)->update(["progress"=>$progress]);
+      return redirect()->route('manage_project_list');
+    }
+
+    //全部项目
     public function listdl(){
         $user=$GLOBALS['m']['user'];
         $data['user'] = Accountnum::userinfo($user);

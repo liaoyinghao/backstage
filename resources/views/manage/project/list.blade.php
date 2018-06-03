@@ -89,9 +89,9 @@
 
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         @if($lists['type'] == 1 && $v->status > 0 && $v->status < 3)
-                                            <a class="pfp">查看跟进信息</a>
+                                            <a href = "{{route('manage_project_process',['id'=>$v->id])}}" class="pfp">查看跟进信息</a>
                                         @else
-                                            <a class="pfp">添加跟进信息</a>
+                                            <a href = "{{route('manage_project_addprocess',['id'=>$v->id])}}"  class="pfp">添加跟进信息</a>
                                         @endif
                                   </button>
                                   <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
@@ -118,14 +118,6 @@
                                             <a href="{{route('manage_project_addprojectst',['id'=>$v->id])}}" class="genghuanzt pfp">添加定金</a>
                                         <li>
                                         @endif
-                                   </ul>
-                                   @endif
-                                   @if($lists['type'] != 1 &&  $lists['type'] != 4) <!-- 财务和客服 -->
-                                    <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
-                                        <a href="{{route('manage_project_addproject',['id'=>$v->id,'type'=>1])}}" class="pfp">查看项目</a>
-                                  </button>
-                                  <button type="button" class="btn blue-steel dropdown-toggle btn-xs @if($v->status == 0) huibg @endif" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-                                  <ul class="dropdown-menu pull-right" role="menu">
                                         @if($lists['type'] == 2 && $v->status > 2)   <!-- 客服 -->
                                             <li><a class="genghuanzt pfp yggzt">更换状态</a><li>
                                         @elseif($lists['type'] == 2 && $v->status == 1)  <!-- 客服 -->
@@ -134,6 +126,10 @@
                                             <li><a class="genghuanzt pfp yggzter">更换状态</a><li>  <!-- 财务 -->
                                         @else
                                             <li><a class="genghuanzt pfp" href="{{route('manage_customer_khterxm',['id'=>$v->id])}}">更换状态</a><li>
+                                        @endif
+
+                                        @if($lists['type'] != 1 &&  $lists['type'] != 4) <!-- 财务和客服 -->
+                                            <li><a href="{{route('manage_project_addproject',['id'=>$v->id,'type'=>1])}}" class="genghuanzt pfp yggzter">查看项目</a><li> 
                                         @endif
 
                                         @if($lists['type'] == 2) <!-- 客服 -->
