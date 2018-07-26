@@ -71,10 +71,11 @@ class FinanceController extends Controller
         foreach ($accountnum as $key => $value) {
           if(!empty($value)){
             $BeginDate=date('Y-m-01', strtotime(date("Y-m-d")));
-            $EndDate=date('Y-m-d', strtotime("$BeginDate +1 month -1 day"));
-            dd($EndDate);
+            $EndDate=date('Y-m-01', strtotime(date("Y-m-d") . '+1 month'));
+            // dd($EndDate);
             $start=strtotime($BeginDate);
             $end=strtotime($EndDate);
+            dd($end);
             if($request['kstime'] && $request['jstime']){
               $start=$starts;
               $end=$ends;
