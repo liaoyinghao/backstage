@@ -25,7 +25,7 @@
         .form_d_1{display: inline-block;width: 45%;}
         .form_d_2{display: inline-block;width: 50%;vertical-align: top;}
         .form_p input{width: 300px;height: 35px;border-radius: 5px;border: 1px solid #999;text-indent: 5px;}
-        .form_p textarea{width:600px;height:300px;vertical-align: top;}
+        .form_p textarea{width:900px;height:600px;vertical-align: top;}
         .genjin{margin-top: 30px;}
         /*.portlet-body{text-align: center;}*/
     </style>

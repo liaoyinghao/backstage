@@ -70,13 +70,13 @@
                           @if(isset($lists))
                           @foreach($lists as $v)
                             <tr>
-                                <td width="50px">{{$v->id}}</td>
+                                <td width="50px">{{$v->xmunion}}</td>
                                 <td>{{$v->proname}}</td>
                                 <td>{{$kid[$v->kid]}}</td>
                                 <td>{{$v->contractamount - $v->floorprice}}</td>
                                 <td>{{$v->contractamount}}</td>
                                 <td>{{date('Y-m-d',$v->addtime)}}</td>
-                                <td>    
+                                <td>
                                     @if(!empty($v->wctime))
                                         {{date('Y-m-d H:i',$v->wctime)}}
                                     @else

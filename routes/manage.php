@@ -69,6 +69,9 @@ Route::group(['prefix'=>'project' , 'as'=>'project_'] , function(){
     Route::any('updateprosta' , 'ProjectController@updateprosta')->name('updateprosta');
     Route::any('editprojectpost' , 'ProjectController@editprojectpost')->name('editprojectpost');
     Route::get('listdl' , 'ProjectController@listdl')->name('listdl');
+    Route::get('retreatlist' , 'ProjectController@retreatlist')->name('retreatlist');
+    Route::get('retreatedlist' , 'ProjectController@retreatedlist')->name('retreatedlist');
+    Route::get('successlist' , 'ProjectController@successlist')->name('successlist');
     Route::any('adddlproject' , 'ProjectController@adddlproject')->name('adddlproject');
     Route::any('adddlprojectpost' , 'ProjectController@adddlprojectpost')->name('adddlprojectpost');
     Route::any('process' , 'ProjectController@process')->name('process');

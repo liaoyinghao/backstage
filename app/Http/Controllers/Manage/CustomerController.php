@@ -25,14 +25,14 @@ class CustomerController extends Controller
           $data['flag']=1;
           if($type == 'shaixuan'){
             if(empty($quan)){
-              $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();
+              $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','=',1)->get();
             }else{
               $data['quan']=1;
-              $data['lists']=Customer::where('grade',$shai)->where('status','!=',0)->get();
+              $data['lists']=Customer::where('grade',$shai)->where('status','=',1)->get();
             }
             // $lists=Customer::where('status','!=',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','=',1)->get();
             // $lists=Customer::where('status','=',0)->get();
           }
           $kong=[];
@@ -57,10 +57,10 @@ class CustomerController extends Controller
       if($user['position'] == '销售主管'){
           $data['flag']=2;
           if($type == 'shaixuan'){
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','=',1)->get();//放弃
             // $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','=',1)->get();//放弃
             // $lists=Customer::where('status',0)->get();
           }
           $kong=[];
@@ -86,10 +86,10 @@ class CustomerController extends Controller
 
           $data['flag']=3;
           if($type == 'shaixuan'){
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','!=',0)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('grade',$shai)->where('status','=',1)->get();//放弃
             // $lists=Customer::where('status',0)->where('grade',$shai)->get();
           }else{
-            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//放弃
+            $data['lists']=Customer::where('fromuser',$user['id'])->where('status','=',1)->get();//放弃
             // $lists=Customer::where('status',0)->get();
           }
           $kong=[];
@@ -133,8 +133,8 @@ class CustomerController extends Controller
       if($type == 'zu'){
         $data['flag']=2;
         $fromuser=Accountnum::where('fromuser',$user['id'])->pluck('id')->toArray();//找到队员
-        $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status','!=',0)->get();//队员客户
-        $lists=Customer::where('fromuser',$user['id'])->where('status','!=',0)->get();//自己客户
+        $data['lists']=Customer::whereIn('fromuser',$fromuser)->where('status','=',1)->get();//队员客户
+        $lists=Customer::where('fromuser',$user['id'])->where('status','=',1)->get();//自己客户
         // dd($user,$fromuser,$data['lists']);
         $kong=[];
         foreach ($data['lists'] as $key => $value) {
@@ -184,7 +184,7 @@ class CustomerController extends Controller
       }
 
       if($zuyuan){
-          $data['lists']=Customer::where('fromuser',$zuyuan)->where('status','!=',0)->get();//放弃
+          $data['lists']=Customer::where('fromuser',$zuyuan)->where('status','=',1)->get();//放弃
           $lists=Customer::where('status',0)->get();
           $kong=[];
           foreach ($data['lists'] as $key => $value) {
@@ -225,6 +225,7 @@ class CustomerController extends Controller
                 $data['lists'][$key]['progressname'] = $val[$countVal];
             }
         }
+        $data['lists'][$key]['addtime'] = date('Y-m-d h:i:s',$value['addtime']);
         $listi++;
       }
       // dd($data['lists']);

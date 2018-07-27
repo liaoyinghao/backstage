@@ -130,6 +130,7 @@
                             <!-- <th>报价</th> -->
                             <th>客户评级</th>
                             <th>客户需求</th>
+                            <th>录入时间</th>
                             <th width="350px">最新更近信息</th>
                             <th width="150px">操作</th>
                         </tr>
@@ -143,16 +144,10 @@
                             <td>{{$v->info}}</td>
                             <!-- <td>{{$v->offer}}</td> -->
                             <td>
-                                <select class="td_select">
-                                    <option value="D" @if($v->grade == "D") selected="selected" @endif >D</option>
-                                    <option value="C" @if($v->grade == "C") selected="selected" @endif >C</option>
-                                    <option value="B" @if($v->grade == "B") selected="selected" @endif >B</option>
-                                    <option value="A" @if($v->grade == "A") selected="selected" @endif >A</option>
-                                    <option value="S" @if($v->grade == "S") selected="selected" @endif >S</option>
-                                </select>
-                                <input type="hidden" class="tid" value="{{$v->id}}">
+                              {{$v->grade}}
                             </td>
                             <td>{{$v->demand}}</td>
+                            <td>{{$v->addtime}}</td>
                             <td><span class="td_span">{{$v->progressname or ''}}</span></td>
                             <td>
                                 <div class="btn-group">

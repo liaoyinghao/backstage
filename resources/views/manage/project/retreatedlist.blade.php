@@ -48,7 +48,6 @@
                             <th>已付定金</th>
                             <th>底价</th>
                             <th>项目类型</th>
-                            <th>最新跟进信息</th>
                             <th>所属销售人员</th>
                             <th>所属客服人员</th>
                             <th>状态</th>
@@ -61,18 +60,13 @@
                             @if(isset($v->id))
                           <tr>
                             <td>{{$v->xmunion}}</td>
-                            @if($v->success == 1)
-                            <td style="color:red">{{$v->proname}}</td>
-                            @else
                             <td>{{$v->proname}}</td>
-                            @endif
                             <td>{{$v->customername}}</td>
                             <td>{{$v->contact}}</td>
                             <td>{{$v->contractamount}}</td>
                             <td>{{$v->paiddepositcount}}</td>
                             <td>{{$v->floorprice}}</td>
                             <td>@if($v->prosta == 1) 直接项目 @elseif($v->prosta ==2)代理记账 @endif</td>
-                            <td>{{$v->progressname}}</td>
                             <td>{{$v->kid or ''}}</td>
                             <td>{{$v->kfid or ''}}</td>
                             <td>
@@ -84,6 +78,8 @@
                                     <button class="btn btn-danger btn-xs">完成</button>
                                 @elseif($v->status == 4)
                                     <button class="btn btn-warning btn-xs">申请退</button>
+                                @elseif($v->status == 5)
+                                    <button class="btn btn-warning btn-xs">退单成功</button>
                                 @else
                                     <button class="btn success btn-xs">放弃</button>
                                 @endif
@@ -91,7 +87,7 @@
                             <td>
                               <div class="btn-group">
 
-                                  @if($v->status != 3) <!-- 销售不能更改状态 -->
+                                  @if($v->status == 99) <!-- 销售不能更改状态 -->
 
                                   <button type="button" class="btn blue btn-xs @if($v->status == 0) huibg @endif">
                                         @if($lists['type'] == 1 && $v->status > 0 && $v->status < 3)

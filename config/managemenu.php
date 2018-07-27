@@ -29,6 +29,10 @@ return [
                 'name'=>'需确认项目',
                 'url'=>'main'
             ],
+            'retreatlist'=>[
+                'name'=>'需要确认退单项目',
+                'url'=>'retreatlist'
+            ],
             'list'=>[
                 'name'=>'直接项目管理',
                 'url'=>'list'
@@ -36,6 +40,14 @@ return [
             'listdl'=>[
                 'name'=>'代理项目管理',
                 'url'=>'listdl'
+            ],
+            'retreatedlist'=>[
+                'name'=>'已退单项目',
+                'url'=>'retreatedlist'
+            ],
+            'successlist'=>[
+                'name'=>'已完成项目',
+                'url'=>'successlist'
             ],
         ]
     ],

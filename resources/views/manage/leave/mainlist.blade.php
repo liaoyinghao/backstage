@@ -97,6 +97,8 @@ li{list-style-type: none;}
                                         <button class="btn btn-danger btn-xs">申请中</button>
                                         @elseif($val['status'] == 2)
                                         <button class="btn success btn-xs">已允许</button>
+                                        @elseif($val['status'] == 4)
+                                        <button class="btn success btn-xs">已取消</button>
                                         @else
                                         <button class="btn btn-xs leixingbgst">被拒绝</button>
                                         @endif

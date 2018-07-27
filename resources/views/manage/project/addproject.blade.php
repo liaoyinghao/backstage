@@ -13,25 +13,6 @@
             })
         });
         function check(){
-          var sum = 0;
-          $("input[name='start[paiddeposit][]']").each(function(){
-            sum += $(this).val();
-          })
-          if(parseInt(sum) >= parseInt($("input[name='start[contractamount]']").val())){
-            var r=confirm("确认项目是否完成");
-            if (r==true)
-              {
-              var div = '  <input type="hidden" name="start[status]" value="3" id = "status">';
-              $("#form_tj").append(div);
-                // console.log($("#status").val());
-                // return false;
-              }
-            else
-              {
-                console.log("You pressed Cancel!")
-              }
-            // return false;
-          }
         }
     </script>
 @endsection

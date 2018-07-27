@@ -86,13 +86,13 @@ class Leave extends Model
 			$start=strtotime($request['kstime']);
 			$end=strtotime($request['jstime']) + 86400;
 			if($info['position'] == '总经理'){
-				$stoer = self::where('addtime','<',$end)->where('addtime','>',$start)->get();
+				$stoer = self::where('addtime','<',$end)->where('addtime','>',$start)->where('status','!=','0')->get();
 			}else{
 				$stoer = self::where("qid",$info['id'])->where('addtime','<',$end)->where('addtime','>',$start)->get();
 			}
 		}else{
 			if($info['position'] == '总经理'){
-				$stoer = self::get();
+				$stoer = self::where('status','!=','0')->get();
 			}else{
 				$stoer = self::where("qid",$info['id'])->get();
 			}

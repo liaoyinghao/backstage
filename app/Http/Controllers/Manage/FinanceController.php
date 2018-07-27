@@ -75,21 +75,20 @@ class FinanceController extends Controller
             // dd($EndDate);
             $start=strtotime($BeginDate);
             $end=strtotime($EndDate);
-            dd($end);
             if($request['kstime'] && $request['jstime']){
               $start=$starts;
               $end=$ends;
             }
           $kid=Customer::where('fromuser',$value['id'])->pluck('id')->toArray();//找出属于同一个职员的
-          $xsz=Project::whereIn('kid',$kid)->where('status', '>', '1')->where('prosta', '=', '1')->sum('contractamount');//同一个职员下的总销售
-          $dijia=Project::whereIn('kid',$kid)->where('status', '>', '1')->where('prosta', '=', '1')->sum('floorprice');//同一个职员下的总利润
+          $xsz=Project::whereIn('kid',$kid)->whereIn('status',[2,3,4])->where('prosta', '=', '1')->sum('contractamount');//同一个职员下的总销售
+          $dijia=Project::whereIn('kid',$kid)->whereIn('status',[2,3,4])->where('prosta', '=', '1')->sum('floorprice');//同一个职员下的总利润
           $xslr=$xsz-$dijia;
           $arr[$i]['xsz']=$xsz;
           $arr[$i]['xslr']=$xslr;
           $arr[$i]['nickname']=$value['nickname'];
           $arr[$i]['position']=$value['position'];
-          $xszdy=Project::whereIn('kid',$kid)->where('status', '>', '1')->where('addtime','<',$end)->where('addtime','>',$start)->sum('contractamount');//当月同一个职员下的总销售
-          $dijiady=Project::whereIn('kid',$kid)->where('status', '>', '1')->where('addtime','<',$end)->where('addtime','>',$start)->sum('floorprice');//当月同一个职员下的总利润
+          $xszdy=Project::whereIn('kid',$kid)->whereIn('status',[2,3,4])->where('addtime','<',$end)->where('addtime','>',$start)->sum('contractamount');//当月同一个职员下的总销售
+          $dijiady=Project::whereIn('kid',$kid)->whereIn('status',[2,3,4])->where('addtime','<',$end)->where('addtime','>',$start)->sum('floorprice');//当月同一个职员下的总利润
           $xslrdy=$xszdy-$dijiady;
           $arr[$i]['xszdy']=$xszdy;
           $arr[$i]['xslrdy']=$xslrdy;

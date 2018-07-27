@@ -51,7 +51,7 @@
                 <div class="portlet-body">
 
                     <form method="post" action="{{route('manage_leave_addldetails')}}">
-
+                    <input type="hidden" value="{{$stoer['id'] or ''}}" name = "start[id]"/>
                     <p class="form_p">
                         <span class="userk">姓名：</span><input type="text" value="{{$info['nickname'] or ''}}" disabled='disabled'>
                     </p>
@@ -64,7 +64,7 @@
                     </p>
                     <p class="form_p">
                         <span class="userk">请假时间：</span>
-                        <input type="datetime-local" name="start[kstime]" value="{{$stoer['kstime'] or ''}}" required="required"> 
+                        <input type="datetime-local" name="start[kstime]" value="{{$stoer['kstime'] or ''}}" required="required">
                         至
                         <input type="datetime-local" name="start[jstime]" value="{{$stoer['jstime'] or ''}}" required="required">
                     </p>
@@ -73,9 +73,7 @@
                         <textarea name="start[progress]" placeholder="请假原因" class="textarea" required="required">{{$stoer['progress'] or ''}}</textarea>
                     </p>
 
-                    @if(!isset($stoer))
                     <p class="submit_p"><input type="submit" value="确认" class="submit"></p>
-                    @endif
                     </form>
                 </div>
             </div>

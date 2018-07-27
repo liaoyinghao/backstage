@@ -9,10 +9,32 @@
                 ]
             });
 
+            $(".cancel").on("click",function(){
+                var id = $(this).attr("data-id");
+                var status = $(this).attr("data-status");
+
+                if(id=='' || status==''){
+                    return false;
+                }
+                $.ajax({
+                    url:"{{route('manage_leave_leavestatus')}}",
+                    type:"post",
+                    data:{"id":id,"status":status},
+                    dataType:"json",
+                    success:function(d){
+                        if(d==1){
+                            alert("状态更改成功！");
+                            location.href="{{route('manage_leave_main')}}";
+                        }else{
+                            alert("更改状态失败！");
+                        }
+                    }
+                })
+            })
             $(".shengqing").on("click",function(){
                 var id = $(this).attr("data-id");
                 var status = $(this).attr("data-status");
-                
+
                 if(id=='' || status==''){
                     return false;
                 }
@@ -60,7 +82,7 @@ li{list-style-type: none;}
                     </div>
                     <div class="actions">
                     @if($info['position'] == '销售主管' || $info['position'] == '客服主管')
-                        <a class="btn blue btn-outline listcounta" href="{{route('manage_leave_sqlist')}}">审批列表 
+                        <a class="btn blue btn-outline listcounta" href="{{route('manage_leave_sqlist')}}">审批列表
                         @if(isset($stoer) && $stoer > 0)
                         &nbsp;&nbsp;&nbsp;<span class="listcount">{{$stoer}}</span>
                         @endif
@@ -93,7 +115,7 @@ li{list-style-type: none;}
                                     <td>{{$val['nickname'] or ''}}</td>
                                     <td>{{$val['position'] or ''}}</td>
                                     <td>
-                                        @if($val['type'] == 1) 
+                                        @if($val['type'] == 1)
                                          <button class="btn btn-xs leixingbg">请假</button>
                                         @else
                                          <button class="btn btn-xs leixingbgs">外勤</button>
@@ -113,8 +135,20 @@ li{list-style-type: none;}
                                     <td>
                                        <div class="btn-group">
                                           <button type="button" class="btn blue btn-xs">
-                                                <a href="{{route('manage_leave_ldetails',['id'=>$val['id']])}}" class="pfp">查看</a>
+
+                                               <a href="{{route('manage_leave_ldetails',['id'=>$val['id']])}}" class="pfp">查看</a>
                                           </button>
+
+                                          <button type="button" class="btn blue-steel dropdown-toggle btn-xs " data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                          <ul class="dropdown-menu pull-right" role="menu">
+                                             <li>
+                                               <a data-id="{{$val['id']}}" data-status="4" class="cancel">已取消</a>
+                                             </li>
+                                             <li>
+                                                <a href="{{route('manage_leave_ldetails',['id'=>$val['id']])}}" class="pfp">修改</a>
+                                             </li>
+
+                                          </ul>
                                         @if(isset($info))
                                             @if($info['position'] == '总经理')
                                           <button type="button" class="btn blue-steel dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>

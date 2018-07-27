@@ -122,7 +122,16 @@ class LeaveController extends Controller
     	$start = $username=request()->input('start');
     	$start['qid'] = $info['id'];
     	$start['addtime'] = time();
-    	$m = Leave::insert($start);
+      // dd($start);
+      if($start['id']){
+        $data['type'] = $start['type'];
+        $data['kstime'] = $start['kstime'];
+        $data['jstime'] = $start['jstime'];
+        $data['progress'] = $start['progress'];
+       $m = Leave::where('id',$start['id'])->update($data);
+     }else{
+    	 $m = Leave::insert($start);
+     }
     	if($m){
     		return redirect()->route('manage_leave_main');
     	}else{
