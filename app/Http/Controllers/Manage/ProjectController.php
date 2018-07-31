@@ -150,7 +150,7 @@ class ProjectController extends Controller
       $did = request()->input('did');
       Project::where("id",$did)->update(['prosta'=>2,'status'=>1]);
 
-    	return redirect()->back();
+      return redirect()->route('manage_project_list');
     }
 
     //项目增加和修改
@@ -162,19 +162,19 @@ class ProjectController extends Controller
       $start['prosta'] = 2;
 
     	$type = request()->input('type');//这是销售添加的已付定金
-        if(!empty($type)){
+        if(!empty($type) && $type != 5){
             $paiddeposit = serialize($start['paiddeposit']);
             $projects = Project::where("id",$id)->first();
             if($start['paiddeposit'] != $projects['paiddeposit']){
                 Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>1]);
             }
-            return redirect()->back();
+            return redirect()->route('manage_project_listdl');
         }
 
         $dijia = request()->input('dijia');//这是客服修改底价
         if(!empty($dijia)){
             Project::where("id",$id)->update(['floorprice'=>$start['floorprice']]);
-            return redirect()->back();
+            return redirect()->route('manage_project_listdl');
         }
         if($did){
             $aid = $did;
@@ -202,6 +202,7 @@ class ProjectController extends Controller
             }
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
+        return redirect()->route('manage_project_list');
     	}else{
     		//修改
             $start['paiddeposit'] = serialize($start['paiddeposit']);
@@ -211,7 +212,10 @@ class ProjectController extends Controller
             }
     		Project::where("id",$id)->update($start);
     	}
-    	return redirect()->back();
+      if($type ==5){
+        return redirect()->route('manage_project_list');
+      }
+      return redirect()->route('manage_project_listdl');
     }
 
     //项目增加和修改
@@ -230,13 +234,13 @@ class ProjectController extends Controller
                 Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$status]);
                 // Project::where("id",$id)->update(['paiddeposit'=>$paiddeposit,'status'=>$start]);
             }
-            return redirect()->back();
+            return redirect()->route('manage_project_list');
         }
 
         $dijia = request()->input('dijia');//这是客服修改底价
         if(!empty($dijia)){
             Project::where("id",$id)->update(['floorprice'=>$start['floorprice']]);
-            return redirect()->back();
+            return redirect()->route('manage_project_list');
         }
         if($did){
             $aid = $did;
@@ -265,6 +269,7 @@ class ProjectController extends Controller
             $start['status'] = 1;
     		Project::insert($start);
     		Customer::where("id",$aid)->update(['status'=>2]);
+        return redirect()->route('manage_customer_main');
     	}else{
     		//修改
             $start['paiddeposit'] = serialize($start['paiddeposit']);
@@ -274,7 +279,7 @@ class ProjectController extends Controller
             }
     		Project::where("id",$id)->update($start);
     	}
-    	return redirect()->back();
+      return redirect()->route('manage_project_list');
     }
 
     //项目改变状态
@@ -301,7 +306,7 @@ class ProjectController extends Controller
     		}
     	}
     	if($type == 3){
-            if(empty($status)){ return redirect()->back(); }
+            if(empty($status)){ return redirect()->route('manage_project_list'); }
             if(empty($cwid)){
                 if($status == 3){
                     $statusinfo['status'] = 3;
@@ -321,7 +326,7 @@ class ProjectController extends Controller
                 }
     		   $isok = Project::where("id",$id)->update($statusinfo);
             }
-    		return redirect()->back();
+            return redirect()->route('manage_project_list');
     	}
     }
 
@@ -423,7 +428,7 @@ class ProjectController extends Controller
           $user=Accountnum::userinfo($GLOBALS['m']['user']);
       }
       if(count($stoer) == 2 && empty($stoer['time1']) && empty($stoer['main1'])){
-          return redirect()->back();
+      return redirect()->route('manage_project_list');
       }
       foreach ($stoer as $key => $value) {
         if(empty($value)){
@@ -432,7 +437,7 @@ class ProjectController extends Controller
       }
       $progress = serialize($stoer);
       $isok = Project::where("id",$id)->update(["progress"=>$progress]);
-      return redirect()->back();
+      return redirect()->route('manage_project_list');
     }
 
     //全部项目
@@ -499,14 +504,14 @@ class ProjectController extends Controller
         $pro = Project::projectinfo($id);
         if($type == 2){
           Project::where('id',$id)->update(['status'=>5]);
-          return redirect()->back();
+          return redirect()->route('manage_project_retreatlist');
         }
         if($pro['prosta']  ==2){
              Project::where('id',$id)->update(['status'=>2]);
         }else{
             Project::where('id',$id)->update(['status'=>2]);
         }
-        return redirect()->back();
+        return redirect()->route('manage_project_main');
     }
 
 }

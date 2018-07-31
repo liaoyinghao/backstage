@@ -106,7 +106,7 @@
                                       <li><a class="huifuxm pfp" href = "{{route('manage_project_addproject',['id'=>$v->id])}}" data-id="{{$v->id}}">编辑项目</a><li>
                                       @if($v->prosta == 1)
                                         <li>
-                                            <a class="tap-street acolor ahrefsd" href="{{route('manage_project_adddlproject',['id'=>$v->id])}}">转入代理记账</a>
+                                            <a class="tap-street acolor ahrefsd" href="{{route('manage_project_adddlproject',['id'=>$v->id,'type'=>5])}}">转入代理记账</a>
                                             <input type="hidden" value="{{$v->id}}" class="did">
                                         </li>
                                       @endif

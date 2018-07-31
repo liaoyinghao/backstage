@@ -58,7 +58,11 @@
                           @foreach($lists as $v)
                             @if(isset($v->id))
                           <tr>
+                          @if($v->success == 1)
+                          <td style="color:red">{{$v->xmunion}}</td>
+                          @else
                             <td>{{$v->xmunion}}</td>
+                          @endif
                             <td>{{$v->customername}}</td>
                             <td>{{$v->companyname}}</td>
                             <td>{{$v->contact}}</td>
